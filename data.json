@@ -5071,10 +5071,39 @@
           "dialogue_density": "High",
           "visual_motion_intensity": "Medium"
         }
-      }
+      },
+      "history_logs": [
+        {
+          "timestamp": "2024-10-15 14:32:18",
+          "action": "Summary Approved",
+          "status": "approved",
+          "user": "Priya Sharma",
+          "message": null
+        },
+        {
+          "timestamp": "2024-10-15 14:35:42",
+          "action": "Genre Classification Approved",
+          "status": "approved",
+          "user": "Rajesh Kumar",
+          "message": null
+        },
+        {
+          "timestamp": "2024-10-15 14:38:55",
+          "action": "Highlights Rejected",
+          "status": "rejected",
+          "user": "Ananya Patel",
+          "message": "The 'One-Man Wolfpack' speech timestamp needs to be adjusted. Current highlight at 00:06:12 should be 00:06:18 for better context."
+        },
+        {
+          "timestamp": "2024-10-15 15:12:03",
+          "action": "Highlights Re-approved",
+          "status": "approved",
+          "user": "Priya Sharma",
+          "message": null
+        }
+      ]
     }
-  }
-  ,
+  },
   {
     "video_details": {
       "title": "Game of Thrones - Battle of the Bastards | Two Steps From Hell - Heart of Courage",
@@ -5590,10 +5619,32 @@
           "dialogue_density": "Very Low",
           "visual_motion_intensity": "Extreme (Fast cuts and shaky cam)"
         }
-      }
+      },
+      "history_logs": [
+        {
+          "timestamp": "2024-10-18 09:15:33",
+          "action": "Summary Approved",
+          "status": "approved",
+          "user": "Vikram Singh",
+          "message": null
+        },
+        {
+          "timestamp": "2024-10-18 09:18:27",
+          "action": "Genre Classification Approved",
+          "status": "approved",
+          "user": "Meera Reddy",
+          "message": null
+        },
+        {
+          "timestamp": "2024-10-18 09:22:14",
+          "action": "Content Rating Rejected",
+          "status": "rejected",
+          "user": "Arjun Desai",
+          "message": "Rating needs review - graphic violence level may warrant additional content warnings beyond standard 'A' rating. Recommend adding explicit violence disclaimer."
+        }
+      ]
     }
-  }
-  ,
+  },
   {
     "video_details": {
       "title": "Forrest Gump is the BEST soldier because he doesn't think (Best Scenes) 🌀 4K",
@@ -9158,7 +9209,37 @@
           "dialogue_density": "Medium-High",
           "visual_motion_intensity": "High (Combat sequences)"
         }
-      }
+      },
+      "history_logs": [
+        {
+          "timestamp": "2024-10-20 16:45:12",
+          "action": "Summary Approved",
+          "status": "approved",
+          "user": "Kavya Iyer",
+          "message": null
+        },
+        {
+          "timestamp": "2024-10-20 16:48:39",
+          "action": "Genre Classification Rejected",
+          "status": "rejected",
+          "user": "Aditya Menon",
+          "message": "Initial classification missed 'War/Military' genre. Drama and Comedy alone don't capture the significant military narrative. Requires reclassification."
+        },
+        {
+          "timestamp": "2024-10-20 17:05:21",
+          "action": "Genre Classification Re-approved",
+          "status": "approved",
+          "user": "Neha Gupta",
+          "message": null
+        },
+        {
+          "timestamp": "2024-10-20 17:08:55",
+          "action": "Highlights Approved",
+          "status": "approved",
+          "user": "Kavya Iyer",
+          "message": null
+        }
+      ]
     }
   }  
 ]

@@ -6,317 +6,7 @@
     <title>MovieBuff - Your AI-Assisted Cinema Companion</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        body {
-            background: #F4F0E4;
-            min-height: 100vh;
-        }
-        
-        .glass-card {
-            background: white;
-            border-radius: 8px;
-            border: 1px solid rgba(174, 183, 132, 0.2);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-        
-        .video-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(174, 183, 132, 0.2);
-        }
-        
-        .video-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(174, 183, 132, 0.15);
-            border-color: rgba(174, 183, 132, 0.4);
-        }
-        
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            height: 100vh;
-            width: 280px;
-            background: rgba(248, 243, 225, 0.98);
-            backdrop-filter: blur(10px);
-            border-right: 1px solid rgba(174, 183, 132, 0.3);
-            transform: translateX(-100%);
-            transition: transform 0.3s ease-in-out;
-            z-index: 1000;
-            overflow-y: auto;
-            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.05);
-        }
-        
-        .sidebar.open {
-            transform: translateX(0);
-        }
-        
-        .sidebar-toggle {
-            position: fixed;
-            left: 20px;
-            top: 20px;
-            z-index: 1001;
-            background: white;
-            border: 1px solid rgba(174, 183, 132, 0.4);
-            padding: 10px 18px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-weight: 500;
-            color: #2d3748;
-            font-size: 14px;
-        }
-        
-        .sidebar-toggle:hover {
-            background: rgba(174, 183, 132, 0.1);
-            border-color: rgba(174, 183, 132, 0.6);
-        }
-        
-        .tab-container {
-            display: flex;
-            gap: 4px;
-            margin-bottom: 32px;
-            background: #f8f9fa;
-            padding: 4px;
-            border-radius: 8px;
-            border: 1px solid rgba(174, 183, 132, 0.2);
-        }
-        
-        .tab {
-            flex: 1;
-            padding: 12px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-weight: 500;
-            text-align: center;
-            color: #4a5568;
-            background: transparent;
-            border: none;
-        }
-        
-        .tab:hover {
-            background: rgba(174, 183, 132, 0.1);
-            color: #2d3748;
-        }
-        
-        .tab.active {
-            background: #AEB784;
-            color: white;
-        }
-        
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.5s ease-in;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .timestamp-link {
-            color: #8a9668;
-            cursor: pointer;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.2s;
-            text-shadow: none;
-        }
-        
-        .timestamp-link:hover {
-            color: #AEB784;
-            text-decoration: underline;
-            transform: scale(1.05);
-            display: inline-block;
-        }
-        
-        .primary-btn {
-            background: #AEB784;
-            color: white;
-            padding: 14px 40px;
-            border-radius: 8px;
-            font-weight: 500;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s;
-            font-size: 1rem;
-            box-shadow: 0 2px 8px rgba(174, 183, 132, 0.2);
-        }
-        
-        .primary-btn:hover {
-            background: #9ca876;
-            box-shadow: 0 4px 12px rgba(174, 183, 132, 0.3);
-        }
-        
-        .primary-btn:active {
-            transform: translateY(0);
-        }
-        
-        .confidence-bar {
-            height: 24px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .confidence-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #10b981, #34d399, #6ee7b7);
-            border-radius: 12px;
-            transition: width 1s cubic-bezier(0.65, 0, 0.35, 1);
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
-        }
-        
-        .transcript-line {
-            padding: 16px;
-            margin: 8px 0;
-            background: #fafafa;
-            border-radius: 8px;
-            border-left: 3px solid #AEB784;
-            transition: all 0.2s;
-            color: #2d3748;
-        }
-        
-        .transcript-line:hover {
-            background: white;
-            transform: translateX(4px);
-            box-shadow: 0 2px 8px rgba(174, 183, 132, 0.1);
-        }
-        
-        .transcript-line.active {
-            background: rgba(174, 183, 132, 0.2);
-            border-left-color: #8a9668;
-            border-left-width: 4px;
-            transform: translateX(4px);
-        }
-        
-        /* Match transcript height to video */
-        #videoWithTranscript .content-section {
-            display: flex;
-            flex-direction: column;
-            max-height: 600px;
-        }
-        
-        #videoWithTranscript #transcriptContainer {
-            flex: 1;
-            min-height: 0;
-            overflow-y: auto;
-        }
-        
-        .badge {
-            display: inline-block;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            margin-left: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .badge-amber {
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
-            color: white;
-            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
-        }
-        
-        .badge-green {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
-        }
-        
-        .badge-yellow {
-            background: linear-gradient(135deg, #eab308, #ca8a04);
-            color: white;
-            box-shadow: 0 4px 12px rgba(234, 179, 8, 0.4);
-        }
-        
-        .badge-red {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
-        }
-        
-        .hidden {
-            display: none;
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.6s ease-in;
-        }
-        
-        .slide-up {
-            animation: slideUp 0.6s ease-out;
-        }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .sidebar-video-item {
-            padding: 12px;
-            margin: 8px 0;
-            background: white;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 1px solid rgba(174, 183, 132, 0.15);
-        }
-        
-        .sidebar-video-item:hover {
-            background: #fafafa;
-            border-color: rgba(174, 183, 132, 0.3);
-        }
-        
-        .sidebar-video-item.active {
-            background: rgba(174, 183, 132, 0.1);
-            border-color: #AEB784;
-        }
-        
-        h1, h2, h3 {
-            color: #2d3748;
-            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
-        }
-        
-        .content-section {
-            background: white;
-            border-radius: 12px;
-            padding: 32px;
-            margin-bottom: 24px;
-            border: 1px solid rgba(174, 183, 132, 0.15);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-        }
-        
-        .loading-spinner {
-            border: 4px solid rgba(174, 183, 132, 0.3);
-            border-top: 4px solid #AEB784;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body class="min-h-screen">
     <!-- Sidebar Toggle Button -->
@@ -352,7 +42,7 @@
             <!-- Video cards will be dynamically inserted here -->
         </div>
 
-        <!-- Selection State: Video Player & Controls -->
+        <!-- Individual Video Page -->
         <div id="videoPlayer" class="hidden">
             <div class="slide-up">
                 <!-- Back Button -->
@@ -360,87 +50,140 @@
                     ← Back to Videos
                 </button>
 
-                <!-- Video Player Container (initially shown) -->
-                <div id="videoPlayerContainer" class="mb-8">
-                    <div class="max-w-4xl mx-auto" id="playerWrapper">
-                        <!-- Player will be here initially -->
-                    </div>
+                <!-- Video Title -->
+                <div id="videoTitle" class="mb-6 content-section">
+                    <h1 class="text-3xl font-bold" style="color: #2d3748;"></h1>
                 </div>
 
-                <!-- Video Player and Transcript Row (shown after transcript generation) -->
-                <div id="videoWithTranscript" class="hidden mb-8">
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        <!-- Video Player (2/3 width) -->
-                        <div class="lg:col-span-2" id="playerWrapperTranscript">
-                            <!-- Player will move here -->
-                        </div>
-
-                        <!-- Transcript Sidebar (1/3 width) -->
-                        <div>
-                            <div class="content-section" style="height: 100%;">
-                                <h2 class="text-xl font-semibold mb-4">Transcript</h2>
-                                <div id="transcriptContainer" class="space-y-2" style="overflow-y: auto;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Primary Action Button -->
-                <div class="text-center mb-8">
-                    <button id="primaryBtn" class="primary-btn">Generate Transcription</button>
-                </div>
-
-                <!-- Progress Bar -->
-                <div id="progressBar" class="hidden mb-8">
+                <!-- Progress Bar Section -->
+                <div id="progressBarSection" class="mb-8">
                     <div class="content-section">
-                        <div class="flex items-center justify-between mb-3">
-                            <span id="progressText" class="font-medium" style="color: #2d3748;">Processing...</span>
-                            <span id="progressPercent" class="text-sm" style="color: #718096;">0%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2">
-                            <div id="progressFill" class="h-2 rounded-full transition-all duration-500" style="width: 0%; background: #AEB784;"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tabs -->
-                <div class="tab-container hidden" id="tabContainer">
-                    <div class="tab active" data-tab="analysis">Analysis</div>
-                </div>
-
-                <!-- Analysis Tab Content -->
-                <div id="analysisTab" class="tab-content">
-                    <!-- First Row: Summary and Genres -->
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                        <!-- Summary -->
-                        <div class="content-section">
-                            <div class="flex justify-between items-center mb-4">
-                                <h2 class="text-2xl font-semibold">Summary</h2>
-                                <span id="sentimentBadge" class="badge badge-blue text-sm px-4 py-2"></span>
+                        <h3 class="text-lg font-semibold mb-4" style="color: #2d3748;">Processing Video</h3>
+                        <div class="space-y-4">
+                            <!-- Progress Steps -->
+                            <div class="flex items-center justify-between text-sm mb-2">
+                                <div class="flex-1 flex items-center gap-2">
+                                    <div id="step1" class="progress-step">
+                                        <div class="step-icon">1</div>
+                                        <span class="step-text">Extracting Audio</span>
+                                    </div>
+                                </div>
+                                <div class="flex-1 flex items-center gap-2">
+                                    <div id="step2" class="progress-step">
+                                        <div class="step-icon">2</div>
+                                        <span class="step-text">Generating Transcripts</span>
+                                    </div>
+                                </div>
+                                <div class="flex-1 flex items-center gap-2">
+                                    <div id="step3" class="progress-step">
+                                        <div class="step-icon">3</div>
+                                        <span class="step-text">Analyzing Video</span>
+                                    </div>
+                                </div>
+                                <div class="flex-1 flex items-center gap-2">
+                                    <div id="step4" class="progress-step">
+                                        <div class="step-icon">4</div>
+                                        <span class="step-text">Analyzing Sentiment</span>
+                                    </div>
+                                </div>
+                                <div class="flex-1 flex items-center gap-2">
+                                    <div id="step5" class="progress-step">
+                                        <div class="step-icon">5</div>
+                                        <span class="step-text">Generating Summary</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div id="summaryContent" class="leading-relaxed" style="color: #4a5568;"></div>
-                            <div id="videoLength" class="mt-6 font-medium" style="color: #718096;"></div>
-                        </div>
-
-                        <!-- Genres with Confidence Bars -->
-                        <div class="content-section">
-                            <h2 class="text-2xl font-semibold mb-6">Genres</h2>
-                            <div id="genresContent"></div>
+                            <!-- Progress Bar -->
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div id="progressFill" class="h-3 rounded-full transition-all duration-500" style="width: 0%; background: #AEB784;"></div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span id="progressText" class="font-medium text-sm" style="color: #2d3748;">Initializing...</span>
+                                <span id="progressPercent" class="text-sm font-semibold" style="color: #AEB784;">0%</span>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Second Row: Category & Rating and Smart Features -->
+                <!-- Main Content: Video on Left, Tabs on Right -->
+                <div id="mainContent" class="hidden">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <!-- Category & Rating -->
-                        <div class="content-section">
-                            <h2 class="text-2xl font-semibold mb-6">Category & Rating</h2>
-                            <div id="categoryContent"></div>
+                        <!-- Left Side: Video Player (50% width) -->
+                        <div>
+                            <div class="content-section sticky top-4">
+                                <div id="playerWrapper">
+                                    <!-- YouTube player will be inserted here -->
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Smart Features -->
-                        <div class="content-section">
-                            <h2 class="text-2xl font-semibold mb-6">Smart Features</h2>
-                            <div id="smartFeaturesContent"></div>
+                        <!-- Right Side: Tabs and Content (50% width) -->
+                        <div>
+                            <!-- Tab Navigation -->
+                            <div class="tab-container mb-6">
+                                <button class="tab active" data-tab="transcript">Transcript</button>
+                                <button class="tab" data-tab="summary">Summary</button>
+                                <button class="tab" data-tab="genres">Genres</button>
+                                <button class="tab" data-tab="category">Category</button>
+                                <button class="tab" data-tab="features">Smart Features</button>
+                                <button class="tab" data-tab="history">History Logs</button>
+                            </div>
+
+                            <!-- Tab Content -->
+                            <div class="tab-contents">
+                                <!-- Transcript Tab -->
+                                <div id="transcriptTab" class="tab-content active">
+                                    <div class="content-section">
+                                        <h2 class="text-2xl font-semibold mb-4">Transcript</h2>
+                                        <div id="transcriptContainer" class="space-y-2 max-h-[600px] overflow-y-auto pr-2"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Summary Tab -->
+                                <div id="summaryTab" class="tab-content">
+                                    <div class="content-section">
+                                        <div class="flex justify-between items-center mb-4">
+                                            <h2 class="text-2xl font-semibold">Summary</h2>
+                                            <span id="sentimentBadge" class="badge badge-blue text-sm px-4 py-2"></span>
+                                        </div>
+                                        <div id="summaryContent" class="leading-relaxed text-lg" style="color: #4a5568;"></div>
+                                        <div id="videoLength" class="mt-6 font-medium" style="color: #718096;"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Genres Tab -->
+                                <div id="genresTab" class="tab-content">
+                                    <div class="content-section">
+                                        <h2 class="text-2xl font-semibold mb-6">Genres</h2>
+                                        <div id="genresContent"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Category Tab -->
+                                <div id="categoryTab" class="tab-content">
+                                    <div class="content-section">
+                                        <h2 class="text-2xl font-semibold mb-6">Category & Rating</h2>
+                                        <div id="categoryContent"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Smart Features Tab -->
+                                <div id="featuresTab" class="tab-content">
+                                    <div class="content-section">
+                                        <h2 class="text-2xl font-semibold mb-6">Smart Features</h2>
+                                        <div id="smartFeaturesContent"></div>
+                                    </div>
+                                </div>
+
+                                <!-- History Logs Tab -->
+                                <div id="historyTab" class="tab-content">
+                                    <div class="content-section">
+                                        <h2 class="text-2xl font-semibold mb-6">History Logs</h2>
+                                        <p class="text-sm mb-4" style="color: #718096;">Audit trail of content review and approval actions</p>
+                                        <div id="historyLogsContent"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

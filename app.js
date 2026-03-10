@@ -2,8 +2,15 @@
 let videosData = [];
 let currentVideo = null;
 let player = null;
-let currentState = 'landing'; // landing, selection, transcription, analysis
 let currentTab = 'transcript';
+let processingSteps = [
+    { id: 'step1', name: 'Extracting Audio', duration: 1000 },
+    { id: 'step2', name: 'Generating Transcripts', duration: 2000 },
+    { id: 'step3', name: 'Analyzing Video', duration: 1500 },
+    { id: 'step4', name: 'Analyzing Sentiment', duration: 1000 },
+    { id: 'step5', name: 'Generating Summary', duration: 1500 }
+];
+let currentStepIndex = 0;
 
 // Load data.json
 async function loadData() {
@@ -156,47 +163,302 @@ function convertTimeToSeconds(timeString) {
 // Select a video
 function selectVideo(video) {
     currentVideo = video;
-    currentState = 'selection';
+    currentTab = 'transcript';
+    currentStepIndex = 0;
     
-    // Hide grid, show player
+    // Hide video grid
     document.getElementById('videoGrid').classList.add('hidden');
-    document.getElementById('videoPlayer').classList.remove('hidden');
     
-    // Show sidebar toggle
+    // Show video player section
+    const videoPlayer = document.getElementById('videoPlayer');
+    videoPlayer.classList.remove('hidden');
+    
+    // Show sidebar toggle button
     document.getElementById('sidebarToggle').classList.remove('hidden');
-    
-    // Reset button and sections
-    document.getElementById('primaryBtn').textContent = 'Generate Transcription';
-    document.getElementById('primaryBtn').style.display = 'inline-block';
-    document.getElementById('tabContainer').classList.add('hidden');
-    document.getElementById('videoWithTranscript').classList.add('hidden');
-    document.getElementById('videoPlayerContainer').classList.remove('hidden');
-    
-    // Player stays in transcript wrapper - just hide/show containers
-    
-    // Remove active class from all tab contents
-    document.getElementById('analysisTab').classList.remove('active');
     
     // Update sidebar active state
     updateSidebarActiveState();
     
-    // Load YouTube player
+    // Get video details
+    const videoUrl = video.video_details.url || video.video_details.metadata.video_url;
+    const videoTitle = video.video_details.title || video.video_details.metadata.title;
+    
+    // Update video title
+    document.querySelector('#videoTitle h1').textContent = videoTitle;
+    
+    // Show progress bar section, hide main content
+    document.getElementById('progressBarSection').classList.remove('hidden');
+    document.getElementById('mainContent').classList.add('hidden');
+    
+    // Reset progress
+    resetProgress();
+    
+    // Start processing automatically
+    setTimeout(() => {
+        startProcessing();
+    }, 500);
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Reset progress bar and steps
+function resetProgress() {
+    currentStepIndex = 0;
+    document.getElementById('progressFill').style.width = '0%';
+    document.getElementById('progressPercent').textContent = '0%';
+    document.getElementById('progressText').textContent = 'Initializing...';
+    
+    // Reset all steps
+    processingSteps.forEach(step => {
+        const stepEl = document.getElementById(step.id);
+        stepEl.classList.remove('active', 'completed');
+    });
+}
+
+// Start processing workflow
+async function startProcessing() {
+    for (let i = 0; i < processingSteps.length; i++) {
+        currentStepIndex = i;
+        await processStep(i);
+    }
+    
+    // All steps completed - show main content
+    completeProcessing();
+}
+
+// Process a single step
+function processStep(stepIndex) {
+    return new Promise((resolve) => {
+        const step = processingSteps[stepIndex];
+        const stepEl = document.getElementById(step.id);
+        
+        // Mark current step as active
+        stepEl.classList.add('active');
+        
+        // Update progress text
+        document.getElementById('progressText').textContent = step.name + '...';
+        
+        // Calculate progress percentage
+        const progress = ((stepIndex + 1) / processingSteps.length) * 100;
+        
+        // Animate progress bar
+        setTimeout(() => {
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressPercent').textContent = Math.round(progress) + '%';
+        }, 100);
+        
+        // Simulate processing time
+        setTimeout(() => {
+            // Mark step as completed
+            stepEl.classList.remove('active');
+            stepEl.classList.add('completed');
+            
+            // Clear the number from completed step icon
+            const stepIcon = stepEl.querySelector('.step-icon');
+            stepIcon.textContent = '';
+            
+            resolve();
+        }, step.duration);
+    });
+}
+
+// Complete processing and show content
+function completeProcessing() {
+    // Hide progress bar section
+    document.getElementById('progressBarSection').classList.add('hidden');
+    
+    // Show main content
+    document.getElementById('mainContent').classList.remove('hidden');
+    
+    // Create YouTube player
     const videoUrl = currentVideo.video_details.url || currentVideo.video_details.metadata.video_url;
     const videoId = extractVideoId(videoUrl);
+    createPlayer(videoId);
     
-    // Always recreate player in center layout when selecting new video
-    if (player && player.destroy) {
-        player.destroy();
+    // Load transcript
+    loadTranscript();
+    
+    // Load analysis data
+    loadAnalysisData();
+}
+
+// Load transcript into the transcript tab
+function loadTranscript() {
+    const transcriptContainer = document.getElementById('transcriptContainer');
+    const segments = currentVideo.video_details.segments;
+    
+    if (!segments || segments.length === 0) {
+        transcriptContainer.innerHTML = '<p style="color: #718096;">No transcript available for this video.</p>';
+        return;
     }
     
-    // Remove old player div if it exists
-    const oldPlayerDiv = document.getElementById('player');
-    if (oldPlayerDiv) {
-        oldPlayerDiv.remove();
+    transcriptContainer.innerHTML = '';
+    segments.forEach((segment, index) => {
+        const transcriptItem = document.createElement('div');
+        transcriptItem.className = 'transcript-line p-3 rounded-lg hover:bg-gray-50 transition cursor-pointer';
+        transcriptItem.dataset.startTime = segment.start;
+        transcriptItem.dataset.endTime = segment.end;
+        transcriptItem.dataset.index = index;
+        transcriptItem.innerHTML = `
+            <a href="#" class="timestamp-link" onclick="seekTo(${segment.start}); return false;">
+                ${formatTimestamp(segment.start)}
+            </a>
+            <span class="ml-3" style="color: #2d3748;">${segment.text}</span>
+        `;
+        transcriptContainer.appendChild(transcriptItem);
+    });
+}
+
+// Load analysis data into respective tabs
+function loadAnalysisData() {
+    const videoDetails = currentVideo.video_details;
+    
+    // Summary Tab
+    const summaryContent = document.getElementById('summaryContent');
+    const sentimentBadge = document.getElementById('sentimentBadge');
+    const videoLength = document.getElementById('videoLength');
+    
+    summaryContent.textContent = videoDetails.detailed_summary || videoDetails.summary || 'No summary available.';
+    
+    // Sentiment from smart_features
+    const sentiment = videoDetails.smart_features?.sentiment_analysis || videoDetails.sentiment || '';
+    if (sentiment) {
+        sentimentBadge.textContent = sentiment;
+        sentimentBadge.className = `badge badge-blue text-sm px-4 py-2`;
+    } else {
+        sentimentBadge.style.display = 'none';
     }
     
-    // Create new player in center layout
-    createPlayer(videoId, false);
+    videoLength.textContent = `Video Length: ${formatDuration(videoDetails.metadata.duration)}`;
+    
+    // Genres Tab
+    const genresContent = document.getElementById('genresContent');
+    const genres = videoDetails.genres;
+    
+    genresContent.innerHTML = genres.map(genre => `
+        <div class="mb-6">
+            <div class="flex justify-between items-center mb-2">
+                <span class="font-semibold text-lg" style="color: #2d3748;">${genre.genre}</span>
+                <span class="text-sm font-medium" style="color: #AEB784;">${Math.round((genre.confidence_score || genre.confidence) * 100)}%</span>
+            </div>
+            <div class="confidence-bar">
+                <div class="confidence-fill" style="width: ${(genre.confidence_score || genre.confidence) * 100}%"></div>
+            </div>
+            ${genre.reasoning ? `<p class="text-sm mt-2" style="color: #718096;">${genre.reasoning}</p>` : ''}
+        </div>
+    `).join('');
+    
+    // Category Tab
+    const categoryContent = document.getElementById('categoryContent');
+    const category = videoDetails.category;
+    const rating = category.rating || category.age_rating || 'Not Rated';
+    const ratingClass = getRatingClass(rating);
+    
+    let contentAnalysisHTML = '';
+    if (category.content_analysis && category.content_analysis.length > 0) {
+        contentAnalysisHTML = `
+            <div class="mt-6">
+                <h4 class="font-semibold mb-3 text-lg" style="color: #2d3748;">Content Alerts:</h4>
+                <div class="space-y-3">
+                    ${category.content_analysis.map(alert => {
+                        const seconds = convertTimeToSeconds(alert.timestamp);
+                        return `
+                            <div class="p-4 bg-gray-50 rounded-xl">
+                                <span class="badge badge-amber">${alert.alert_type}</span>
+                                <a href="#" class="ml-2 font-semibold timestamp-link" onclick="seekTo(${seconds}); return false;">
+                                    ${formatTimestamp(alert.timestamp)}
+                                </a>
+                                <p class="text-sm mt-2" style="color: #4a5568;">${alert.description}</p>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+        `;
+    }
+    
+    categoryContent.innerHTML = `
+        <div>
+            <p class="text-sm mb-3" style="color: #718096;">Age Rating</p>
+            <span class="badge ${ratingClass} text-xl px-6 py-3">${rating}</span>
+            ${contentAnalysisHTML}
+        </div>
+    `;
+    
+    // Smart Features Tab
+    const smartFeatures = videoDetails.smart_features;
+    const smartFeaturesContent = document.getElementById('smartFeaturesContent');
+    
+    let moodTagsHTML = '';
+    if (smartFeatures.mood_tags && smartFeatures.mood_tags.length > 0) {
+        moodTagsHTML = `
+            <div class="mb-6">
+                <h4 class="font-semibold mb-3 text-lg" style="color: #2d3748;">Mood Tags:</h4>
+                <div class="flex flex-wrap gap-3">
+                    ${smartFeatures.mood_tags.map(tag => `
+                        <span class="badge badge-green text-base px-4 py-2">${tag}</span>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }
+    
+    let keyMomentsHTML = '';
+    if (smartFeatures.key_moments && smartFeatures.key_moments.length > 0) {
+        keyMomentsHTML = `
+            <div>
+                <h4 class="font-semibold mb-3 text-lg" style="color: #2d3748;">Highlights:</h4>
+                <div class="space-y-3">
+                    ${smartFeatures.key_moments.map(moment => {
+                        const time = moment.time || moment.timestamp;
+                        const desc = moment.label || moment.description;
+                        const seconds = convertTimeToSeconds(time);
+                        return `
+                            <div class="p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition">
+                                <a href="#" class="timestamp-link text-lg" onclick="seekTo(${seconds}); return false;">
+                                    ${formatTimestamp(time)}
+                                </a>
+                                <span class="ml-3" style="color: #2d3748;">${desc}</span>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+        `;
+    }
+    
+    smartFeaturesContent.innerHTML = moodTagsHTML + keyMomentsHTML;
+    
+    // History Logs Tab
+    const historyLogsContent = document.getElementById('historyLogsContent');
+    const historyLogs = videoDetails.history_logs || [];
+    
+    if (historyLogs.length === 0) {
+        historyLogsContent.innerHTML = '<p style="color: #718096;">No history logs available.</p>';
+    } else {
+        historyLogsContent.innerHTML = historyLogs.map(log => {
+            const statusClass = log.status;
+            const messageHTML = log.message ? `<div class="log-message">${log.message}</div>` : '';
+            
+            return `
+                <div class="history-log-item ${statusClass}">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <h4 class="font-semibold text-base" style="color: #2d3748;">${log.action}</h4>
+                            <p class="text-xs mt-1" style="color: #718096;">
+                                <span>${log.timestamp}</span>
+                                <span class="mx-2">•</span>
+                                <span>${log.user}</span>
+                            </p>
+                        </div>
+                        <span class="log-status-badge ${statusClass}">${statusClass}</span>
+                    </div>
+                    ${messageHTML}
+                </div>
+            `;
+        }).join('');
+    }
 }
 
 // Update sidebar active state
@@ -217,23 +479,29 @@ function onYouTubeIframeAPIReady() {
 }
 
 // Create YouTube player
-function createPlayer(videoId, inTranscriptLayout = false) {
-    // Determine which wrapper to use
-    const wrapperToUse = inTranscriptLayout ? 'playerWrapperTranscript' : 'playerWrapper';
-    
-    let playerDiv = document.getElementById('player');
-    if (!playerDiv) {
-        playerDiv = document.createElement('div');
-        playerDiv.id = 'player';
-        playerDiv.className = 'w-full aspect-video rounded-2xl overflow-hidden shadow-2xl';
-        playerDiv.style.border = '4px solid rgba(174, 183, 132, 0.5)';
-        const wrapper = document.getElementById(wrapperToUse);
-        if (wrapper) {
-            wrapper.appendChild(playerDiv);
-        }
+function createPlayer(videoId) {
+    // Destroy existing player if any
+    if (player && player.destroy) {
+        player.destroy();
     }
     
-    console.log('Creating YouTube player for video:', videoId, 'in', wrapperToUse);
+    // Remove old player div if exists
+    const oldPlayerDiv = document.getElementById('player');
+    if (oldPlayerDiv) {
+        oldPlayerDiv.remove();
+    }
+    
+    // Create new player div
+    const playerDiv = document.createElement('div');
+    playerDiv.id = 'player';
+    playerDiv.className = 'w-full aspect-video rounded-xl overflow-hidden';
+    
+    const wrapper = document.getElementById('playerWrapper');
+    if (wrapper) {
+        wrapper.appendChild(playerDiv);
+    }
+    
+    // Create YouTube player
     player = new YT.Player('player', {
         videoId: videoId,
         playerVars: {
@@ -333,147 +601,21 @@ function seekTo(seconds) {
 // Back button handler
 document.getElementById('backBtn').addEventListener('click', () => {
     currentVideo = null;
-    currentState = 'landing';
     
+    // Show video grid
     document.getElementById('videoGrid').classList.remove('hidden');
     document.getElementById('videoPlayer').classList.add('hidden');
     document.getElementById('sidebarToggle').classList.add('hidden');
     
-    if (player) {
-        player.pauseVideo();
+    // Destroy player
+    if (player && player.destroy) {
+        player.destroy();
+        player = null;
     }
+    
+    // Reset to transcript tab
+    switchTab('transcript');
 });
-
-// Primary button handler
-document.getElementById('primaryBtn').addEventListener('click', () => {
-    if (currentState === 'selection') {
-        // Generate transcription with progress
-        document.getElementById('primaryBtn').style.display = 'none';
-        showTranscriptionProgress();
-    } else if (currentState === 'transcription') {
-        // Show analysis with progress
-        document.getElementById('primaryBtn').style.display = 'none';
-        showAnalysisProgress();
-    }
-});
-
-// Show transcription progress
-function showTranscriptionProgress() {
-    const progressBar = document.getElementById('progressBar');
-    const progressText = document.getElementById('progressText');
-    const progressPercent = document.getElementById('progressPercent');
-    const progressFill = document.getElementById('progressFill');
-    
-    progressBar.classList.remove('hidden');
-    
-    // Step 1: Extracting audio
-    progressText.textContent = 'Extracting audio...';
-    progressPercent.textContent = '33%';
-    progressFill.style.width = '33%';
-    
-    setTimeout(() => {
-        // Step 2: Generating transcript
-        progressText.textContent = 'Generating transcript...';
-        progressPercent.textContent = '66%';
-        progressFill.style.width = '66%';
-        
-        setTimeout(() => {
-            // Step 3: Complete
-            progressText.textContent = 'Transcript ready!';
-            progressPercent.textContent = '100%';
-            progressFill.style.width = '100%';
-            
-            setTimeout(() => {
-                // Hide progress bar and show results
-                progressBar.classList.add('hidden');
-                progressFill.style.width = '0%';
-                
-                generateTranscription();
-                currentState = 'transcription';
-                document.getElementById('primaryBtn').textContent = 'Analyze Video';
-                document.getElementById('primaryBtn').style.display = 'inline-block';
-                
-                // Recreate player in transcript layout
-                const videoId = extractVideoId(currentVideo.video_details.url || currentVideo.video_details.metadata.video_url);
-                
-                // Destroy old player
-                if (player && player.destroy) {
-                    player.destroy();
-                }
-                
-                // Remove old player div
-                const oldPlayerDiv = document.getElementById('player');
-                if (oldPlayerDiv) {
-                    oldPlayerDiv.remove();
-                }
-                
-                // Switch to 2-column layout
-                document.getElementById('videoPlayerContainer').classList.add('hidden');
-                document.getElementById('videoWithTranscript').classList.remove('hidden');
-                
-                // Create new player in transcript layout
-                createPlayer(videoId, true);
-                
-                console.log('Layout switched to transcript view with new player');
-            }, 800);
-        }, 2000);
-    }, 1800);
-}
-
-// Show analysis progress
-function showAnalysisProgress() {
-    const progressBar = document.getElementById('progressBar');
-    const progressText = document.getElementById('progressText');
-    const progressPercent = document.getElementById('progressPercent');
-    const progressFill = document.getElementById('progressFill');
-    
-    progressBar.classList.remove('hidden');
-    
-    // Step 1: Analyzing video
-    progressText.textContent = 'Analyzing video...';
-    progressPercent.textContent = '50%';
-    progressFill.style.width = '50%';
-    
-    setTimeout(() => {
-        // Step 2: Almost there
-        progressText.textContent = 'Almost there...';
-        progressPercent.textContent = '80%';
-        progressFill.style.width = '80%';
-        
-        setTimeout(() => {
-            // Step 3: Analysis done
-            progressText.textContent = 'Analysis done!';
-            progressPercent.textContent = '100%';
-            progressFill.style.width = '100%';
-            
-            setTimeout(() => {
-                // Hide progress bar and show results
-                progressBar.classList.add('hidden');
-                progressFill.style.width = '0%';
-                
-                generateAnalysis();
-                currentState = 'analysis';
-                
-                // Show tab container and analysis
-                document.getElementById('tabContainer').classList.remove('hidden');
-                document.getElementById('analysisTab').classList.add('active');
-            }, 800);
-        }, 2200);
-    }, 2000);
-}
-
-// Show loading animation
-function showLoadingAnimation() {
-    const btn = document.getElementById('primaryBtn');
-    const originalText = btn.textContent;
-    btn.innerHTML = '<div class="loading-spinner"></div>';
-    btn.disabled = true;
-    
-    setTimeout(() => {
-        btn.textContent = originalText;
-        btn.disabled = false;
-    }, 800);
-}
 
 // Tab switching
 function switchTab(tabName) {
@@ -493,10 +635,19 @@ function switchTab(tabName) {
         content.classList.remove('active');
     });
     
-    if (tabName === 'transcript') {
-        document.getElementById('transcriptTab').classList.add('active');
-    } else if (tabName === 'analysis') {
-        document.getElementById('analysisTab').classList.add('active');
+    // Show the selected tab content
+    const tabContentMap = {
+        'transcript': 'transcriptTab',
+        'summary': 'summaryTab',
+        'genres': 'genresTab',
+        'category': 'categoryTab',
+        'features': 'featuresTab',
+        'history': 'historyTab'
+    };
+    
+    const contentId = tabContentMap[tabName];
+    if (contentId) {
+        document.getElementById(contentId).classList.add('active');
     }
 }
 
@@ -508,172 +659,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
-// Generate transcription
-function generateTranscription() {
-    const container = document.getElementById('transcriptContainer');
-    container.innerHTML = '';
-    
-    const segments = currentVideo.video_details.segments || [];
-    const contentAnalysis = currentVideo.video_details.category.content_analysis || [];
-    
-    // If no segments available, show a message
-    if (segments.length === 0) {
-        container.innerHTML = '<p style="color: #718096; text-align: center; padding: 40px;">Transcript not available for this video.</p>';
-        return;
-    }
-    
-    segments.forEach((segment, index) => {
-        const line = document.createElement('div');
-        line.className = 'transcript-line';
-        line.dataset.startTime = segment.start;
-        line.dataset.endTime = segment.end;
-        line.dataset.index = index;
-        
-        // Check if this segment has any content alerts
-        const alerts = contentAnalysis.filter(alert => {
-            const alertTime = parseFloat(alert.timestamp);
-            return alertTime >= segment.start && alertTime < segment.end;
-        });
-        
-        // Create timestamp link
-        const timestamp = document.createElement('a');
-        timestamp.className = 'timestamp-link';
-        timestamp.textContent = formatTimestamp(segment.start);
-        timestamp.onclick = (e) => {
-            e.preventDefault();
-            seekTo(segment.start);
-        };
-        
-        // Create text content
-        const text = document.createElement('span');
-        text.className = 'ml-4';
-        text.textContent = segment.text;
-        
-        line.appendChild(timestamp);
-        line.appendChild(text);
-        container.appendChild(line);
-    });
-}
-
-// Generate analysis
-function generateAnalysis() {
-    const videoDetails = currentVideo.video_details;
-    
-    // Detailed Summary (Top) with video length
-    const summaryContent = document.getElementById('summaryContent');
-    summaryContent.textContent = videoDetails.detailed_summary;
-    
-    const videoLength = document.getElementById('videoLength');
-    videoLength.innerHTML = `Duration: <span style="color: #2d3748; font-weight: 600;">${formatDuration(videoDetails.metadata.duration)}</span>`;
-    
-    // Sentiment Analysis Badge
-    const sentimentBadge = document.getElementById('sentimentBadge');
-    const sentiment = videoDetails.smart_features?.sentiment_analysis || '';
-    if (sentiment) {
-        sentimentBadge.textContent = sentiment;
-        sentimentBadge.style.display = 'inline-block';
-    } else {
-        sentimentBadge.style.display = 'none';
-    }
-    
-    // Genres with confidence bars
-    const genres = videoDetails.genres;
-    const genresContent = document.getElementById('genresContent');
-    genresContent.innerHTML = genres.map(genre => `
-        <div class="mb-6">
-            <div class="flex justify-between items-center mb-2">
-                <span class="font-bold text-lg" style="color: #2d3748;">${genre.genre}</span>
-                <span class="font-semibold" style="color: #4a5568;">${(genre.confidence_score * 100).toFixed(0)}%</span>
-            </div>
-            <div class="confidence-bar">
-                <div class="confidence-fill" style="width: ${genre.confidence_score * 100}%"></div>
-            </div>
-            <p class="text-sm mt-2" style="color: #718096;">${genre.reasoning}</p>
-        </div>
-    `).join('');
-    
-    // Category & Rating
-    const category = videoDetails.category;
-    const rating = category.rating || category.age_rating || 'Not Rated';
-    const ratingClass = getRatingClass(rating);
-    const categoryContent = document.getElementById('categoryContent');
-    
-    let contentAnalysisHTML = '';
-    if (category.content_analysis && category.content_analysis.length > 0) {
-        contentAnalysisHTML = `
-            <div class="mt-6">
-                <h4 class="font-semibold mb-3 text-lg" style="color: #2d3748;">Content Alerts:</h4>
-                <div class="space-y-3">
-                    ${category.content_analysis.map(alert => {
-                        const seconds = convertTimeToSeconds(alert.timestamp);
-                        return `
-                            <div class="p-4 bg-white/10 rounded-xl backdrop-blur-sm">
-                                <span class="badge badge-amber">${alert.alert_type}</span>
-                                <a href="#" class="ml-2 font-semibold timestamp-link" onclick="seekTo(${seconds}); return false;">
-                                    ${formatTimestamp(alert.timestamp)}
-                                </a>
-                                <p class="text-sm mt-2" style="color: #4a5568;">${alert.description}</p>
-                            </div>
-                        `;
-                    }).join('')}
-                </div>
-            </div>
-        `;
-    }
-    
-    categoryContent.innerHTML = `
-        <div>
-            <p class="text-sm mb-3" style="color: #718096;">Age Rating</p>
-            <span class="badge ${ratingClass} text-xl px-6 py-3">${rating}</span>
-            ${contentAnalysisHTML}
-        </div>
-    `;
-    
-    // Smart Features
-    const smartFeatures = videoDetails.smart_features;
-    const smartFeaturesContent = document.getElementById('smartFeaturesContent');
-    
-    let moodTagsHTML = '';
-    if (smartFeatures.mood_tags && smartFeatures.mood_tags.length > 0) {
-        moodTagsHTML = `
-            <div class="mb-6">
-                <h4 class="font-semibold mb-3 text-lg" style="color: #2d3748;">Mood Tags:</h4>
-                <div class="flex flex-wrap gap-3">
-                    ${smartFeatures.mood_tags.map(tag => `
-                        <span class="badge badge-green text-base px-4 py-2">${tag}</span>
-                    `).join('')}
-                </div>
-            </div>
-        `;
-    }
-    
-    let keyMomentsHTML = '';
-    if (smartFeatures.key_moments && smartFeatures.key_moments.length > 0) {
-        keyMomentsHTML = `
-            <div>
-                <h4 class="font-semibold mb-3 text-lg" style="color: #2d3748;">Highlights:</h4>
-                <div class="space-y-3">
-                    ${smartFeatures.key_moments.map(moment => {
-                        const time = moment.time || moment.timestamp;
-                        const desc = moment.label || moment.description;
-                        const seconds = convertTimeToSeconds(time);
-                        return `
-                            <div class="p-4 bg-white/10 rounded-xl backdrop-blur-sm hover:bg-white/20 transition">
-                                <a href="#" class="timestamp-link text-lg" onclick="seekTo(${seconds}); return false;">
-                                    ${formatTimestamp(time)}
-                                </a>
-                                <span class="ml-3" style="color: #2d3748;">${desc}</span>
-                            </div>
-                        `;
-                    }).join('')}
-                </div>
-            </div>
-        `;
-    }
-    
-    smartFeaturesContent.innerHTML = moodTagsHTML + keyMomentsHTML;
-}
 
 // Get rating badge class
 function getRatingClass(rating) {
