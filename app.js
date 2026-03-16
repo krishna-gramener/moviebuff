@@ -459,6 +459,55 @@ function loadAnalysisData() {
             `;
         }).join('');
     }
+    
+    // Regional Recommendations Tab
+    loadRegionalRecommendations('india'); // Default to India
+}
+
+// Load regional recommendations
+function loadRegionalRecommendations(region) {
+    const regionalContent = document.getElementById('regionalContent');
+    const regionalData = currentVideo.video_details.regional_recommendations;
+    
+    if (!regionalData || !regionalData[region]) {
+        regionalContent.innerHTML = '<p style="color: #718096;">No regional recommendations available for this region.</p>';
+        return;
+    }
+    
+    const data = regionalData[region];
+    const cardClass = data.changes_required ? 'changes-required' : 'no-changes';
+    const badgeClass = data.changes_required ? 'changes-required' : 'no-changes';
+    const badgeText = data.changes_required ? 'Changes Required' : 'No Changes Required';
+    
+    // Format region name for display
+    const regionNames = {
+        'india': 'India',
+        'france': 'France',
+        'japan': 'Japan',
+        'united_states': 'United States'
+    };
+    const displayName = regionNames[region] || region;
+    
+    const recommendationsHTML = data.recommendations.map(rec => `<li>${rec}</li>`).join('');
+    
+    regionalContent.innerHTML = `
+        <div class="regional-card ${cardClass}">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <h3 class="text-xl font-bold mb-2" style="color: #2d3748;">Region: ${displayName}</h3>
+                    <p class="text-sm" style="color: #718096;">Suggested Rating: <span class="font-semibold" style="color: #2d3748;">${data.rating_suggestion}</span></p>
+                </div>
+                <span class="regional-badge ${badgeClass}">${badgeText}</span>
+            </div>
+            
+            <div class="mt-4">
+                <h4 class="font-semibold mb-3" style="color: #2d3748;">Recommendations:</h4>
+                <ul class="recommendation-list">
+                    ${recommendationsHTML}
+                </ul>
+            </div>
+        </div>
+    `;
 }
 
 // Update sidebar active state
@@ -642,7 +691,8 @@ function switchTab(tabName) {
         'genres': 'genresTab',
         'category': 'categoryTab',
         'features': 'featuresTab',
-        'history': 'historyTab'
+        'history': 'historyTab',
+        'regional': 'regionalTab'
     };
     
     const contentId = tabContentMap[tabName];
@@ -656,6 +706,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.tab').forEach(tab => {
         tab.addEventListener('click', () => {
             switchTab(tab.dataset.tab);
+        });
+    });
+    
+    // Add region button event listeners
+    document.querySelectorAll('.region-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active class from all buttons
+            document.querySelectorAll('.region-btn').forEach(b => b.classList.remove('active'));
+            // Add active class to clicked button
+            btn.classList.add('active');
+            // Load recommendations for selected region
+            loadRegionalRecommendations(btn.dataset.region);
         });
     });
 });
