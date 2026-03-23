@@ -38,7 +38,7 @@
         </header>
 
         <!-- Landing State: Video Grid -->
-        <div id="videoGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div id="videoGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <!-- Video cards will be dynamically inserted here -->
         </div>
 
@@ -108,45 +108,36 @@
                 <!-- Main Content: Video on Left, Tabs on Right -->
                 <div id="mainContent" class="hidden">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <!-- Left Side: Video Player (50% width) -->
+                        <!-- Left Side: Video Player + Summary & Genres Tabs (50% width) -->
                         <div>
-                            <div class="content-section sticky top-4">
+                            <!-- Video Player -->
+                            <div class="content-section mb-6">
                                 <div id="playerWrapper">
                                     <!-- YouTube player will be inserted here -->
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Right Side: Tabs and Content (50% width) -->
-                        <div>
-                            <!-- Tab Navigation -->
-                            <div class="tab-container-grid mb-6">
-                                <button class="tab active" data-tab="transcript">Transcript</button>
-                                <button class="tab" data-tab="summary">Summary</button>
+                            <!-- Left Side Tab Navigation -->
+                            <div class="tab-container-grid mb-6" style="grid-template-columns: repeat(2, 1fr);">
+                                <button class="tab active" data-tab="summary">Summary</button>
                                 <button class="tab" data-tab="genres">Genres</button>
-                                <button class="tab" data-tab="category">Category</button>
-                                <button class="tab" data-tab="features">Smart Features</button>
-                                <button class="tab" data-tab="history">History Logs</button>
-                                <button class="tab" data-tab="regional">Regional Recommendations</button>
                             </div>
 
-                            <!-- Tab Content -->
+                            <!-- Left Side Tab Content -->
                             <div class="tab-contents">
-                                <!-- Transcript Tab -->
-                                <div id="transcriptTab" class="tab-content active">
-                                    <div class="content-section">
-                                        <h2 class="text-2xl font-semibold mb-4">Transcript</h2>
-                                        <div id="transcriptContainer" class="space-y-2 max-h-[600px] overflow-y-auto pr-2"></div>
-                                    </div>
-                                </div>
-
                                 <!-- Summary Tab -->
-                                <div id="summaryTab" class="tab-content">
+                                <div id="summaryTab" class="tab-content active">
                                     <div class="content-section">
-                                        <div class="flex justify-between items-center mb-4">
+                                        <!-- Title and Age Rating on same line -->
+                                        <div class="flex justify-between items-center mb-3">
                                             <h2 class="text-2xl font-semibold">Summary</h2>
-                                            <span id="sentimentBadge" class="badge badge-blue text-sm px-4 py-2"></span>
+                                            <div id="ageRatingBadge"></div>
                                         </div>
+                                        
+                                        <!-- Sentiment Badge -->
+                                        <span id="sentimentBadge" class="badge badge-blue text-sm mb-4" style="display: inline-block; margin-left: 0; padding-left: 0; padding-right: 14px; padding-top: 6px; padding-bottom: 6px;"></span>
+                                        
+                                        <!-- Summary Content -->
                                         <div id="summaryContent" class="leading-relaxed text-lg" style="color: #4a5568;"></div>
                                         <div id="videoLength" class="mt-6 font-medium" style="color: #718096;"></div>
                                     </div>
@@ -159,12 +150,35 @@
                                         <div id="genresContent"></div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
 
-                                <!-- Category Tab -->
-                                <div id="categoryTab" class="tab-content">
+                        <!-- Right Side: Tabs and Content (50% width) -->
+                        <div>
+                            <!-- Tab Navigation -->
+                            <div class="mb-6" style="display: flex; gap: 6px; background: #f8f9fa; padding: 8px; border-radius: 8px; border: 1px solid rgba(174, 183, 132, 0.2); flex-wrap: nowrap;">
+                                <button class="tab active" data-tab="transcript" style="flex: 1; font-size: 0.8rem; padding: 10px 8px; white-space: nowrap;">Transcript</button>
+                                <button class="tab" data-tab="contentalert" style="flex: 1; font-size: 0.8rem; padding: 10px 8px; white-space: nowrap;">Content Alert</button>
+                                <button class="tab" data-tab="features" style="flex: 1; font-size: 0.8rem; padding: 10px 8px; white-space: nowrap;">Smart Features</button>
+                                <button class="tab" data-tab="regional" style="flex: 1; font-size: 0.8rem; padding: 10px 8px; white-space: nowrap;">Regional Advisory</button>
+                                <button class="tab" data-tab="history" style="flex: 1; font-size: 0.8rem; padding: 10px 8px; white-space: nowrap;">History Logs</button>
+                            </div>
+
+                            <!-- Tab Content -->
+                            <div class="tab-contents">
+                                <!-- Transcript Tab -->
+                                <div id="transcriptTab" class="tab-content active">
                                     <div class="content-section">
-                                        <h2 class="text-2xl font-semibold mb-6">Category & Rating</h2>
-                                        <div id="categoryContent"></div>
+                                        <h2 class="text-2xl font-semibold mb-4">Transcript</h2>
+                                        <div id="transcriptContainer" class="space-y-2 max-h-[600px] overflow-y-auto pr-2"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Content Alert Tab (formerly Category) -->
+                                <div id="contentalertTab" class="tab-content">
+                                    <div class="content-section">
+                                        <h2 class="text-2xl font-semibold mb-6">Content Alert</h2>
+                                        <div id="contentalertContent"></div>
                                     </div>
                                 </div>
 
@@ -176,19 +190,10 @@
                                     </div>
                                 </div>
 
-                                <!-- History Logs Tab -->
-                                <div id="historyTab" class="tab-content">
-                                    <div class="content-section">
-                                        <h2 class="text-2xl font-semibold mb-6">History Logs</h2>
-                                        <p class="text-sm mb-4" style="color: #718096;">Audit trail of content review and approval actions</p>
-                                        <div id="historyLogsContent"></div>
-                                    </div>
-                                </div>
-
                                 <!-- Regional Recommendations Tab -->
                                 <div id="regionalTab" class="tab-content">
                                     <div class="content-section">
-                                        <h2 class="text-2xl font-semibold mb-4">Regional Recommendations</h2>
+                                        <h2 class="text-2xl font-semibold mb-4">Regional Advisory</h2>
                                         <p class="text-sm mb-6" style="color: #718096;">Geography-specific content advisory and rating recommendations</p>
                                         
                                         <!-- Region Selector -->
@@ -216,6 +221,15 @@
 
                                         <!-- Regional Content -->
                                         <div id="regionalContent"></div>
+                                    </div>
+                                </div>
+
+                                <!-- History Logs Tab -->
+                                <div id="historyTab" class="tab-content">
+                                    <div class="content-section">
+                                        <h2 class="text-2xl font-semibold mb-6">History Logs</h2>
+                                        <p class="text-sm mb-4" style="color: #718096;">Audit trail of content review and approval actions</p>
+                                        <div id="historyLogsContent"></div>
                                     </div>
                                 </div>
                             </div>

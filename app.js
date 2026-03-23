@@ -349,17 +349,20 @@ function loadAnalysisData() {
         </div>
     `).join('');
     
-    // Category Tab
-    const categoryContent = document.getElementById('categoryContent');
+    // Category/Content Alert Tab - Prepare content
     const category = videoDetails.category;
     const rating = category.rating || category.age_rating || 'Not Rated';
     const ratingClass = getRatingClass(rating);
     
+    // Age Rating Badge only (for Summary tab on left)
+    const ageRatingBadge = document.getElementById('ageRatingBadge');
+    ageRatingBadge.innerHTML = `<span class="badge ${ratingClass} text-lg px-5 py-2">${rating}</span>`;
+    
+    // Content Alerts HTML (for Content Alert tab on right)
     let contentAnalysisHTML = '';
     if (category.content_analysis && category.content_analysis.length > 0) {
         contentAnalysisHTML = `
             <div class="mt-6">
-                <h4 class="font-semibold mb-3 text-lg" style="color: #2d3748;">Content Alerts:</h4>
                 <div class="space-y-3">
                     ${category.content_analysis.map(alert => {
                         const seconds = convertTimeToSeconds(alert.timestamp);
@@ -378,13 +381,12 @@ function loadAnalysisData() {
         `;
     }
     
-    categoryContent.innerHTML = `
-        <div>
-            <p class="text-sm mb-3" style="color: #718096;">Age Rating</p>
-            <span class="badge ${ratingClass} text-xl px-6 py-3">${rating}</span>
-            ${contentAnalysisHTML}
-        </div>
-    `;
+    // Content Alert HTML (Only content alerts for right side tab)
+    const contentalertHTML = contentAnalysisHTML || '<p style="color: #718096;">No content alerts for this video.</p>';
+    
+    // Populate content alert tab (right side)
+    const contentalertContent = document.getElementById('contentalertContent');
+    contentalertContent.innerHTML = contentalertHTML;
     
     // Smart Features Tab
     const smartFeatures = videoDetails.smart_features;
@@ -662,42 +664,85 @@ document.getElementById('backBtn').addEventListener('click', () => {
         player = null;
     }
     
-    // Reset to transcript tab
+    // Reset to summary tab on left, transcript on right
+    switchTab('summary');
     switchTab('transcript');
 });
 
-// Tab switching
+// Tab switching - Independent for left and right sides
 function switchTab(tabName) {
-    currentTab = tabName;
+    // Define left side tabs and right side tabs
+    const leftTabs = ['summary', 'genres'];
+    const rightTabs = ['transcript', 'contentalert', 'features', 'regional', 'history'];
     
-    // Update tab buttons
-    document.querySelectorAll('.tab').forEach(tab => {
-        if (tab.dataset.tab === tabName) {
-            tab.classList.add('active');
-        } else {
-            tab.classList.remove('active');
-        }
-    });
-    
-    // Update tab content
-    document.querySelectorAll('.tab-content').forEach(content => {
-        content.classList.remove('active');
-    });
-    
-    // Show the selected tab content
     const tabContentMap = {
         'transcript': 'transcriptTab',
         'summary': 'summaryTab',
         'genres': 'genresTab',
-        'category': 'categoryTab',
+        'contentalert': 'contentalertTab',
         'features': 'featuresTab',
         'history': 'historyTab',
         'regional': 'regionalTab'
     };
     
-    const contentId = tabContentMap[tabName];
-    if (contentId) {
-        document.getElementById(contentId).classList.add('active');
+    // Determine which side this tab belongs to
+    const isLeftTab = leftTabs.includes(tabName);
+    const isRightTab = rightTabs.includes(tabName);
+    
+    if (isLeftTab) {
+        // Update only left side tab buttons
+        document.querySelectorAll('.tab').forEach(tab => {
+            if (leftTabs.includes(tab.dataset.tab)) {
+                if (tab.dataset.tab === tabName) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            }
+        });
+        
+        // Update only left side tab content
+        leftTabs.forEach(tab => {
+            const contentId = tabContentMap[tab];
+            if (contentId) {
+                const element = document.getElementById(contentId);
+                if (element) {
+                    if (tab === tabName) {
+                        element.classList.add('active');
+                    } else {
+                        element.classList.remove('active');
+                    }
+                }
+            }
+        });
+    }
+    
+    if (isRightTab) {
+        // Update only right side tab buttons
+        document.querySelectorAll('.tab').forEach(tab => {
+            if (rightTabs.includes(tab.dataset.tab)) {
+                if (tab.dataset.tab === tabName) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            }
+        });
+        
+        // Update only right side tab content
+        rightTabs.forEach(tab => {
+            const contentId = tabContentMap[tab];
+            if (contentId) {
+                const element = document.getElementById(contentId);
+                if (element) {
+                    if (tab === tabName) {
+                        element.classList.add('active');
+                    } else {
+                        element.classList.remove('active');
+                    }
+                }
+            }
+        });
     }
 }
 
