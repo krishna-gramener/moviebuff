@@ -9,50 +9,229 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="min-h-screen">
-    <!-- Sidebar Toggle Button -->
-    <button class="sidebar-toggle hidden" id="sidebarToggle">
-        <span id="sidebarArrow">→</span> Videos
-    </button>
-    
-    <!-- Collapsible Sidebar -->
-    <div class="sidebar" id="sidebar">
-        <div class="p-6">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-bold text-gray-800">All Videos</h3>
-                <button class="text-gray-800 text-2xl" onclick="toggleSidebar()">×</button>
+    <!-- Landing Page -->
+    <div id="landingPage" class="landing-page">
+        <!-- Navigation Bar -->
+        <nav class="nav-bar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <div class="brand-icon">🎬</div>
+                    <span class="brand-text">MovieBuff</span>
+                    <span class="brand-subtitle">Powered by AI</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#overview" class="nav-link">Overview</a>
+                    <a href="#guidelines" class="nav-link">Guidelines</a>
+                    <a href="#statistics" class="nav-link">Key Statistics</a>
+                    <a href="#contacts" class="nav-link">Contacts</a>
+                </div>
+                <div class="nav-actions">
+                    <button class="nav-btn secondary">My To-Dos</button>
+                    <button class="nav-btn primary">Profile</button>
+                    <div class="profile-avatar">
+                        <img src="https://ui-avatars.com/api/?name=User&background=AEB784&color=fff" alt="Profile">
+                    </div>
+                </div>
             </div>
-            <div id="sidebarVideoList">
-                <!-- Sidebar video items will be inserted here -->
+        </nav>
+
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        Unknown to <span class="hero-highlight">Known</span>
+                        <br>in Minutes
+                    </h1>
+                    <p class="hero-description">
+                        Streamline your review process with automated ratings,<br>
+                        human-in-the-loop validation, and export-ready reports.
+                    </p>
+                    <button id="startReviewBtn" class="hero-cta">Start Review</button>
+                </div>
+                <div class="hero-visual">
+                    <div class="visual-card">
+                        <div class="visual-stats">
+                            <div class="stat-bubble stat-1">
+                                <div class="stat-number">200+</div>
+                                <div class="stat-label">Hrs<br>Of Content Reviewed</div>
+                            </div>
+                            <div class="stat-bubble stat-2">
+                                <div class="stat-number">1M+</div>
+                                <div class="stat-label">Sounds Analyzed</div>
+                            </div>
+                            <div class="stat-bubble stat-3">
+                                <div class="stat-number">2K+</div>
+                                <div class="stat-label">Titles Rated</div>
+                            </div>
+                        </div>
+                        <div class="visual-mockup">
+                            <div class="mockup-screen">
+                                <div class="mockup-header"></div>
+                                <div class="mockup-content">
+                                    <div class="mockup-video"></div>
+                                    <div class="mockup-sidebar">
+                                        <div class="mockup-item"></div>
+                                        <div class="mockup-item"></div>
+                                        <div class="mockup-item"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <!-- Feature Cards Section -->
+        <div class="features-section">
+            <div class="features-container">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                        </svg>
+                    </div>
+                    <div class="feature-content">
+                        <div class="feature-label">Ready To Start Rating?</div>
+                        <h3 class="feature-title">Select Your Video</h3>
+                        <p class="feature-description">Upload videos or choose from your library to begin the AI-powered content analysis process.</p>
+                        <button class="feature-btn">Upload</button>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                    </div>
+                    <div class="feature-content">
+                        <div class="feature-label">How Is This Tool?</div>
+                        <h3 class="feature-title">Generate AI Review</h3>
+                        <p class="feature-description">Our AI analyzes audio, video, and dialogue to provide comprehensive ratings and insights automatically.</p>
+                        <button class="feature-btn">Learn More</button>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div class="feature-content">
+                        <div class="feature-label">Need To Check Rating Rules?</div>
+                        <h3 class="feature-title">Add Human Feedback</h3>
+                        <p class="feature-description">Review AI suggestions, validate findings, and provide expert feedback to ensure accuracy and compliance.</p>
+                        <button class="feature-btn">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="landing-footer">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#terms">Terms and conditions</a>
+                    <span class="footer-divider">|</span>
+                    <a href="#privacy">Privacy Policy</a>
+                </div>
+            </div>
+        </footer>
     </div>
 
-    <div class="container mx-auto px-4 py-8" style="max-width: 1400px;">
-        <!-- Header -->
-        <header class="text-center mb-16 fade-in">
-            <h1 class="text-6xl font-extrabold mb-4" style="color: #2d3748;">
-                MovieBuff
-            </h1>
-            <p class="text-2xl font-light" style="color: #4a5568;">Your AI-Assisted Cinema Companion</p>
-            <p class="text-lg mt-2" style="color: #718096;">Analyze, transcribe, and deep-dive into iconic moments</p>
-        </header>
+    <!-- Main App (Hidden Initially) -->
+    <div id="mainApp" class="hidden">
+        <!-- Navigation Bar -->
+        <nav class="nav-bar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <div class="brand-icon">🎬</div>
+                    <span class="brand-text">MovieBuff</span>
+                    <span class="brand-subtitle">Powered by AI</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#overview" class="nav-link">Overview</a>
+                    <a href="#guidelines" class="nav-link">Guidelines</a>
+                    <a href="#statistics" class="nav-link">Key Statistics</a>
+                    <a href="#contacts" class="nav-link">Contacts</a>
+                </div>
+                <div class="nav-actions">
+                    <button class="nav-btn secondary">My To-Dos</button>
+                    <button class="nav-btn primary">Profile</button>
+                    <div class="profile-avatar">
+                        <img src="https://ui-avatars.com/api/?name=User&background=AEB784&color=fff" alt="Profile">
+                    </div>
+                </div>
+            </div>
+        </nav>
 
-        <!-- Landing State: Video Grid -->
-        <div id="videoGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Video cards will be dynamically inserted here -->
+        <!-- Sidebar Toggle Button -->
+        <button class="sidebar-toggle hidden" id="sidebarToggle">
+            <span id="sidebarArrow">→</span> Videos
+        </button>
+        
+        <!-- Collapsible Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold text-gray-800">All Videos</h3>
+                    <button class="text-gray-800 text-2xl" onclick="toggleSidebar()">×</button>
+                </div>
+                <div id="sidebarVideoList">
+                    <!-- Sidebar video items will be inserted here -->
+                </div>
+            </div>
         </div>
 
-        <!-- Individual Video Page -->
-        <div id="videoPlayer" class="hidden">
-            <div class="slide-up">
-                <!-- Back Button -->
-                <button id="backBtn" class="mb-6 px-6 py-3 glass-card font-semibold rounded-xl transition hover:scale-105" style="color: #2d3748;">
-                    ← Back to Videos
-                </button>
+        <div class="container mx-auto px-4" style="max-width: 1400px; position: relative; z-index: 1; padding-top: 100px; padding-bottom: 40px;">
 
-                <!-- Video Title -->
-                <div id="videoTitle" class="mb-6 content-section">
-                    <h1 class="text-3xl font-bold" style="color: #2d3748;"></h1>
+            <!-- Video Library Section -->
+            <div id="videoLibrarySection" style="max-width: 1200px; margin: 0 auto;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                    <h1 style="font-size: 32px; font-weight: 700; color: #1e3a8a; margin: 0;">My Video Library</h1>
+                    <div class="library-tabs">
+                        <button class="library-tab active">All</button>
+                    </div>
+                </div>
+                
+                <!-- Landing State: Video Grid -->
+                <div id="videoGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Video cards will be dynamically inserted here -->
+                </div>
+            </div>
+
+            <!-- Individual Video Page -->
+            <div id="videoPlayer" class="hidden">
+                <!-- Top Navigation Bar -->
+                <!-- <div class="analysis-nav">
+                    <div class="analysis-nav-content">
+                        <button id="backBtn" class="back-button">
+                            ← Back
+                        </button>
+                        <span class="nav-title">Content Analysis Results</span>
+                    </div>
+                </div> -->
+
+                <!-- Breadcrumb -->
+                <div class="breadcrumb-section">
+                    <div class="breadcrumb">
+                        <span class="breadcrumb-item breadcrumb-link" id="breadcrumbHome" style="cursor: pointer;">Home</span>
+                        <span class="breadcrumb-separator">></span>
+                        <span class="breadcrumb-item breadcrumb-link" id="breadcrumbLibrary" style="cursor: pointer;">Video Library</span>
+                        <span class="breadcrumb-separator">></span>
+                        <span class="breadcrumb-item active" id="breadcrumbTitle"></span>
+                    </div>
+                </div>
+
+                <!-- Video Title Section -->
+                <div class="video-title-section">
+                    <h1 id="videoTitleText" class="video-title-text"></h1>
+                    <div class="video-metadata" id="videoMetadata">
+                        <!-- Metadata will be populated dynamically -->
+                    </div>
                 </div>
 
                 <!-- Progress Bar Section -->
@@ -105,136 +284,95 @@
                     </div>
                 </div>
 
-                <!-- Main Content: Video on Left, Tabs on Right -->
+                <!-- Main Content: Video on Left, Analysis on Right -->
                 <div id="mainContent" class="hidden">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <!-- Left Side: Video Player + Summary & Genres Tabs (50% width) -->
-                        <div>
+                    <div class="analysis-container">
+                        <!-- Left Side: Video Player & Tabs -->
+                        <div class="video-section">
                             <!-- Video Player -->
-                            <div class="content-section mb-6">
+                            <div class="video-player-wrapper">
                                 <div id="playerWrapper">
                                     <!-- YouTube player will be inserted here -->
                                 </div>
                             </div>
 
-                            <!-- Left Side Tab Navigation -->
-                            <div class="tab-container-grid mb-6" style="grid-template-columns: repeat(2, 1fr);">
-                                <button class="tab active" data-tab="summary">Summary</button>
-                                <button class="tab" data-tab="genres">Genres</button>
+                            <!-- Left Side Tabs -->
+                            <div class="left-tabs">
+                                <button class="left-tab active" data-tab="summary">Summary</button>
+                                <button class="left-tab" data-tab="genres">Genres</button>
                             </div>
 
                             <!-- Left Side Tab Content -->
-                            <div class="tab-contents">
+                            <div class="left-tab-content-wrapper">
                                 <!-- Summary Tab -->
-                                <div id="summaryTab" class="tab-content active">
-                                    <div class="content-section">
-                                        <!-- Title and Age Rating on same line -->
-                                        <div class="flex justify-between items-center mb-3">
-                                            <h2 class="text-2xl font-semibold">Summary</h2>
-                                            <div id="ageRatingBadge"></div>
-                                        </div>
-                                        
-                                        <!-- Sentiment Badge -->
-                                        <span id="sentimentBadge" class="badge badge-blue text-sm mb-4" style="display: inline-block; margin-left: 0; padding-left: 0; padding-right: 14px; padding-top: 6px; padding-bottom: 6px;"></span>
-                                        
-                                        <!-- Summary Content -->
-                                        <div id="summaryContent" class="leading-relaxed text-lg" style="color: #4a5568;"></div>
-                                        <div id="videoLength" class="mt-6 font-medium" style="color: #718096;"></div>
-                                    </div>
+                                <div class="left-tab-content active" id="summaryTabLeft">
+                                    <div class="summary-content-left" id="summaryContentLeft"></div>
                                 </div>
 
                                 <!-- Genres Tab -->
-                                <div id="genresTab" class="tab-content">
-                                    <div class="content-section">
-                                        <h2 class="text-2xl font-semibold mb-6">Genres</h2>
-                                        <div id="genresContent"></div>
-                                    </div>
+                                <div class="left-tab-content" id="genresTabLeft">
+                                    <div class="genres-content-left" id="genresContentLeft"></div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Right Side: Tabs and Content (50% width) -->
-                        <div>
+                        <!-- Right Side: Content Analysis & Tabs -->
+                        <div class="analysis-section">
                             <!-- Tab Navigation -->
-                            <div class="mb-6" style="display: flex; gap: 6px; background: #f8f9fa; padding: 8px; border-radius: 8px; border: 1px solid rgba(174, 183, 132, 0.2); flex-wrap: nowrap;">
-                                <button class="tab active" data-tab="transcript" style="flex: 1; font-size: 0.8rem; padding: 10px 8px; white-space: nowrap;">Transcript</button>
-                                <button class="tab" data-tab="contentalert" style="flex: 1; font-size: 0.8rem; padding: 10px 8px; white-space: nowrap;">Content Alert</button>
-                                <button class="tab" data-tab="features" style="flex: 1; font-size: 0.8rem; padding: 10px 8px; white-space: nowrap;">Smart Features</button>
-                                <button class="tab" data-tab="regional" style="flex: 1; font-size: 0.8rem; padding: 10px 8px; white-space: nowrap;">Regional Advisory</button>
-                                <button class="tab" data-tab="history" style="flex: 1; font-size: 0.8rem; padding: 10px 8px; white-space: nowrap;">History Logs</button>
+                            <div class="analysis-tabs">
+                                <button class="analysis-tab active" data-tab="transcript">Transcript</button>
+                                <button class="analysis-tab" data-tab="content-alerts">
+                                    Content Alerts <span class="tab-count" id="alertCount">0</span>
+                                </button>
+                                <button class="analysis-tab" data-tab="regional">Regional Advisory</button>
+                                <button class="analysis-tab" data-tab="history">History Logs</button>
                             </div>
 
-                            <!-- Tab Content -->
-                            <div class="tab-contents">
-                                <!-- Transcript Tab -->
-                                <div id="transcriptTab" class="tab-content active">
-                                    <div class="content-section">
-                                        <h2 class="text-2xl font-semibold mb-4">Transcript</h2>
-                                        <div id="transcriptContainer" class="space-y-2 max-h-[600px] overflow-y-auto pr-2"></div>
-                                    </div>
+                            <!-- Transcript Tab -->
+                            <div class="analysis-tab-content active" id="transcriptTabContent">
+                                <div class="tab-content-wrapper" id="transcriptContent">
+                                    <!-- Transcript will be loaded here -->
+                                </div>
+                            </div>
+
+                            <!-- Content Alerts Tab -->
+                            <div class="analysis-tab-content" id="contentAlertsTab">
+                                <!-- Category Filters (dynamically populated) -->
+                                <div class="category-filters" id="categoryFilters">
+                                    <!-- Category filter buttons will be dynamically inserted here -->
                                 </div>
 
-                                <!-- Content Alert Tab (formerly Category) -->
-                                <div id="contentalertTab" class="tab-content">
-                                    <div class="content-section">
-                                        <h2 class="text-2xl font-semibold mb-6">Content Alert</h2>
-                                        <div id="contentalertContent"></div>
+                                <!-- Analysis Results List -->
+                                <div class="analysis-results" id="analysisResults">
+                                    <!-- Analysis items will be dynamically inserted here -->
+                                </div>
+                            </div>
+
+                            <!-- Regional Advisory Tab -->
+                            <div class="analysis-tab-content" id="regionalTabContent">
+                                <div class="tab-content-wrapper">
+                                    <!-- Region Selector -->
+                                    <div class="region-selector">
+                                        <button class="region-btn active" data-region="india">India</button>
+                                        <button class="region-btn" data-region="united_states">United States</button>
+                                        <button class="region-btn" data-region="france">France</button>
+                                        <button class="region-btn" data-region="japan">Japan</button>
+                                    </div>
+                                    <div id="regionalContentNew">
+                                        <!-- Regional recommendations will be loaded here -->
                                     </div>
                                 </div>
+                            </div>
 
-                                <!-- Smart Features Tab -->
-                                <div id="featuresTab" class="tab-content">
-                                    <div class="content-section">
-                                        <h2 class="text-2xl font-semibold mb-6">Smart Features</h2>
-                                        <div id="smartFeaturesContent"></div>
-                                    </div>
-                                </div>
-
-                                <!-- Regional Recommendations Tab -->
-                                <div id="regionalTab" class="tab-content">
-                                    <div class="content-section">
-                                        <h2 class="text-2xl font-semibold mb-4">Regional Advisory</h2>
-                                        <p class="text-sm mb-6" style="color: #718096;">Geography-specific content advisory and rating recommendations</p>
-                                        
-                                        <!-- Region Selector -->
-                                        <div class="mb-6">
-                                            <label class="block text-sm font-semibold mb-3" style="color: #2d3748;">Select Region:</label>
-                                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                                                <button class="region-btn active" data-region="india">
-                                                    <span class="region-flag">🇮🇳</span>
-                                                    <span class="region-name">India</span>
-                                                </button>
-                                                <button class="region-btn" data-region="france">
-                                                    <span class="region-flag">🇫🇷</span>
-                                                    <span class="region-name">France</span>
-                                                </button>
-                                                <button class="region-btn" data-region="japan">
-                                                    <span class="region-flag">🇯🇵</span>
-                                                    <span class="region-name">Japan</span>
-                                                </button>
-                                                <button class="region-btn" data-region="united_states">
-                                                    <span class="region-flag">🇺🇸</span>
-                                                    <span class="region-name">United States</span>
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                        <!-- Regional Content -->
-                                        <div id="regionalContent"></div>
-                                    </div>
-                                </div>
-
-                                <!-- History Logs Tab -->
-                                <div id="historyTab" class="tab-content">
-                                    <div class="content-section">
-                                        <h2 class="text-2xl font-semibold mb-6">History Logs</h2>
-                                        <p class="text-sm mb-4" style="color: #718096;">Audit trail of content review and approval actions</p>
-                                        <div id="historyLogsContent"></div>
-                                    </div>
+                            <!-- History Logs Tab -->
+                            <div class="analysis-tab-content" id="historyTabContent">
+                                <div class="tab-content-wrapper" id="historyContentNew">
+                                    <!-- History logs will be loaded here -->
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -243,121 +381,5 @@
     <!-- Load YouTube IFrame API -->
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="app.js"></script>
-    <style>
-        .log-message {
-            margin-top: 8px;
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 6px;
-            font-size: 14px;
-            color: #4a5568;
-            border-left: 3px solid #fbbf24;
-        }
-        
-        /* Regional Recommendations Styling */
-        .region-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            padding: 16px 12px;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            background: white;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-weight: 500;
-            color: #4a5568;
-        }
-        
-        .region-btn:hover {
-            border-color: #AEB784;
-            box-shadow: 0 4px 12px rgba(174, 183, 132, 0.15);
-            transform: translateY(-2px);
-        }
-        
-        .region-btn.active {
-            border-color: #AEB784;
-            background: rgba(174, 183, 132, 0.1);
-            color: #2d3748;
-            box-shadow: 0 4px 12px rgba(174, 183, 132, 0.2);
-        }
-        
-        .region-flag {
-            font-size: 32px;
-            line-height: 1;
-        }
-        
-        .region-name {
-            font-size: 14px;
-            text-align: center;
-        }
-        
-        .regional-card {
-            background: #fafafa;
-            border-radius: 12px;
-            padding: 20px;
-            border-left: 5px solid;
-        }
-        
-        .regional-card.changes-required {
-            border-left-color: #f59e0b;
-            background: rgba(245, 158, 11, 0.05);
-        }
-        
-        .regional-card.no-changes {
-            border-left-color: #10b981;
-            background: rgba(16, 185, 129, 0.05);
-        }
-        
-        .regional-badge {
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .regional-badge.changes-required {
-            background: #f59e0b;
-            color: white;
-        }
-        
-        .regional-badge.no-changes {
-            background: #10b981;
-            color: white;
-        }
-        
-        .recommendation-list {
-            list-style: none;
-            padding: 0;
-            margin: 16px 0 0 0;
-        }
-        
-        .recommendation-list li {
-            padding: 12px 16px;
-            margin-bottom: 8px;
-            background: white;
-            border-radius: 8px;
-            border-left: 3px solid #AEB784;
-            font-size: 14px;
-            color: #4a5568;
-            transition: all 0.2s;
-        }
-        
-        .recommendation-list li:hover {
-            transform: translateX(4px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-        
-        .recommendation-list li::before {
-            content: "→";
-            margin-right: 8px;
-            color: #AEB784;
-            font-weight: bold;
-        }
-    </style>
 </body>
 </html>

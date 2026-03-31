@@ -1,3 +1,23 @@
+// Landing Page Handler
+document.addEventListener('DOMContentLoaded', () => {
+    const startReviewBtn = document.getElementById('startReviewBtn');
+    const landingPage = document.getElementById('landingPage');
+    const mainApp = document.getElementById('mainApp');
+    
+    if (startReviewBtn) {
+        startReviewBtn.addEventListener('click', () => {
+            // Hide landing page
+            landingPage.classList.add('hidden');
+            // Show main app
+            mainApp.classList.remove('hidden');
+            // Load data if not already loaded
+            if (videosData.length === 0) {
+                loadData();
+            }
+        });
+    }
+});
+
 // Global variables
 let videosData = [];
 let currentVideo = null;
@@ -15,19 +35,27 @@ let currentStepIndex = 0;
 // Load data.json
 async function loadData() {
     try {
+        console.log('Loading data from data.json...');
         const response = await fetch('data.json');
         videosData = await response.json();
+        console.log('Data loaded successfully:', videosData.length, 'videos');
         renderVideoGrid();
         renderSidebar();
     } catch (error) {
         console.error('Error loading data:', error);
-        alert('Failed to load video data. Please ensure data.json exists.');
+        alert('Failed to load video data. Please ensure data.json exists and the app is running on a web server.');
     }
 }
 
 // Render video grid
 function renderVideoGrid() {
     const grid = document.getElementById('videoGrid');
+    if (!grid) {
+        console.error('Video grid element not found!');
+        return;
+    }
+    
+    console.log('Rendering video grid with', videosData.length, 'videos');
     grid.innerHTML = '';
     
     videosData.forEach((video, index) => {
@@ -39,15 +67,27 @@ function renderVideoGrid() {
         const videoUrl = video.video_details.url || video.video_details.metadata.video_url;
         const videoTitle = video.video_details.title || video.video_details.metadata.title;
         const videoDuration = video.video_details.metadata.duration;
+        const viewCount = video.video_details.metadata.view_count || 0;
+        const rating = video.video_details.category.rating || 'U/A';
         
         const videoId = extractVideoId(videoUrl);
-        const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+        const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+        
+        // Format view count
+        const formattedViews = viewCount >= 1000000 
+            ? (viewCount / 1000000).toFixed(1) + 'M'
+            : viewCount >= 1000 
+            ? (viewCount / 1000).toFixed(1) + 'K'
+            : viewCount.toString();
         
         card.innerHTML = `
-            <img src="${thumbnailUrl}" alt="${videoTitle}" class="w-full h-48 object-cover">
-            <div class="p-4">
-                <h3 class="text-xl font-semibold mb-2" style="color: #2d3748;">${videoTitle}</h3>
-                <p class="text-sm" style="color: #718096;">${formatDuration(videoDuration)}</p>
+            <div class="video-card-thumbnail">
+                <img src="${thumbnailUrl}" alt="${videoTitle}" 
+                     onerror="this.src='https://img.youtube.com/vi/${videoId}/0.jpg'">
+            </div>
+            <div class="video-card-content">
+                <h3 class="video-card-title">${videoTitle}</h3>
+                <div class="video-card-duration">${formatDuration(videoDuration)}</div>
             </div>
         `;
         
@@ -166,6 +206,18 @@ function selectVideo(video) {
     currentTab = 'transcript';
     currentStepIndex = 0;
     
+    // Hide main app header
+    const mainAppHeader = document.getElementById('mainAppHeader');
+    if (mainAppHeader) {
+        mainAppHeader.classList.add('hidden');
+    }
+    
+    // Hide video library section (including header and tabs)
+    const videoLibrarySection = document.getElementById('videoLibrarySection');
+    if (videoLibrarySection) {
+        videoLibrarySection.classList.add('hidden');
+    }
+    
     // Hide video grid
     document.getElementById('videoGrid').classList.add('hidden');
     
@@ -182,9 +234,30 @@ function selectVideo(video) {
     // Get video details
     const videoUrl = video.video_details.url || video.video_details.metadata.video_url;
     const videoTitle = video.video_details.title || video.video_details.metadata.title;
+    const genres = video.video_details.genres || [];
+    const metadata = video.video_details.metadata || {};
     
-    // Update video title
-    document.querySelector('#videoTitle h1').textContent = videoTitle;
+    // Update breadcrumb and title
+    const breadcrumbTitle = document.getElementById('breadcrumbTitle');
+    const videoTitleText = document.getElementById('videoTitleText');
+    if (breadcrumbTitle) breadcrumbTitle.textContent = videoTitle;
+    if (videoTitleText) videoTitleText.textContent = videoTitle;
+    
+    // Update metadata section
+    const videoMetadata = document.getElementById('videoMetadata');
+    if (videoMetadata) {
+        const genreText = genres.length > 0 ? genres.map(g => g.genre).slice(0, 2).join(', ') : 'N/A';
+        const publishDate = metadata.publish_date || 'N/A';
+        const duration = metadata.duration || 'N/A';
+        
+        videoMetadata.innerHTML = `
+            <span class="metadata-item"><strong>Genre:</strong> ${genreText}</span>
+            <span class="metadata-separator">|</span>
+            <span class="metadata-item"><strong>Duration:</strong> ${duration}</span>
+            <span class="metadata-separator">|</span>
+            <span class="metadata-item"><strong>Published:</strong> ${publishDate}</span>
+        `;
+    }
     
     // Show progress bar section, hide main content
     document.getElementById('progressBarSection').classList.remove('hidden');
@@ -281,189 +354,23 @@ function completeProcessing() {
     
     // Load analysis data
     loadAnalysisData();
+    
+    // Populate new analysis results interface
+    populateAnalysisResults();
 }
 
-// Load transcript into the transcript tab
+// Load transcript into the transcript tab (legacy - now handled by populateTranscriptTab)
 function loadTranscript() {
-    const transcriptContainer = document.getElementById('transcriptContainer');
-    const segments = currentVideo.video_details.segments;
-    
-    if (!segments || segments.length === 0) {
-        transcriptContainer.innerHTML = '<p style="color: #718096;">No transcript available for this video.</p>';
-        return;
-    }
-    
-    transcriptContainer.innerHTML = '';
-    segments.forEach((segment, index) => {
-        const transcriptItem = document.createElement('div');
-        transcriptItem.className = 'transcript-line p-3 rounded-lg hover:bg-gray-50 transition cursor-pointer';
-        transcriptItem.dataset.startTime = segment.start;
-        transcriptItem.dataset.endTime = segment.end;
-        transcriptItem.dataset.index = index;
-        transcriptItem.innerHTML = `
-            <a href="#" class="timestamp-link" onclick="seekTo(${segment.start}); return false;">
-                ${formatTimestamp(segment.start)}
-            </a>
-            <span class="ml-3" style="color: #2d3748;">${segment.text}</span>
-        `;
-        transcriptContainer.appendChild(transcriptItem);
-    });
+    // This function is kept for backward compatibility but transcript is now
+    // populated by populateTranscriptTab() which is called from populateAnalysisResults()
+    console.log('loadTranscript called - transcript is now handled by populateTranscriptTab');
 }
 
-// Load analysis data into respective tabs
+// Load analysis data into respective tabs (legacy - now handled by new populate functions)
 function loadAnalysisData() {
-    const videoDetails = currentVideo.video_details;
-    
-    // Summary Tab
-    const summaryContent = document.getElementById('summaryContent');
-    const sentimentBadge = document.getElementById('sentimentBadge');
-    const videoLength = document.getElementById('videoLength');
-    
-    summaryContent.textContent = videoDetails.detailed_summary || videoDetails.summary || 'No summary available.';
-    
-    // Sentiment from smart_features
-    const sentiment = videoDetails.smart_features?.sentiment_analysis || videoDetails.sentiment || '';
-    if (sentiment) {
-        sentimentBadge.textContent = sentiment;
-        sentimentBadge.className = `badge badge-blue text-sm px-4 py-2`;
-    } else {
-        sentimentBadge.style.display = 'none';
-    }
-    
-    videoLength.textContent = `Video Length: ${formatDuration(videoDetails.metadata.duration)}`;
-    
-    // Genres Tab
-    const genresContent = document.getElementById('genresContent');
-    const genres = videoDetails.genres;
-    
-    genresContent.innerHTML = genres.map(genre => `
-        <div class="mb-6">
-            <div class="flex justify-between items-center mb-2">
-                <span class="font-semibold text-lg" style="color: #2d3748;">${genre.genre}</span>
-                <span class="text-sm font-medium" style="color: #AEB784;">${Math.round((genre.confidence_score || genre.confidence) * 100)}%</span>
-            </div>
-            <div class="confidence-bar">
-                <div class="confidence-fill" style="width: ${(genre.confidence_score || genre.confidence) * 100}%"></div>
-            </div>
-            ${genre.reasoning ? `<p class="text-sm mt-2" style="color: #718096;">${genre.reasoning}</p>` : ''}
-        </div>
-    `).join('');
-    
-    // Category/Content Alert Tab - Prepare content
-    const category = videoDetails.category;
-    const rating = category.rating || category.age_rating || 'Not Rated';
-    const ratingClass = getRatingClass(rating);
-    
-    // Age Rating Badge only (for Summary tab on left)
-    const ageRatingBadge = document.getElementById('ageRatingBadge');
-    ageRatingBadge.innerHTML = `<span class="badge ${ratingClass} text-lg px-5 py-2">${rating}</span>`;
-    
-    // Content Alerts HTML (for Content Alert tab on right)
-    let contentAnalysisHTML = '';
-    if (category.content_analysis && category.content_analysis.length > 0) {
-        contentAnalysisHTML = `
-            <div class="mt-6">
-                <div class="space-y-3">
-                    ${category.content_analysis.map(alert => {
-                        const seconds = convertTimeToSeconds(alert.timestamp);
-                        return `
-                            <div class="p-4 bg-gray-50 rounded-xl">
-                                <span class="badge badge-amber">${alert.alert_type}</span>
-                                <a href="#" class="ml-2 font-semibold timestamp-link" onclick="seekTo(${seconds}); return false;">
-                                    ${formatTimestamp(alert.timestamp)}
-                                </a>
-                                <p class="text-sm mt-2" style="color: #4a5568;">${alert.description}</p>
-                            </div>
-                        `;
-                    }).join('')}
-                </div>
-            </div>
-        `;
-    }
-    
-    // Content Alert HTML (Only content alerts for right side tab)
-    const contentalertHTML = contentAnalysisHTML || '<p style="color: #718096;">No content alerts for this video.</p>';
-    
-    // Populate content alert tab (right side)
-    const contentalertContent = document.getElementById('contentalertContent');
-    contentalertContent.innerHTML = contentalertHTML;
-    
-    // Smart Features Tab
-    const smartFeatures = videoDetails.smart_features;
-    const smartFeaturesContent = document.getElementById('smartFeaturesContent');
-    
-    let moodTagsHTML = '';
-    if (smartFeatures.mood_tags && smartFeatures.mood_tags.length > 0) {
-        moodTagsHTML = `
-            <div class="mb-6">
-                <h4 class="font-semibold mb-3 text-lg" style="color: #2d3748;">Mood Tags:</h4>
-                <div class="flex flex-wrap gap-3">
-                    ${smartFeatures.mood_tags.map(tag => `
-                        <span class="badge badge-green text-base px-4 py-2">${tag}</span>
-                    `).join('')}
-                </div>
-            </div>
-        `;
-    }
-    
-    let keyMomentsHTML = '';
-    if (smartFeatures.key_moments && smartFeatures.key_moments.length > 0) {
-        keyMomentsHTML = `
-            <div>
-                <h4 class="font-semibold mb-3 text-lg" style="color: #2d3748;">Highlights:</h4>
-                <div class="space-y-3">
-                    ${smartFeatures.key_moments.map(moment => {
-                        const time = moment.time || moment.timestamp;
-                        const desc = moment.label || moment.description;
-                        const seconds = convertTimeToSeconds(time);
-                        return `
-                            <div class="p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition">
-                                <a href="#" class="timestamp-link text-lg" onclick="seekTo(${seconds}); return false;">
-                                    ${formatTimestamp(time)}
-                                </a>
-                                <span class="ml-3" style="color: #2d3748;">${desc}</span>
-                            </div>
-                        `;
-                    }).join('')}
-                </div>
-            </div>
-        `;
-    }
-    
-    smartFeaturesContent.innerHTML = moodTagsHTML + keyMomentsHTML;
-    
-    // History Logs Tab
-    const historyLogsContent = document.getElementById('historyLogsContent');
-    const historyLogs = videoDetails.history_logs || [];
-    
-    if (historyLogs.length === 0) {
-        historyLogsContent.innerHTML = '<p style="color: #718096;">No history logs available.</p>';
-    } else {
-        historyLogsContent.innerHTML = historyLogs.map(log => {
-            const statusClass = log.status;
-            const messageHTML = log.message ? `<div class="log-message">${log.message}</div>` : '';
-            
-            return `
-                <div class="history-log-item ${statusClass}">
-                    <div class="flex justify-between items-start mb-2">
-                        <div>
-                            <h4 class="font-semibold text-base" style="color: #2d3748;">${log.action}</h4>
-                            <p class="text-xs mt-1" style="color: #718096;">
-                                <span>${log.timestamp}</span>
-                                <span class="mx-2">•</span>
-                                <span>${log.user}</span>
-                            </p>
-                        </div>
-                        <span class="log-status-badge ${statusClass}">${statusClass}</span>
-                    </div>
-                    ${messageHTML}
-                </div>
-            `;
-        }).join('');
-    }
-    
-    // Regional Recommendations Tab
-    loadRegionalRecommendations('india'); // Default to India
+    // This function is kept for backward compatibility
+    // Data is now populated by populateLeftSideTabs(), populateAnalysisResults(), etc.
+    console.log('loadAnalysisData called - data is now handled by new populate functions');
 }
 
 // Load regional recommendations
@@ -510,6 +417,284 @@ function loadRegionalRecommendations(region) {
             </div>
         </div>
     `;
+}
+
+// Populate Analysis Results (New Interface)
+function populateAnalysisResults() {
+    const analysisResults = document.getElementById('analysisResults');
+    const categoryFilters = document.getElementById('categoryFilters');
+    if (!analysisResults || !currentVideo) return;
+    
+    const category = currentVideo.video_details.category;
+    const contentAnalysis = category.content_analysis || [];
+    
+    if (contentAnalysis.length === 0) {
+        analysisResults.innerHTML = '<div style="text-align: center; padding: 40px; color: #94a3b8;">No content alerts found for this video.</div>';
+        if (categoryFilters) categoryFilters.innerHTML = '';
+        return;
+    }
+    
+    // Get unique alert types from content analysis
+    const alertTypes = [...new Set(contentAnalysis.map(alert => alert.alert_type))];
+    
+    // Create category filter buttons dynamically
+    if (categoryFilters) {
+        const categoryCounts = {};
+        categoryCounts['all'] = contentAnalysis.length;
+        
+        alertTypes.forEach(type => {
+            categoryCounts[type.toLowerCase().replace(/\s+/g, '-')] = contentAnalysis.filter(a => a.alert_type === type).length;
+        });
+        
+        let filtersHTML = `
+            <button class="category-btn active" data-category="all">
+                All <span class="category-count">${categoryCounts['all']}</span>
+            </button>
+        `;
+        
+        alertTypes.forEach(type => {
+            const categoryKey = type.toLowerCase().replace(/\s+/g, '-');
+            filtersHTML += `
+                <button class="category-btn" data-category="${categoryKey}" data-alert-type="${type}">
+                    ${type} <span class="category-count">${categoryCounts[categoryKey]}</span>
+                </button>
+            `;
+        });
+        
+        categoryFilters.innerHTML = filtersHTML;
+    }
+    
+    // Generate analysis items with simpler design
+    const analysisHTML = contentAnalysis.map((alert, index) => {
+        const seconds = convertTimeToSeconds(alert.timestamp);
+        const categoryClass = alert.alert_type.toLowerCase().replace(/\s+/g, '-');
+        
+        return `
+            <div class="analysis-item" data-category="${categoryClass}">
+                <div class="analysis-item-header">
+                    <a href="#" class="analysis-timestamp" onclick="seekTo(${seconds}); return false;">
+                        ${formatTimestamp(alert.timestamp)}
+                    </a>
+                    <span class="analysis-category">${alert.alert_type}</span>
+                </div>
+                <div class="analysis-item-content">
+                    ${alert.description}
+                </div>
+            </div>
+        `;
+    }).join('');
+    
+    analysisResults.innerHTML = analysisHTML;
+    
+    // Update alert count in tab badge
+    updateAlertCount(contentAnalysis.length);
+    
+    // Populate other tabs
+    populateTranscriptTab();
+    populateLeftSideTabs();
+    populateRegionalTab();
+    populateHistoryTab();
+}
+
+// Populate Transcript Tab
+function populateTranscriptTab() {
+    const transcriptContent = document.getElementById('transcriptContent');
+    if (!transcriptContent || !currentVideo) return;
+    
+    const segments = currentVideo.video_details.segments || [];
+    
+    if (segments.length === 0) {
+        transcriptContent.innerHTML = '<div style="text-align: center; padding: 40px; color: #94a3b8;">No transcript available.</div>';
+        return;
+    }
+    
+    const transcriptHTML = segments.map(segment => {
+        const timestamp = formatDuration(segment.start);
+        const seconds = Math.floor(segment.start);
+        
+        return `
+            <div class="transcript-item" data-start="${segment.start}" data-end="${segment.end}">
+                <a href="#" class="transcript-timestamp" onclick="seekTo(${seconds}); return false;">
+                    ${timestamp}
+                </a>
+                <p class="transcript-text">${segment.text}</p>
+            </div>
+        `;
+    }).join('');
+    
+    transcriptContent.innerHTML = transcriptHTML;
+}
+
+// Populate Left Side Tabs (Summary and Genres)
+function populateLeftSideTabs() {
+    if (!currentVideo) return;
+    
+    const videoDetails = currentVideo.video_details;
+    const summary = videoDetails.detailed_summary || videoDetails.summary || 'No summary available.';
+    const genres = videoDetails.genres || [];
+    const rating = videoDetails.category.rating || 'Not Rated';
+    const sentiment = videoDetails.smart_features?.sentiment_analysis || '';
+    const duration = videoDetails.metadata?.duration || '';
+    
+    // Summary Tab Content - Layout matching the image
+    const summaryContentLeft = document.getElementById('summaryContentLeft');
+    if (summaryContentLeft) {
+        // Get mood tags if available
+        const moodTags = videoDetails.smart_features?.mood_tags || [];
+        const moodTagsHTML = moodTags.length > 0 ? moodTags.map(tag => 
+            `<span style="display: inline-block; background: #1e293b; color: white; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-right: 8px; text-transform: uppercase;">${tag}</span>`
+        ).join('') : '';
+        
+        summaryContentLeft.innerHTML = `
+            <div style="background: white; border-radius: 12px; padding: 32px; border: 1px solid #e2e8f0;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                    <h3 style="font-size: 26px; font-weight: 700; color: #1e293b; margin: 0;">Summary</h3>
+                    <span style="background: #ef4444; color: white; padding: 10px 24px; border-radius: 25px; font-size: 13px; font-weight: 700; white-space: nowrap;">
+                        ${rating}
+                    </span>
+                </div>
+                ${sentiment ? `<p style="font-size: 14px; font-weight: 700; color: #1e293b; margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: 0.5px;">${sentiment}</p>` : ''}
+                ${moodTagsHTML ? `<div style="margin-bottom: 20px;">${moodTagsHTML}</div>` : ''}
+                <p style="font-size: 15px; line-height: 1.8; color: #475569; margin-bottom: 20px;">${summary}</p>
+                ${duration ? `<p style="font-size: 14px; color: #64748b; margin: 0;"><strong>Video Length:</strong> ${duration}</p>` : ''}
+            </div>
+        `;
+    }
+    
+    // Genres Tab Content
+    const genresContentLeft = document.getElementById('genresContentLeft');
+    if (genresContentLeft && genres.length > 0) {
+        const genresHTML = genres.map(genre => {
+            const confidence = Math.round((genre.confidence_score || genre.confidence || 0) * 100);
+            return `
+                <div style="margin-bottom: 24px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <span style="font-weight: 600; font-size: 15px; color: #1e293b;">${genre.genre}</span>
+                        <span style="font-size: 13px; font-weight: 600; color: #2563eb;">${confidence}%</span>
+                    </div>
+                    <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;">
+                        <div style="height: 100%; background: linear-gradient(90deg, #2563eb, #3b82f6); width: ${confidence}%; transition: width 0.5s;"></div>
+                    </div>
+                    ${genre.reasoning ? `<p style="font-size: 13px; color: #64748b; margin-top: 8px;">${genre.reasoning}</p>` : ''}
+                </div>
+            `;
+        }).join('');
+        
+        genresContentLeft.innerHTML = `
+            ${genresHTML}
+        `;
+    }
+}
+
+// Populate Regional Tab
+function populateRegionalTab() {
+    if (!currentVideo) return;
+    
+    // Load default region (India)
+    loadRegionalRecommendationsNew('india');
+}
+
+// Load Regional Recommendations (New)
+function loadRegionalRecommendationsNew(region) {
+    const regionalContentNew = document.getElementById('regionalContentNew');
+    if (!regionalContentNew) return;
+    
+    const regionalData = currentVideo.video_details.regional_recommendations;
+    
+    if (!regionalData || !regionalData[region]) {
+        regionalContentNew.innerHTML = '<div style="text-align: center; padding: 40px; color: #94a3b8;">No regional recommendations available for this region.</div>';
+        return;
+    }
+    
+    const data = regionalData[region];
+    const regionNames = {
+        'india': 'India',
+        'france': 'France',
+        'japan': 'Japan',
+        'united_states': 'United States'
+    };
+    const displayName = regionNames[region] || region;
+    
+    let html = `
+        <div style="background: white; border-radius: 12px; padding: 24px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="font-size: 18px; font-weight: 700; color: #1e293b; margin: 0;">
+                    ${displayName}
+                </h3>
+                <span style="padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; background: ${data.changes_required ? '#fef2f2' : '#f0fdf4'}; color: ${data.changes_required ? '#ef4444' : '#10b981'}; border: 1px solid ${data.changes_required ? '#ef4444' : '#10b981'};">
+                    ${data.changes_required ? 'Changes Required' : 'No Changes Required'}
+                </span>
+            </div>
+            ${data.rating_suggestion ? `
+                <div style="background: #f8fafc; padding: 16px; border-radius: 8px; border-left: 4px solid #2563eb; margin-bottom: 16px;">
+                    <p style="font-size: 13px; font-weight: 600; color: #64748b; margin: 0 0 4px 0;">Suggested Rating:</p>
+                    <p style="font-size: 16px; font-weight: 700; color: #1e293b; margin: 0;">${data.rating_suggestion}</p>
+                </div>
+            ` : ''}
+    `;
+    
+    if (data.recommendations && data.recommendations.length > 0) {
+        html += `
+            <h4 style="font-size: 16px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">Recommendations:</h4>
+            <ul style="list-style: none; padding: 0; margin: 0;">
+        `;
+        
+        data.recommendations.forEach(rec => {
+            html += `
+                <li style="padding: 12px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #2563eb;">
+                    <p style="font-size: 14px; color: #475569; margin: 0;">${rec}</p>
+                </li>
+            `;
+        });
+        
+        html += '</ul>';
+    }
+    
+    html += '</div>';
+    regionalContentNew.innerHTML = html;
+}
+
+// Populate History Tab
+function populateHistoryTab() {
+    const historyContentNew = document.getElementById('historyContentNew');
+    if (!historyContentNew || !currentVideo) return;
+    
+    const historyLogs = currentVideo.video_details.history_logs || [];
+    
+    if (historyLogs.length === 0) {
+        historyContentNew.innerHTML = '<div style="text-align: center; padding: 40px; color: #94a3b8;">No history logs available.</div>';
+        return;
+    }
+    
+    const historyHTML = historyLogs.map(log => {
+        const statusBadgeColor = log.status === 'approved' ? '#10b981' : log.status === 'rejected' ? '#ef4444' : '#6b7280';
+        const statusBadgeText = log.status ? log.status.charAt(0).toUpperCase() + log.status.slice(1) : '';
+        
+        return `
+            <div style="background: white; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid #e2e8f0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <div>
+                        <span style="font-weight: 700; font-size: 15px; color: #1e293b;">${log.action}</span>
+                        ${statusBadgeText ? `<span style="display: inline-block; margin-left: 12px; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 600; background: ${statusBadgeColor}; color: white;">${statusBadgeText}</span>` : ''}
+                    </div>
+                    <span style="font-size: 13px; color: #64748b;">${log.timestamp}</span>
+                </div>
+                ${log.message ? `<p style="font-size: 14px; color: #475569; margin: 0; margin-bottom: 8px;">${log.message}</p>` : ''}
+                ${log.user ? `<p style="font-size: 13px; color: #94a3b8; margin: 0;">By: ${log.user}</p>` : ''}
+            </div>
+        `;
+    }).join('');
+    
+    historyContentNew.innerHTML = historyHTML;
+}
+
+// Update category counts in filter buttons
+// Update alert count in tab (for the "Content Alerts" tab badge)
+function updateAlertCount(count) {
+    const alertCount = document.getElementById('alertCount');
+    if (alertCount) {
+        alertCount.textContent = count;
+    }
 }
 
 // Update sidebar active state
@@ -592,46 +777,29 @@ function onPlayerStateChange(event) {
 // Update active transcript line based on current video time
 function updateActiveTranscript() {
     if (!player || !player.getCurrentTime) {
-        console.log('Player not ready');
         return;
     }
     
     const currentTime = player.getCurrentTime();
-    const transcriptLines = document.querySelectorAll('.transcript-line');
+    const transcriptItems = document.querySelectorAll('.transcript-item');
     
-    console.log('Update transcript - Time:', currentTime, 'Lines:', transcriptLines.length);
-    
-    if (transcriptLines.length === 0) {
-        console.log('No transcript lines found');
+    if (transcriptItems.length === 0) {
         return;
     }
     
-    let foundActive = false;
-    transcriptLines.forEach(line => {
-        const startTime = parseFloat(line.dataset.startTime);
-        const endTime = parseFloat(line.dataset.endTime);
+    transcriptItems.forEach(item => {
+        const startTime = parseFloat(item.dataset.start);
+        const endTime = parseFloat(item.dataset.end);
         
         if (currentTime >= startTime && currentTime < endTime) {
-            if (!line.classList.contains('active')) {
-                console.log('Activating line:', startTime, '-', endTime, line.textContent.substring(0, 50));
-                foundActive = true;
-            }
-            line.classList.add('active');
+            item.classList.add('active');
             // Auto-scroll within the transcript container
-            const container = document.getElementById('transcriptContainer');
+            const container = document.getElementById('transcriptContent');
             if (container) {
-                const lineTop = line.offsetTop;
-                const lineHeight = line.offsetHeight;
-                const containerScroll = container.scrollTop;
-                const containerHeight = container.clientHeight;
-                
-                // Scroll if line is not visible
-                if (lineTop < containerScroll || lineTop + lineHeight > containerScroll + containerHeight) {
-                    line.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
+                item.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         } else {
-            line.classList.remove('active');
+            item.classList.remove('active');
         }
     });
 }
@@ -650,24 +818,79 @@ function seekTo(seconds) {
 }
 
 // Back button handler
-document.getElementById('backBtn').addEventListener('click', () => {
-    currentVideo = null;
-    
-    // Show video grid
-    document.getElementById('videoGrid').classList.remove('hidden');
-    document.getElementById('videoPlayer').classList.add('hidden');
-    document.getElementById('sidebarToggle').classList.add('hidden');
-    
-    // Destroy player
-    if (player && player.destroy) {
-        player.destroy();
-        player = null;
-    }
-    
-    // Reset to summary tab on left, transcript on right
-    switchTab('summary');
-    switchTab('transcript');
-});
+// document.getElementById('backBtn').addEventListener('click', () => {
+//     currentVideo = null;
+//     
+//     // Show main app header
+//     const mainAppHeader = document.getElementById('mainAppHeader');
+//     if (mainAppHeader) {
+//         mainAppHeader.classList.remove('hidden');
+//     }
+//     
+//     // Show video library section (including header and tabs)
+//     const videoLibrarySection = document.getElementById('videoLibrarySection');
+//     if (videoLibrarySection) {
+//         videoLibrarySection.classList.remove('hidden');
+//     }
+//     
+//     // Show video grid
+//     document.getElementById('videoGrid').classList.remove('hidden');
+//     document.getElementById('videoPlayer').classList.add('hidden');
+//     document.getElementById('sidebarToggle').classList.add('hidden');
+//     
+//     // Destroy player
+//     if (player && player.destroy) {
+//         player.destroy();
+//         player = null;
+//     }
+//     
+//     // Reset to summary tab on left, transcript on right
+//     switchTab('summary');
+//     switchTab('transcript');
+// });
+
+// Breadcrumb navigation handlers
+// Home breadcrumb - go to landing page
+const breadcrumbHome = document.getElementById('breadcrumbHome');
+if (breadcrumbHome) {
+    breadcrumbHome.addEventListener('click', () => {
+        // Hide main app
+        document.getElementById('mainApp').classList.add('hidden');
+        // Show landing page
+        document.getElementById('landingPage').classList.remove('hidden');
+        
+        // Destroy player if exists
+        if (player && player.destroy) {
+            player.destroy();
+            player = null;
+        }
+    });
+}
+
+// Video Library breadcrumb - go to cards section
+const breadcrumbLibrary = document.getElementById('breadcrumbLibrary');
+if (breadcrumbLibrary) {
+    breadcrumbLibrary.addEventListener('click', () => {
+        currentVideo = null;
+        
+        // Show video library section
+        const videoLibrarySection = document.getElementById('videoLibrarySection');
+        if (videoLibrarySection) {
+            videoLibrarySection.classList.remove('hidden');
+        }
+        
+        // Show video grid
+        document.getElementById('videoGrid').classList.remove('hidden');
+        document.getElementById('videoPlayer').classList.add('hidden');
+        document.getElementById('sidebarToggle').classList.add('hidden');
+        
+        // Destroy player
+        if (player && player.destroy) {
+            player.destroy();
+            player = null;
+        }
+    });
+}
 
 // Tab switching - Independent for left and right sides
 function switchTab(tabName) {
@@ -754,16 +977,102 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // Add region button event listeners
-    document.querySelectorAll('.region-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
+    // Add region button event listeners (for new regional tab)
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('region-btn')) {
+            const region = e.target.dataset.region;
+            
             // Remove active class from all buttons
             document.querySelectorAll('.region-btn').forEach(b => b.classList.remove('active'));
             // Add active class to clicked button
-            btn.classList.add('active');
+            e.target.classList.add('active');
             // Load recommendations for selected region
-            loadRegionalRecommendations(btn.dataset.region);
+            loadRegionalRecommendationsNew(region);
+        }
+    });
+    
+    // Add left side tab switching
+    document.querySelectorAll('.left-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            const tabName = tab.dataset.tab;
+            
+            // Update tab buttons
+            document.querySelectorAll('.left-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            
+            // Update tab content
+            document.querySelectorAll('.left-tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Show corresponding content
+            const contentMap = {
+                'summary': 'summaryTabLeft',
+                'genres': 'genresTabLeft'
+            };
+            
+            const contentId = contentMap[tabName];
+            if (contentId) {
+                document.getElementById(contentId).classList.add('active');
+            }
         });
+    });
+    
+    // Add analysis tab switching (right side)
+    document.querySelectorAll('.analysis-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            const tabName = tab.dataset.tab;
+            
+            // Update tab buttons
+            document.querySelectorAll('.analysis-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            
+            // Update tab content
+            document.querySelectorAll('.analysis-tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Show corresponding content
+            const contentMap = {
+                'content-alerts': 'contentAlertsTab',
+                'transcript': 'transcriptTabContent',
+                'regional': 'regionalTabContent',
+                'history': 'historyTabContent'
+            };
+            
+            const contentId = contentMap[tabName];
+            if (contentId) {
+                document.getElementById(contentId).classList.add('active');
+            }
+        });
+    });
+    
+    // Add category filter functionality using event delegation
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('category-btn') || e.target.closest('.category-btn')) {
+            const btn = e.target.classList.contains('category-btn') ? e.target : e.target.closest('.category-btn');
+            const category = btn.dataset.category;
+            
+            // Update active state
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            // Filter analysis items
+            const items = document.querySelectorAll('.analysis-item');
+            items.forEach(item => {
+                if (category === 'all') {
+                    item.style.display = 'block';
+                } else {
+                    const itemCategory = item.dataset.category;
+                    
+                    if (itemCategory === category) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                }
+            });
+        }
     });
 });
 
@@ -785,8 +1094,12 @@ function getRatingClass(rating) {
     return 'badge-green';
 }
 
-// Sidebar toggle button listener
-document.getElementById('sidebarToggle').addEventListener('click', toggleSidebar);
+// Sidebar toggle button listener - wrapped in DOMContentLoaded to ensure element exists
+document.addEventListener('DOMContentLoaded', () => {
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', toggleSidebar);
+    }
+});
 
-// Initialize app
-loadData();
+// Note: Data loading is now triggered by the "Start Review" button on the landing page
