@@ -477,13 +477,17 @@ function populateAnalysisResults() {
         categoryFilters.innerHTML = filtersHTML;
     }
     
-    // Generate analysis items with simpler design
+    // Generate analysis items with approve/reject buttons
     const analysisHTML = contentAnalysis.map((alert, index) => {
         const seconds = convertTimeToSeconds(alert.timestamp);
         const categoryClass = alert.alert_type.toLowerCase().replace(/\s+/g, '-');
         
+        // Check if this alert has been reviewed
+        const isReviewed = alert.review_status !== undefined;
+        const reviewStatus = alert.review_status || null;
+        
         return `
-            <div class="analysis-item" data-category="${categoryClass}">
+            <div class="analysis-item" data-category="${categoryClass}" data-alert-index="${index}">
                 <div class="analysis-item-header">
                     <a href="#" class="analysis-timestamp" onclick="seekTo(${seconds}); return false;">
                         ${formatTimestamp(alert.timestamp)}
@@ -492,6 +496,25 @@ function populateAnalysisResults() {
                 </div>
                 <div class="analysis-item-content">
                     ${alert.description}
+                </div>
+                <div class="analysis-item-actions">
+                    ${isReviewed ? `
+                        <div class="review-status ${reviewStatus}">
+                            ${reviewStatus === 'approved' ? '✓ Approved' : '✗ Rejected'}
+                            ${alert.review_comment ? `<span class="review-comment-preview" title="${alert.review_comment}"></span>` : ''}
+                        </div>
+                    ` : `
+                        <button class="action-btn approve-btn" onclick="openReviewModal(${index}, 'approved'); return false;" title="Approve">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M13.5 4L6 11.5L2.5 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <button class="action-btn reject-btn" onclick="openReviewModal(${index}, 'rejected'); return false;" title="Reject">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    `}
                 </div>
             </div>
         `;
@@ -573,13 +596,55 @@ function populateLeftSideTabs() {
         const currentRating = currentRegion.rating_suggestion || rating;
         const currentSummary = currentRegion.summary || summary;
         
+        // Get AI and Human ratings
+        const aiRating = rating; // Original AI rating from category
+        const humanRating = videoDetails.category.human_rating || rating; // Human override or default to AI
+        const ratingApproved = videoDetails.rating_approved || false;
+        
+        // Debug logging
+        console.log('Rating Debug:', {
+            aiRating: aiRating,
+            humanRating: humanRating,
+            categoryRating: videoDetails.category.rating,
+            humanRatingField: videoDetails.category.human_rating
+        });
+        
         summaryContentLeft.innerHTML = `
             <div style="background: white; border-radius: 12px; padding: 32px; border: 1px solid rgba(174, 183, 132, 0.2);">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
-                    <h3 style="font-size: 26px; font-weight: 700; color: #1e3a8a; margin: 0;">Summary</h3>
-                    <span id="summaryRatingBadge" style="background: #1e3a8a; color: white; padding: 10px 24px; border-radius: 25px; font-size: 13px; font-weight: 700; white-space: nowrap; box-shadow: 0 2px 8px rgba(30, 58, 138, 0.3);">
-                        ${currentRating.split('(')[0].trim()}
-                    </span>
+                <div style="margin-bottom: 24px;">
+                    <h3 style="font-size: 26px; font-weight: 700; color: #1e3a8a; margin: 0 0 20px 0;">Summary</h3>
+                    
+                    <!-- Rating Comparison -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                        <div style="padding: 16px; background: rgba(59, 130, 246, 0.05); border-radius: 8px; border: 2px solid rgba(59, 130, 246, 0.2);">
+                            <div style="font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">AI Rating</div>
+                            <div id="aiRatingDisplay" style="font-size: 20px; font-weight: 700; color: #3b82f6;">
+                                ${aiRating.split('(')[0].trim()}
+                            </div>
+                        </div>
+                        <div style="padding: 16px; background: rgba(16, 185, 129, 0.05); border-radius: 8px; border: 2px solid rgba(16, 185, 129, 0.2);">
+                            <div style="font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">Human Rating</div>
+                            <div id="humanRatingDisplay" style="font-size: 20px; font-weight: 700; color: #10b981;">
+                                ${humanRating.split('(')[0].trim()}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Rating Actions -->
+                    <div id="ratingActionsSection" style="display: flex; gap: 12px; padding: 16px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+                        ${ratingApproved ? `
+                            <div class="review-status approved" style="display: inline-flex; flex: 1; justify-content: center;">
+                                ✓ Rating Approved
+                            </div>
+                        ` : `
+                            <button class="action-btn" onclick="openRatingOverrideModal(); return false;" style="flex: 1; background: #f59e0b; color: white; padding: 12px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s;">
+                                Override Rating
+                            </button>
+                            <button class="action-btn approve-btn" onclick="approveCurrentRating(); return false;" style="flex: 1; padding: 12px;">
+                                Approve Rating
+                            </button>
+                        `}
+                    </div>
                 </div>
                 
                 <!-- Country Selector -->
@@ -601,7 +666,32 @@ function populateLeftSideTabs() {
                 <!-- Country-specific summary -->
                 <p id="countrySummaryText" style="font-size: 15px; line-height: 1.8; color: #475569; margin-bottom: 20px;">${currentSummary}</p>
                 
-                ${duration ? `<p style="font-size: 14px; color: #64748b; margin: 0;"><strong>Video Length:</strong> ${duration}</p>` : ''}
+                ${duration ? `<p style="font-size: 14px; color: #64748b; margin: 0 0 20px 0;"><strong>Video Length:</strong> ${duration}</p>` : ''}
+                
+                <!-- Summary Review Actions -->
+                <div class="summary-review-section" id="summaryReviewSection">
+                    ${videoDetails.summary_review_status ? `
+                        <div class="review-status ${videoDetails.summary_review_status}" style="display: inline-flex;">
+                            ${videoDetails.summary_review_status === 'approved' ? '✓ Summary Approved' : '✗ Summary Rejected'}
+                            ${videoDetails.summary_review_comment ? `<span class="review-comment-preview" title="${videoDetails.summary_review_comment}"></span>` : ''}
+                        </div>
+                    ` : `
+                        <div style="display: flex; gap: 12px; padding-top: 12px; border-top: 1px solid rgba(174, 183, 132, 0.2);">
+                            <button class="action-btn approve-btn" onclick="openSummaryReviewModal('approved'); return false;" title="Approve Summary">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M13.5 4L6 11.5L2.5 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Approve Summary
+                            </button>
+                            <button class="action-btn reject-btn" onclick="openSummaryReviewModal('rejected'); return false;" title="Reject Summary">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                Reject Summary
+                            </button>
+                        </div>
+                    `}
+                </div>
             </div>
         `;
         
@@ -1176,6 +1266,199 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Review modal and functions
+let currentReviewAlertIndex = null;
+let currentReviewAction = null;
+let isSummaryReview = false;
+
+// Current reviewer info (from data.json history logs)
+const CURRENT_REVIEWER = {
+    name: "Abhishek Shrivastava",
+    designation: "Chief Content Reviewer"
+};
+
+// Open summary review modal
+function openSummaryReviewModal(action) {
+    isSummaryReview = true;
+    currentReviewAction = action;
+    openReviewModal(null, action);
+}
+
+// Open review modal
+function openReviewModal(alertIndex, action) {
+    currentReviewAlertIndex = alertIndex;
+    currentReviewAction = action;
+    
+    // Create modal if it doesn't exist
+    let modal = document.getElementById('reviewModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'reviewModal';
+        modal.className = 'review-modal';
+        modal.innerHTML = `
+            <div class="review-modal-content">
+                <div class="review-modal-header">
+                    <div>
+                        <h3 id="reviewModalTitle">Review Content Alert</h3>
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">${CURRENT_REVIEWER.name}</div>
+                            <div class="reviewer-designation">${CURRENT_REVIEWER.designation}</div>
+                        </div>
+                    </div>
+                    <button class="review-modal-close" onclick="closeReviewModal()">&times;</button>
+                </div>
+                <div class="review-modal-body">
+                    <p id="reviewModalMessage"></p>
+                    <textarea id="reviewComment" placeholder="Add your comment (optional)..." rows="4"></textarea>
+                </div>
+                <div class="review-modal-footer">
+                    <button class="modal-btn cancel-btn" onclick="closeReviewModal()">Cancel</button>
+                    <button class="modal-btn submit-btn" onclick="submitReview()">Submit</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
+    
+    // Update modal content
+    const title = isSummaryReview 
+        ? (action === 'approved' ? 'Approve Summary' : 'Reject Summary')
+        : (action === 'approved' ? 'Approve Content Alert' : 'Reject Content Alert');
+    const message = isSummaryReview
+        ? (action === 'approved' 
+            ? 'Are you sure you want to approve this video summary?' 
+            : 'Are you sure you want to reject this video summary?')
+        : (action === 'approved' 
+            ? 'Are you sure you want to approve this content alert?' 
+            : 'Are you sure you want to reject this content alert?');
+    
+    document.getElementById('reviewModalTitle').textContent = title;
+    document.getElementById('reviewModalMessage').textContent = message;
+    document.getElementById('reviewComment').value = '';
+    
+    // Show modal
+    modal.style.display = 'flex';
+}
+
+// Close review modal
+function closeReviewModal() {
+    const modal = document.getElementById('reviewModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+    currentReviewAlertIndex = null;
+    currentReviewAction = null;
+    isSummaryReview = false;
+}
+
+// Submit review
+function submitReview() {
+    if (!currentReviewAction || !currentVideo) {
+        return;
+    }
+    
+    const comment = document.getElementById('reviewComment').value.trim();
+    const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19);
+    let historyEntry;
+    let notificationMessage;
+    
+    if (isSummaryReview) {
+        // Handle summary review
+        const videoDetails = currentVideo.video_details;
+        
+        // Update summary with review status
+        videoDetails.summary_review_status = currentReviewAction;
+        if (comment) {
+            videoDetails.summary_review_comment = comment;
+        }
+        
+        // Create history log entry for summary
+        historyEntry = {
+            timestamp: timestamp,
+            action: `Video Summary Review`,
+            status: currentReviewAction,
+            user: `${CURRENT_REVIEWER.name} (${CURRENT_REVIEWER.designation})`,
+            message: comment || `Video summary ${currentReviewAction} without additional comments.`
+        };
+        
+        notificationMessage = `Summary ${currentReviewAction}!`;
+    } else {
+        // Handle content alert review
+        if (currentReviewAlertIndex === null) {
+            return;
+        }
+        
+        const contentAnalysis = currentVideo.video_details.category.content_analysis;
+        const alert = contentAnalysis[currentReviewAlertIndex];
+        
+        // Update alert with review status
+        alert.review_status = currentReviewAction;
+        if (comment) {
+            alert.review_comment = comment;
+        }
+        
+        // Create history log entry for content alert
+        historyEntry = {
+            timestamp: timestamp,
+            action: `${alert.alert_type} at ${alert.timestamp}`,
+            status: currentReviewAction,
+            user: `${CURRENT_REVIEWER.name} (${CURRENT_REVIEWER.designation})`,
+            message: comment || `Content alert ${currentReviewAction} without additional comments.`
+        };
+        
+        notificationMessage = `Content alert ${currentReviewAction}!`;
+    }
+    
+    // Add to history logs
+    if (!currentVideo.video_details.history_logs) {
+        currentVideo.video_details.history_logs = [];
+    }
+    currentVideo.video_details.history_logs.unshift(historyEntry);
+    
+    // Capture action before closing modal
+    const reviewAction = currentReviewAction;
+    
+    // Close modal
+    closeReviewModal();
+    
+    // Refresh displays
+    if (isSummaryReview) {
+        populateLeftSideTabs();
+    } else {
+        populateAnalysisResults();
+    }
+    populateHistoryTab();
+    
+    // Show success message
+    showNotification(notificationMessage, reviewAction);
+}
+
+// Show notification
+function showNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 16px 24px;
+        background: ${type === 'approved' ? '#10b981' : '#ef4444'};
+        color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        z-index: 10000;
+        animation: slideIn 0.3s ease-out;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease-out';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}
+
 // Get rating badge class
 function getRatingClass(rating) {
     if (!rating) return 'badge-green';
@@ -1192,6 +1475,184 @@ function getRatingClass(rating) {
     }
     
     return 'badge-green';
+}
+
+// Rating override and approval functions
+function openRatingOverrideModal() {
+    if (!currentVideo) return;
+    
+    // India rating options
+    const ratingOptions = [
+        { value: 'U', label: 'U - Universal (All Ages)' },
+        { value: 'U/A 7+', label: 'U/A 7+ - Parental Guidance (7+)' },
+        { value: 'U/A 13+', label: 'U/A 13+ - Parental Guidance (13+)' },
+        { value: 'U/A 16+', label: 'U/A 16+ - Parental Guidance (16+)' },
+        { value: 'A', label: 'A - Adults Only (18+)' }
+    ];
+    
+    // Create override modal
+    let modal = document.getElementById('ratingOverrideModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'ratingOverrideModal';
+        modal.className = 'review-modal';
+        document.body.appendChild(modal);
+    }
+    
+    // Build modal content
+    modal.className = 'review-modal';
+    modal.innerHTML = `
+        <div class="review-modal-content">
+            <div class="review-modal-header">
+                <div>
+                    <h3>Override Rating</h3>
+                    <div class="reviewer-info">
+                        <div class="reviewer-name">${CURRENT_REVIEWER.name}</div>
+                        <div class="reviewer-designation">${CURRENT_REVIEWER.designation}</div>
+                    </div>
+                </div>
+                <button class="review-modal-close" onclick="closeRatingOverrideModal()">&times;</button>
+            </div>
+            <div class="review-modal-body">
+                <p style="margin-bottom: 16px;">Select the rating to override the AI suggestion:</p>
+                
+                <!-- Rating Dropdown -->
+                <select id="ratingSelect" class="rating-select">
+                    <option value="">Select rating...</option>
+                    ${ratingOptions.map(opt => `<option value="${opt.value}">${opt.label}</option>`).join('')}
+                </select>
+                
+                <textarea id="ratingOverrideComment" placeholder="Add reason for override (optional)..." rows="3" style="margin-top: 12px;"></textarea>
+            </div>
+            <div class="review-modal-footer">
+                <button class="modal-btn cancel-btn" onclick="closeRatingOverrideModal()">Cancel</button>
+                <button class="modal-btn submit-btn" onclick="submitRatingOverride()">Override</button>
+            </div>
+        </div>
+    `;
+    
+    // Show modal
+    modal.style.display = 'flex';
+}
+
+function closeRatingOverrideModal() {
+    const modal = document.getElementById('ratingOverrideModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+function submitRatingOverride() {
+    if (!currentVideo) return;
+    
+    // Get the selected rating from the dropdown
+    const newRating = document.getElementById('ratingSelect').value;
+    const comment = document.getElementById('ratingOverrideComment').value.trim();
+    
+    if (!newRating) {
+        alert('Please select a rating');
+        return;
+    }
+    
+    // Update human rating
+    currentVideo.video_details.category.human_rating = newRating;
+    
+    // Create history log entry
+    const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19);
+    const historyEntry = {
+        timestamp: timestamp,
+        action: `Rating Override: ${newRating}`,
+        status: 'approved',
+        user: `${CURRENT_REVIEWER.name} (${CURRENT_REVIEWER.designation})`,
+        message: comment || `Rating overridden from AI suggestion to ${newRating}`
+    };
+    
+    // Add to history logs
+    if (!currentVideo.video_details.history_logs) {
+        currentVideo.video_details.history_logs = [];
+    }
+    currentVideo.video_details.history_logs.unshift(historyEntry);
+    
+    // Close modal
+    closeRatingOverrideModal();
+    
+    // Refresh displays
+    populateLeftSideTabs();
+    populateHistoryTab();
+    
+    // Show notification
+    showNotification(`Rating overridden to ${newRating}!`, 'approved');
+}
+
+function approveCurrentRating() {
+    if (!currentVideo) return;
+    
+    // Mark rating as approved
+    currentVideo.video_details.rating_approved = true;
+    
+    // Create history log entry
+    const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19);
+    const currentRating = currentVideo.video_details.category.human_rating || currentVideo.video_details.category.rating;
+    const historyEntry = {
+        timestamp: timestamp,
+        action: `Rating Approval: ${currentRating}`,
+        status: 'approved',
+        user: `${CURRENT_REVIEWER.name} (${CURRENT_REVIEWER.designation})`,
+        message: `Current rating ${currentRating} approved without changes`
+    };
+    
+    // Add to history logs
+    if (!currentVideo.video_details.history_logs) {
+        currentVideo.video_details.history_logs = [];
+    }
+    currentVideo.video_details.history_logs.unshift(historyEntry);
+    
+    // Refresh displays
+    populateLeftSideTabs();
+    populateHistoryTab();
+    
+    // Show notification
+    showNotification('Rating approved!', 'approved');
+}
+
+// Page navigation functions
+function showLandingPage() {
+    document.getElementById('landingPage').classList.remove('hidden');
+    document.getElementById('guidelinesPage').classList.add('hidden');
+    document.getElementById('contactPage').classList.add('hidden');
+    document.getElementById('mainApp').classList.add('hidden');
+}
+
+function showGuidelinesPage() {
+    document.getElementById('landingPage').classList.add('hidden');
+    document.getElementById('guidelinesPage').classList.remove('hidden');
+    document.getElementById('contactPage').classList.add('hidden');
+    document.getElementById('mainApp').classList.add('hidden');
+}
+
+function showContactPage() {
+    document.getElementById('landingPage').classList.add('hidden');
+    document.getElementById('guidelinesPage').classList.add('hidden');
+    document.getElementById('contactPage').classList.remove('hidden');
+    document.getElementById('mainApp').classList.add('hidden');
+}
+
+// Switch guidelines tabs
+function switchGuidelinesTab(country) {
+    // Update tab buttons
+    document.querySelectorAll('.guidelines-tab').forEach(tab => {
+        if (tab.dataset.country === country) {
+            tab.classList.add('active');
+        } else {
+            tab.classList.remove('active');
+        }
+    });
+    
+    // Update content
+    document.querySelectorAll('.guidelines-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    document.getElementById(`guidelines-${country}`).classList.add('active');
 }
 
 // Sidebar toggle button listener - wrapped in DOMContentLoaded to ensure element exists

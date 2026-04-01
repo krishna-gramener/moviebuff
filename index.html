@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MovieBuff - Your AI-Assisted Cinema Companion</title>
+    <title>AI RateLens - Your AI-Assisted Cinema Companion</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
@@ -14,14 +14,13 @@
         <div class="nav-container">
             <div class="nav-brand">
                 <div class="brand-icon">🎬</div>
-                <span class="brand-text">MovieBuff</span>
+                <span class="brand-text">AI RateLens</span>
                 <span class="brand-subtitle">Powered by AI</span>
             </div>
             <div class="nav-links">
-                <a href="#overview" class="nav-link">Overview</a>
-                <a href="#guidelines" class="nav-link">Guidelines</a>
-                <a href="#statistics" class="nav-link">Key Statistics</a>
-                <a href="#contacts" class="nav-link">Contacts</a>
+                <a href="#" onclick="showLandingPage(); return false;" class="nav-link">Overview</a>
+                <a href="#" onclick="showGuidelinesPage(); return false;" class="nav-link">Guidelines</a>
+                <a href="#" onclick="showContactPage(); return false;" class="nav-link">Contact Us</a>
             </div>
             <div class="nav-actions">
                 <button class="nav-btn primary">Profile</button>
@@ -139,6 +138,254 @@
                 </div>
             </div>
         </footer>
+    </div>
+
+    <!-- Guidelines Page (Hidden Initially) -->
+    <div id="guidelinesPage" class="hidden" style="min-height: 100vh; background: #f8fafc; padding: 40px 0;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 24px;">
+            <div style="margin-bottom: 40px;">
+                <h1 style="font-size: 36px; font-weight: 700; color: #1e293b; margin-bottom: 12px;">Content Guidelines</h1>
+                <p style="font-size: 16px; color: #64748b;">Country-specific content censoring and rating guidelines for video content review.</p>
+            </div>
+
+            <!-- Country Tabs -->
+            <div style="display: flex; gap: 8px; margin-bottom: 32px; border-bottom: 2px solid #e2e8f0;">
+                <button class="guidelines-tab active" data-country="india" onclick="switchGuidelinesTab('india')">
+                    🇮🇳 India
+                </button>
+                <button class="guidelines-tab" data-country="united_states" onclick="switchGuidelinesTab('united_states')">
+                    🇺🇸 United States
+                </button>
+                <button class="guidelines-tab" data-country="france" onclick="switchGuidelinesTab('france')">
+                    🇫🇷 France
+                </button>
+                <button class="guidelines-tab" data-country="japan" onclick="switchGuidelinesTab('japan')">
+                    🇯🇵 Japan
+                </button>
+            </div>
+
+            <!-- Guidelines Content -->
+            <div class="guidelines-content active" id="guidelines-india">
+                <div style="background: white; border-radius: 12px; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <h2 style="font-size: 24px; font-weight: 700; color: #1e3a8a; margin-bottom: 24px;">India - CBFC Guidelines</h2>
+                    
+                    <div style="margin-bottom: 32px;">
+                        <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 16px;">Rating Categories</h3>
+                        <div style="display: grid; gap: 16px;">
+                            <div style="padding: 16px; background: #f1f5f9; border-radius: 8px; border-left: 4px solid #10b981;">
+                                <strong style="color: #1e293b;">U (Universal)</strong> - Suitable for all ages
+                            </div>
+                            <div style="padding: 16px; background: #f1f5f9; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                                <strong style="color: #1e293b;">U/A 7+</strong> - Parental guidance for children under 7
+                            </div>
+                            <div style="padding: 16px; background: #f1f5f9; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                                <strong style="color: #1e293b;">U/A 13+</strong> - Parental guidance for children under 13
+                            </div>
+                            <div style="padding: 16px; background: #f1f5f9; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                                <strong style="color: #1e293b;">U/A 16+</strong> - Parental guidance for children under 16
+                            </div>
+                            <div style="padding: 16px; background: #f1f5f9; border-radius: 8px; border-left: 4px solid #ef4444;">
+                                <strong style="color: #1e293b;">A (Adults Only)</strong> - Restricted to adults (18+)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 32px;">
+                        <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 16px;">Content Restrictions</h3>
+                        <ul style="list-style: disc; padding-left: 24px; color: #475569; line-height: 1.8;">
+                            <li>Graphic violence and animal cruelty require blurring or pixelation</li>
+                            <li>Strong profanity must be beeped or muted for television broadcast</li>
+                            <li>Sexual content and nudity are heavily restricted</li>
+                            <li>Religious and cultural sensitivities must be respected</li>
+                            <li>Content warnings required for graphic scenes</li>
+                            <li>Watershed hours (post-11 PM) for adult content on TV</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 16px;">Key Considerations</h3>
+                        <ul style="list-style: disc; padding-left: 24px; color: #475569; line-height: 1.8;">
+                            <li>Family viewing is prioritized in Indian culture</li>
+                            <li>Conservative broadcast standards apply</li>
+                            <li>Digital platforms have more flexibility with age verification</li>
+                            <li>Regional language content may have additional considerations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="guidelines-content" id="guidelines-united_states">
+                <div style="background: white; border-radius: 12px; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <h2 style="font-size: 24px; font-weight: 700; color: #1e3a8a; margin-bottom: 24px;">United States - TV Parental Guidelines</h2>
+                    
+                    <div style="margin-bottom: 32px;">
+                        <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 16px;">Rating Categories</h3>
+                        <div style="display: grid; gap: 16px;">
+                            <div style="padding: 16px; background: #f1f5f9; border-radius: 8px; border-left: 4px solid #10b981;">
+                                <strong style="color: #1e293b;">TV-Y</strong> - All children
+                            </div>
+                            <div style="padding: 16px; background: #f1f5f9; border-radius: 8px; border-left: 4px solid #10b981;">
+                                <strong style="color: #1e293b;">TV-Y7</strong> - Directed to older children (7+)
+                            </div>
+                            <div style="padding: 16px; background: #f1f5f9; border-radius: 8px; border-left: 4px solid #10b981;">
+                                <strong style="color: #1e293b;">TV-G</strong> - General audience
+                            </div>
+                            <div style="padding: 16px; background: #f1f5f9; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                                <strong style="color: #1e293b;">TV-PG</strong> - Parental guidance suggested
+                            </div>
+                            <div style="padding: 16px; background: #f1f5f9; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                                <strong style="color: #1e293b;">TV-14</strong> - Parents strongly cautioned (14+)
+                            </div>
+                            <div style="padding: 16px; background: #f1f5f9; border-radius: 8px; border-left: 4px solid #ef4444;">
+                                <strong style="color: #1e293b;">TV-MA</strong> - Mature audiences only (17+)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 32px;">
+                        <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 16px;">Content Descriptors</h3>
+                        <ul style="list-style: disc; padding-left: 24px; color: #475569; line-height: 1.8;">
+                            <li><strong>D</strong> - Suggestive dialogue</li>
+                            <li><strong>L</strong> - Coarse or crude language</li>
+                            <li><strong>S</strong> - Sexual situations</li>
+                            <li><strong>V</strong> - Violence</li>
+                            <li><strong>FV</strong> - Fantasy violence (for children's programming)</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 16px;">Broadcast Requirements</h3>
+                        <ul style="list-style: disc; padding-left: 24px; color: #475569; line-height: 1.8;">
+                            <li>FCC safe-harbor hours (10 PM - 6 AM) for explicit content</li>
+                            <li>Rating bug must be displayed for first 15 seconds of each program</li>
+                            <li>Content advisories for graphic material</li>
+                            <li>Premium cable and streaming have more flexibility</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="guidelines-content" id="guidelines-france">
+                <div style="background: white; border-radius: 12px; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <h2 style="font-size: 24px; font-weight: 700; color: #1e3a8a; margin-bottom: 24px;">France - CSA Guidelines</h2>
+                    
+                    <div style="margin-bottom: 32px;">
+                        <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 16px;">Rating Categories</h3>
+                        <div style="display: grid; gap: 16px;">
+                            <div style="padding: 16px; background: #f1f5f9; border-radius: 8px; border-left: 4px solid #10b981;">
+                                <strong style="color: #1e293b;">Tous publics</strong> - All audiences
+                            </div>
+                            <div style="padding: 16px; background: #f1f5f9; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                                <strong style="color: #1e293b;">-10</strong> - Not recommended for children under 10
+                            </div>
+                            <div style="padding: 16px; background: #f1f5f9; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                                <strong style="color: #1e293b;">-12</strong> - Not recommended for children under 12
+                            </div>
+                            <div style="padding: 16px; background: #f1f5f9; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                                <strong style="color: #1e293b;">-16</strong> - Not recommended for children under 16
+                            </div>
+                            <div style="padding: 16px; background: #f1f5f9; border-radius: 8px; border-left: 4px solid #ef4444;">
+                                <strong style="color: #1e293b;">-18</strong> - Prohibited for minors
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 32px;">
+                        <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 16px;">Content Philosophy</h3>
+                        <ul style="list-style: disc; padding-left: 24px; color: #475569; line-height: 1.8;">
+                            <li>Emphasis on artistic and educational merit</li>
+                            <li>More permissive toward nudity in artistic contexts</li>
+                            <li>Authentic nature content valued over excessive editing</li>
+                            <li>Documentary standards prioritize unfiltered reality</li>
+                            <li>Cultural and intellectual content given consideration</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 16px;">Broadcast Standards</h3>
+                        <ul style="list-style: disc; padding-left: 24px; color: #475569; line-height: 1.8;">
+                            <li>Age-rating logos must be visible throughout broadcast</li>
+                            <li>Time-slot restrictions for youth protection</li>
+                            <li>Warnings for potentially disturbing content</li>
+                            <li>Respect for French language and cultural values</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="guidelines-content" id="guidelines-japan">
+                <div style="background: white; border-radius: 12px; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <h2 style="font-size: 24px; font-weight: 700; color: #1e3a8a; margin-bottom: 24px;">Japan - Eirin & Broadcasting Standards</h2>
+                    
+                    <div style="margin-bottom: 32px;">
+                        <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 16px;">Rating Categories</h3>
+                        <div style="display: grid; gap: 16px;">
+                            <div style="padding: 16px; background: #f1f5f9; border-radius: 8px; border-left: 4px solid #10b981;">
+                                <strong style="color: #1e293b;">G</strong> - General audiences
+                            </div>
+                            <div style="padding: 16px; background: #f1f5f9; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                                <strong style="color: #1e293b;">PG12</strong> - Parental guidance for under 12
+                            </div>
+                            <div style="padding: 16px; background: #f1f5f9; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                                <strong style="color: #1e293b;">R15+</strong> - Restricted to 15 and above
+                            </div>
+                            <div style="padding: 16px; background: #f1f5f9; border-radius: 8px; border-left: 4px solid #ef4444;">
+                                <strong style="color: #1e293b;">R18+</strong> - Restricted to adults only
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 32px;">
+                        <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 16px;">Content Restrictions</h3>
+                        <ul style="list-style: disc; padding-left: 24px; color: #475569; line-height: 1.8;">
+                            <li>Mosaic blur required for graphic blood and violence</li>
+                            <li>Animal-related content requires cultural sensitivity</li>
+                            <li>Strong language must be moderated or warned</li>
+                            <li>Explicit content heavily regulated</li>
+                            <li>Preference for edited over raw content</li>
+                            <li>Late-night time slots for mature content</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 16px;">Cultural Considerations</h3>
+                        <ul style="list-style: disc; padding-left: 24px; color: #475569; line-height: 1.8;">
+                            <li>High viewer sensitivity to graphic imagery</li>
+                            <li>Respect for traditional values and aesthetics</li>
+                            <li>Clear warnings and context required</li>
+                            <li>Age-gate verification for online distribution</li>
+                            <li>Post-midnight broadcast for extreme content</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Us Page (Hidden Initially) -->
+    <div id="contactPage" class="hidden" style="min-height: 100vh; background: #f8fafc; padding: 40px 0;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 24px;">
+            <div style="margin-bottom: 40px;">
+                <h1 style="font-size: 36px; font-weight: 700; color: #1e293b; margin-bottom: 12px;">Contact Us</h1>
+                <p style="font-size: 16px; color: #64748b; line-height: 1.8; max-width: 800px;">
+                    The AI RateLens team combines business leadership, product direction, and technical delivery to ensure the tool stays accurate, scalable, and aligned with industry standards. If you have questions about workflow, capabilities, access, or operational support, reach out to the appropriate contact below.
+                </p>
+            </div>
+
+            <!-- Contact Card -->
+            <div style="background: white; border-radius: 12px; padding: 48px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); max-width: 600px; margin: 0 auto; text-align: center;">
+                <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                </div>
+                <h2 style="font-size: 24px; font-weight: 700; color: #1e293b; margin-bottom: 8px;">Email Us</h2>
+                <p style="font-size: 14px; color: #64748b; margin-bottom: 24px;">For inquiries, support, or feedback</p>
+                <a href="mailto:contact@gramener.com" style="display: inline-block; font-size: 20px; font-weight: 600; color: #1e3a8a; text-decoration: none; padding: 16px 32px; background: rgba(30, 58, 138, 0.1); border-radius: 8px; transition: all 0.2s;">
+                    contact@gramener.com
+                </a>
+            </div>
+        </div>
     </div>
 
     <!-- Main App (Hidden Initially) -->

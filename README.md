@@ -1,4 +1,4 @@
-# MovieBuff 🎬
+# AI RateLens 🎬
 
 **Your AI-Assisted Cinema Companion**  
 Analyze, transcribe, and deep-dive into iconic movie moments with comprehensive content analysis and regional recommendations.
@@ -7,7 +7,7 @@ Analyze, transcribe, and deep-dive into iconic movie moments with comprehensive 
 
 ## Overview
 
-MovieBuff is a modern web application for AI-powered video content analysis, featuring real-time transcript highlighting, automated processing workflows, audit trails, and geography-specific content recommendations.
+AI RateLens is a modern web application for AI-powered video content analysis, featuring real-time transcript highlighting, automated processing workflows, audit trails, and geography-specific content recommendations.
 
 ## Features
 
@@ -113,7 +113,7 @@ python3 -m http.server 8000
 ## Project Structure
 
 ```
-moviebuff/
+AI RateLens/
 ├── index.html    # UI and styling
 ├── app.js        # Application logic
 ├── data.json     # Video data and analysis
