@@ -45,7 +45,7 @@ body::before {
 .video-card {
     background: white;
     border-radius: 16px;
-    overflow: hidden;
+    overflow: visible;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
@@ -55,6 +55,11 @@ body::before {
     gap: 20px;
     border: 1px solid rgba(174, 183, 132, 0.2);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    margin-bottom: 0;
+}
+
+.video-card:has(.rating-dropdown.show) {
+    margin-bottom: 180px;
 }
 
 .video-card:hover {
@@ -229,7 +234,7 @@ body::before {
 #videoGrid {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 24px;
     padding: 0;
 }
 
@@ -2486,6 +2491,151 @@ h1, h2, h3 {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* Video Library Rating Dropdown */
+.video-card-ratings-container {
+    position: relative;
+    z-index: 1;
+}
+
+.video-card-ratings-container:has(.rating-dropdown.show) {
+    z-index: 9999;
+}
+
+.video-card-ratings {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background 0.2s;
+    position: relative;
+    z-index: 1;
+}
+
+.video-card-ratings:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.dropdown-arrow {
+    font-size: 10px;
+    color: #64748b;
+    margin-left: 2px;
+    transition: transform 0.2s;
+}
+
+.video-card-ratings:hover .dropdown-arrow {
+    transform: translateY(2px);
+}
+
+.rating-dropdown {
+    position: absolute;
+    top: 0;
+    left: calc(100% + 8px);
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    min-width: 280px;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-10px);
+    transition: all 0.2s ease-out;
+    pointer-events: none;
+}
+
+.rating-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.rating-dropdown-header {
+    display: grid;
+    grid-template-columns: 40px 1fr 70px 70px;
+    gap: 8px;
+    padding: 10px 16px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 11px;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 8px 8px 0 0;
+}
+
+.rating-dropdown-header span:nth-child(1) {
+    text-align: center;
+}
+
+.rating-dropdown-header span:nth-child(2) {
+    text-align: left;
+}
+
+.rating-dropdown-header span:nth-child(3) {
+    text-align: center;
+}
+
+.rating-dropdown-header span:nth-child(4) {
+    text-align: center;
+}
+
+.regional-rating-row {
+    display: grid;
+    grid-template-columns: 30px 1fr 80px 80px;
+    gap: 8px;
+    padding: 10px 16px;
+    align-items: center;
+    border-bottom: 1px solid #f1f5f9;
+    transition: background 0.2s;
+}
+
+.regional-rating-row:last-child {
+    border-bottom: none;
+}
+
+.regional-rating-row:hover {
+    background: #f8fafc;
+}
+
+.region-flag {
+    font-size: 18px;
+}
+
+.region-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: #1e293b;
+}
+
+.region-ratings {
+    display: contents;
+}
+
+.mini-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.mini-badge.ai {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.mini-badge.human {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
 /* Rating Override Modal Styles */

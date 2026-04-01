@@ -87,6 +87,31 @@ function renderVideoGrid() {
             ? (viewCount / 1000).toFixed(1) + 'K'
             : viewCount.toString();
         
+        // Build regional ratings data
+        const regionalRecs = video.video_details.regional_recommendations || {};
+        const countries = [
+            { code: 'india', flag: '🇮🇳', name: 'India' },
+            { code: 'united_states', flag: '🇺🇸', name: 'USA' },
+            { code: 'france', flag: '🇫🇷', name: 'France' },
+            { code: 'japan', flag: '🇯🇵', name: 'Japan' }
+        ];
+        
+        const regionalRatingsHTML = countries.map(country => {
+            const region = regionalRecs[country.code] || {};
+            const aiRating = region.rating_suggestion.slice(0, 4) || 'N/A';
+            const humanRating = region.human_rating.slice(0, 4) || aiRating;
+            return `
+                <div class="regional-rating-row">
+                    <span class="region-flag">${country.flag}</span>
+                    <span class="region-name">${country.name}</span>
+                    <div class="region-ratings">
+                        <span class="mini-badge ai">${aiRating.split('(')[0].trim()}</span>
+                        <span class="mini-badge human">${humanRating.split('(')[0].trim()}</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
         card.innerHTML = `
             <div class="video-card-thumbnail">
                 <img src="${thumbnailUrl}" alt="${videoTitle}" 
@@ -96,9 +121,21 @@ function renderVideoGrid() {
                 <h3 class="video-card-title">${videoTitle}</h3>
                 <div class="video-card-meta-row">
                     <div class="video-card-duration">${formatDuration(videoDuration)}</div>
-                    <div class="video-card-ratings">
-                        <span class="rating-badge ai-rating" title="AI Rating">${aiRatingSymbol}</span>
-                        <span class="rating-badge human-rating" title="Human Rating">${humanRatingSymbol}</span>
+                    <div class="video-card-ratings-container">
+                        <div class="video-card-ratings" onclick="toggleRatingDropdown(event, ${index})">
+                            <span class="rating-badge ai-rating" title="AI Rating">${aiRatingSymbol}</span>
+                            <span class="rating-badge human-rating" title="Human Rating">${humanRatingSymbol}</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </div>
+                        <div class="rating-dropdown" id="rating-dropdown-${index}">
+                            <div class="rating-dropdown-header">
+                                <span></span>
+                                <span>Country</span>
+                                <span>AI</span>
+                                <span>Human</span>
+                            </div>
+                            ${regionalRatingsHTML}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -596,9 +633,9 @@ function populateLeftSideTabs() {
         const currentRating = currentRegion.rating_suggestion || rating;
         const currentSummary = currentRegion.summary || summary;
         
-        // Get AI and Human ratings
-        const aiRating = rating; // Original AI rating from category
-        const humanRating = videoDetails.category.human_rating || rating; // Human override or default to AI
+        // Get AI and Human ratings (region-specific)
+        const aiRating = currentRating; // Region-specific AI rating
+        const humanRating = currentRegion.human_rating || currentRating; // Region-specific human rating
         const ratingApproved = videoDetails.rating_approved || false;
         
         // Debug logging
@@ -611,44 +648,10 @@ function populateLeftSideTabs() {
         
         summaryContentLeft.innerHTML = `
             <div style="background: white; border-radius: 12px; padding: 32px; border: 1px solid rgba(174, 183, 132, 0.2);">
-                <div style="margin-bottom: 24px;">
-                    <h3 style="font-size: 26px; font-weight: 700; color: #1e3a8a; margin: 0 0 20px 0;">Summary</h3>
-                    
-                    <!-- Rating Comparison -->
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
-                        <div style="padding: 16px; background: rgba(59, 130, 246, 0.05); border-radius: 8px; border: 2px solid rgba(59, 130, 246, 0.2);">
-                            <div style="font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">AI Rating</div>
-                            <div id="aiRatingDisplay" style="font-size: 20px; font-weight: 700; color: #3b82f6;">
-                                ${aiRating.split('(')[0].trim()}
-                            </div>
-                        </div>
-                        <div style="padding: 16px; background: rgba(16, 185, 129, 0.05); border-radius: 8px; border: 2px solid rgba(16, 185, 129, 0.2);">
-                            <div style="font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">Human Rating</div>
-                            <div id="humanRatingDisplay" style="font-size: 20px; font-weight: 700; color: #10b981;">
-                                ${humanRating.split('(')[0].trim()}
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Rating Actions -->
-                    <div id="ratingActionsSection" style="display: flex; gap: 12px; padding: 16px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                        ${ratingApproved ? `
-                            <div class="review-status approved" style="display: inline-flex; flex: 1; justify-content: center;">
-                                ✓ Rating Approved
-                            </div>
-                        ` : `
-                            <button class="action-btn" onclick="openRatingOverrideModal(); return false;" style="flex: 1; background: #f59e0b; color: white; padding: 12px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s;">
-                                Override Rating
-                            </button>
-                            <button class="action-btn approve-btn" onclick="approveCurrentRating(); return false;" style="flex: 1; padding: 12px;">
-                                Approve Rating
-                            </button>
-                        `}
-                    </div>
-                </div>
+                <h3 style="font-size: 26px; font-weight: 700; color: #1e3a8a; margin: 0 0 20px 0;">Summary</h3>
                 
                 <!-- Country Selector -->
-                <div style="display: flex; gap: 8px; margin-bottom: 20px; padding: 12px; background: rgba(174, 183, 132, 0.05); border-radius: 8px; border: 1px solid rgba(174, 183, 132, 0.15);">
+                <div style="display: flex; gap: 8px; margin-bottom: 24px; padding: 12px; background: rgba(174, 183, 132, 0.05); border-radius: 8px; border: 1px solid rgba(174, 183, 132, 0.15);">
                     ${countries.map(country => `
                         <button 
                             class="summary-country-btn ${country.code === defaultCountry ? 'active' : ''}" 
@@ -658,6 +661,38 @@ function populateLeftSideTabs() {
                             ${country.flag}
                         </button>
                     `).join('')}
+                </div>
+                
+                <!-- Rating Comparison -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                    <div style="padding: 16px; background: rgba(59, 130, 246, 0.05); border-radius: 8px; border: 2px solid rgba(59, 130, 246, 0.2);">
+                        <div style="font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">AI Rating</div>
+                        <div id="aiRatingDisplay" style="font-size: 20px; font-weight: 700; color: #3b82f6;">
+                            ${currentRating.split('(')[0].trim()}
+                        </div>
+                    </div>
+                    <div style="padding: 16px; background: rgba(16, 185, 129, 0.05); border-radius: 8px; border: 2px solid rgba(16, 185, 129, 0.2);">
+                        <div style="font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">Human Rating</div>
+                        <div id="humanRatingDisplay" style="font-size: 20px; font-weight: 700; color: #10b981;">
+                            ${humanRating.split('(')[0].trim()}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Rating Actions -->
+                <div id="ratingActionsSection" style="display: flex; gap: 12px; padding: 16px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 24px;">
+                    ${ratingApproved ? `
+                        <div class="review-status approved" style="display: inline-flex; flex: 1; justify-content: center;">
+                            ✓ Rating Approved
+                        </div>
+                    ` : `
+                        <button class="action-btn" onclick="openRatingOverrideModal(); return false;" style="flex: 1; background: #f59e0b; color: white; padding: 12px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s;">
+                            Override Rating
+                        </button>
+                        <button class="action-btn approve-btn" onclick="approveCurrentRating(); return false;" style="flex: 1; padding: 12px;">
+                            Approve Rating
+                        </button>
+                    `}
                 </div>
                 
                 ${sentiment ? `<p style="font-size: 14px; font-weight: 700; color: #1e3a8a; margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: 0.5px;">${sentiment}</p>` : ''}
@@ -741,10 +776,19 @@ function updateSummaryForCountry(countryCode) {
     const currentRating = currentRegion.rating_suggestion || rating;
     const currentSummary = currentRegion.summary || summary;
     
-    // Update rating badge
-    const ratingBadge = document.getElementById('summaryRatingBadge');
-    if (ratingBadge) {
-        ratingBadge.textContent = currentRating.split('(')[0].trim();
+    // Get region-specific human rating
+    const humanRating = currentRegion.human_rating || currentRating;
+    
+    // Update AI rating display (country-specific)
+    const aiRatingDisplay = document.getElementById('aiRatingDisplay');
+    if (aiRatingDisplay) {
+        aiRatingDisplay.textContent = currentRating.split('(')[0].trim();
+    }
+    
+    // Update Human rating display (stays same across countries)
+    const humanRatingDisplay = document.getElementById('humanRatingDisplay');
+    if (humanRatingDisplay) {
+        humanRatingDisplay.textContent = humanRating.split('(')[0].trim();
     }
     
     // Update summary text
@@ -1481,14 +1525,53 @@ function getRatingClass(rating) {
 function openRatingOverrideModal() {
     if (!currentVideo) return;
     
-    // India rating options
-    const ratingOptions = [
-        { value: 'U', label: 'U - Universal (All Ages)' },
-        { value: 'U/A 7+', label: 'U/A 7+ - Parental Guidance (7+)' },
-        { value: 'U/A 13+', label: 'U/A 13+ - Parental Guidance (13+)' },
-        { value: 'U/A 16+', label: 'U/A 16+ - Parental Guidance (16+)' },
-        { value: 'A', label: 'A - Adults Only (18+)' }
-    ];
+    // Get currently selected country
+    const activeCountryBtn = document.querySelector('.summary-country-btn.active');
+    const selectedCountry = activeCountryBtn ? activeCountryBtn.dataset.country : 'india';
+    
+    // Define country-specific rating options
+    const ratingOptionsByCountry = {
+        india: [
+            { value: 'U', label: 'U - Universal (All Ages)' },
+            { value: 'U/A 7+', label: 'U/A 7+ - Parental Guidance (7+)' },
+            { value: 'U/A 13+', label: 'U/A 13+ - Parental Guidance (13+)' },
+            { value: 'U/A 16+', label: 'U/A 16+ - Parental Guidance (16+)' },
+            { value: 'A', label: 'A - Adults Only (18+)' }
+        ],
+        united_states: [
+            { value: 'TV-Y', label: 'TV-Y - All Children' },
+            { value: 'TV-Y7', label: 'TV-Y7 - Older Children (7+)' },
+            { value: 'TV-G', label: 'TV-G - General Audience' },
+            { value: 'TV-PG', label: 'TV-PG - Parental Guidance' },
+            { value: 'TV-14', label: 'TV-14 - Parents Cautioned (14+)' },
+            { value: 'TV-MA', label: 'TV-MA - Mature Audiences (17+)' }
+        ],
+        france: [
+            { value: 'Tous publics', label: 'Tous publics - All Audiences' },
+            { value: '-10', label: '-10 - Not for Under 10' },
+            { value: '-12', label: '-12 - Not for Under 12' },
+            { value: '-16', label: '-16 - Not for Under 16' },
+            { value: '-18', label: '-18 - Prohibited for Minors' }
+        ],
+        japan: [
+            { value: 'G', label: 'G - General Audiences' },
+            { value: 'PG12', label: 'PG12 - Parental Guidance (12+)' },
+            { value: 'R15+', label: 'R15+ - Restricted (15+)' },
+            { value: 'R18+', label: 'R18+ - Adults Only (18+)' }
+        ]
+    };
+    
+    // Get rating options for selected country
+    const ratingOptions = ratingOptionsByCountry[selectedCountry] || ratingOptionsByCountry.india;
+    
+    // Get country name for display
+    const countryNames = {
+        india: 'India',
+        united_states: 'United States',
+        france: 'France',
+        japan: 'Japan'
+    };
+    const countryName = countryNames[selectedCountry] || 'India';
     
     // Create override modal
     let modal = document.getElementById('ratingOverrideModal');
@@ -1505,7 +1588,7 @@ function openRatingOverrideModal() {
         <div class="review-modal-content">
             <div class="review-modal-header">
                 <div>
-                    <h3>Override Rating</h3>
+                    <h3>Override Rating - ${countryName}</h3>
                     <div class="reviewer-info">
                         <div class="reviewer-name">${CURRENT_REVIEWER.name}</div>
                         <div class="reviewer-designation">${CURRENT_REVIEWER.designation}</div>
@@ -1514,7 +1597,7 @@ function openRatingOverrideModal() {
                 <button class="review-modal-close" onclick="closeRatingOverrideModal()">&times;</button>
             </div>
             <div class="review-modal-body">
-                <p style="margin-bottom: 16px;">Select the rating to override the AI suggestion:</p>
+                <p style="margin-bottom: 16px;">Select the ${countryName} rating to override the AI suggestion:</p>
                 
                 <!-- Rating Dropdown -->
                 <select id="ratingSelect" class="rating-select">
@@ -1554,17 +1637,33 @@ function submitRatingOverride() {
         return;
     }
     
-    // Update human rating
-    currentVideo.video_details.category.human_rating = newRating;
+    // Get currently selected country
+    const activeCountryBtn = document.querySelector('.summary-country-btn.active');
+    const selectedCountry = activeCountryBtn ? activeCountryBtn.dataset.country : 'india';
+    
+    // Update region-specific human rating
+    const regionalRecs = currentVideo.video_details.regional_recommendations || {};
+    if (!regionalRecs[selectedCountry]) {
+        regionalRecs[selectedCountry] = {};
+    }
+    regionalRecs[selectedCountry].human_rating = newRating;
     
     // Create history log entry
     const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19);
+    const countryNames = {
+        india: 'India',
+        united_states: 'United States',
+        france: 'France',
+        japan: 'Japan'
+    };
+    const countryName = countryNames[selectedCountry] || selectedCountry;
+    
     const historyEntry = {
         timestamp: timestamp,
-        action: `Rating Override: ${newRating}`,
+        action: `Rating Override (${countryName}): ${newRating}`,
         status: 'approved',
         user: `${CURRENT_REVIEWER.name} (${CURRENT_REVIEWER.designation})`,
-        message: comment || `Rating overridden from AI suggestion to ${newRating}`
+        message: comment || `${countryName} rating overridden to ${newRating}`
     };
     
     // Add to history logs
@@ -1614,6 +1713,33 @@ function approveCurrentRating() {
     // Show notification
     showNotification('Rating approved!', 'approved');
 }
+
+// Toggle rating dropdown in video library
+function toggleRatingDropdown(event, videoIndex) {
+    event.stopPropagation(); // Prevent card click
+    
+    const dropdown = document.getElementById(`rating-dropdown-${videoIndex}`);
+    const allDropdowns = document.querySelectorAll('.rating-dropdown');
+    
+    // Close all other dropdowns
+    allDropdowns.forEach(dd => {
+        if (dd !== dropdown) {
+            dd.classList.remove('show');
+        }
+    });
+    
+    // Toggle current dropdown
+    dropdown.classList.toggle('show');
+}
+
+// Close dropdowns when clicking outside
+document.addEventListener('click', (event) => {
+    if (!event.target.closest('.video-card-ratings-container')) {
+        document.querySelectorAll('.rating-dropdown').forEach(dd => {
+            dd.classList.remove('show');
+        });
+    }
+});
 
 // Page navigation functions
 function showLandingPage() {

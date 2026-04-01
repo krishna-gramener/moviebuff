@@ -2727,6 +2727,7 @@
       "regional_recommendations": {
         "india": {
           "rating_suggestion": "U/A 13+",
+          "human_rating": "U/A 16+",
           "summary": "This survival adventure episode showcases Bear Grylls navigating Arizona's challenging terrain, demonstrating wilderness skills that resonate with Indian audiences' growing interest in adventure sports and outdoor education. The content is educational and inspiring, teaching valuable survival techniques including traditional fire-making methods. However, due to graphic scenes involving animal remains and dangerous high-altitude stunts, parental guidance is strongly recommended for viewers under 16. The episode aligns with Indian values of resourcefulness and respect for nature, though some content may be sensitive for family viewing during prime time.",
           "changes_required": true,
           "recommendations": [
@@ -2737,6 +2738,7 @@
         },
         "france": {
           "rating_suggestion": "Tous publics avec avertissement",
+          "human_rating": "-12",
           "summary": "This wilderness survival documentary presents Bear Grylls' journey through Arizona's Sky Island mountains, offering French audiences an authentic look at human adaptation in extreme natural environments. The episode demonstrates traditional survival techniques including fire-starting through air compression and resourceful food procurement. Consistent with French documentary standards that value unfiltered nature content, the episode presents survival realities without excessive dramatization. The content respects environmental consciousness while showcasing the raw challenges of wilderness survival, making it suitable for general audiences with appropriate context warnings.",
           "changes_required": false,
           "recommendations": [
@@ -2745,6 +2747,7 @@
         },
         "japan": {
           "rating_suggestion": "PG12",
+          "human_rating": "R15+",
           "summary": "This survival episode features Bear Grylls demonstrating wilderness techniques in Arizona's mountains. While the educational content showcases valuable survival skills including advanced fire-making and resource management, Japanese audiences should note that the episode contains graphic imagery of animal remains and high-risk climbing sequences that may be disturbing. Given Japanese cultural sensitivity toward animal-related content and preference for edited nature programming, parental guidance is recommended for viewers under 12. The episode's educational merit is high, but certain scenes require careful consideration for Japanese broadcast standards and viewer sensibilities.",
           "changes_required": true,
           "recommendations": [
@@ -2755,6 +2758,7 @@
         },
         "united_states": {
           "rating_suggestion": "TV-14",
+          "human_rating": "TV-MA",
           "summary": "Bear Grylls takes on Arizona's unforgiving wilderness in this action-packed survival episode that showcases the grit and ingenuity American audiences expect from adventure programming. The episode features advanced survival techniques including fire-starting with a compression piston and resourceful scavenging in extreme conditions. While the content delivers high entertainment and educational value, it includes graphic depictions of animal remains and extreme high-risk stunts that warrant a TV-14 rating. The episode embodies core American values of self-reliance, innovation, and conquering nature's challenges, though viewer discretion is advised for intense survival scenarios.",
           "changes_required": true,
           "recommendations": [
@@ -4613,6 +4617,7 @@
       "regional_recommendations": {
         "india": {
           "rating_suggestion": "A (Adults Only - 18+)",
+          "human_rating": "A",
           "summary": "This compilation showcases the irreverent banter between Marvel's Deadpool and Wolverine characters. While Indian audiences appreciate superhero content, this clip contains explicit profanity, crude humor, and graphic violence that exceeds acceptable standards for general viewing. The strong language and adult themes make it unsuitable for family audiences and require an Adults Only rating. Given India's conservative broadcast standards and cultural sensitivities around explicit content, significant editing would be required for television broadcast, though digital platforms with age verification may stream with appropriate warnings.",
           "changes_required": true,
           "recommendations": [
@@ -4624,6 +4629,7 @@
         },
         "france": {
           "rating_suggestion": "-12 (Interdit aux moins de 12 ans)",
+          "human_rating": "-16",
           "summary": "This Marvel compilation features the comedic dynamic between Deadpool and Wolverine, showcasing their signature bickering and action sequences. French audiences, familiar with American superhero franchises and comfortable with stylized violence in entertainment, will find this content appropriate for viewers 12 and above. The vulgar language and comic book violence align with French rating standards for teen-oriented action content. The satirical humor and meta-references characteristic of Deadpool resonate well with French appreciation for irreverent comedy, requiring only standard content warnings for digital distribution.",
           "changes_required": false,
           "recommendations": [
@@ -4633,6 +4639,7 @@
         },
         "japan": {
           "rating_suggestion": "R15+ (Restricted to 15 and above)",
+          "human_rating": "R18+",
           "summary": "This action compilation features Marvel's Deadpool and Wolverine in combat and comedic exchanges. Japanese audiences should be aware that the content includes extreme profanity, graphic violence, and crude humor that may not align with traditional Japanese entertainment preferences. While superhero content is popular in Japan, the explicit language and blood effects in this clip exceed typical anime or tokusatsu standards. The R15+ rating reflects Japanese broadcast regulations requiring parental guidance for intense violence and strong language, with late-night broadcast recommended to respect viewer sensibilities.",
           "changes_required": true,
           "recommendations": [
@@ -4643,6 +4650,7 @@
         },
         "united_states": {
           "rating_suggestion": "TV-MA (Mature Audiences Only)",
+          "human_rating": "TV-MA",
           "summary": "This high-energy compilation delivers exactly what American fans love about Deadpool and Wolverine: unfiltered banter, R-rated humor, and no-holds-barred action. The clip features the signature crude comedy and graphic violence that have made these characters cultural phenomena in the US superhero landscape. While the content pushes boundaries with strong profanity and intense fight sequences, it aligns perfectly with American audiences' appetite for edgy, adult-oriented superhero entertainment. The TV-MA rating ensures appropriate audience targeting while preserving the authentic, irreverent tone that defines these beloved Marvel anti-heroes.",
           "changes_required": true,
           "recommendations": [
@@ -6102,6 +6110,7 @@
       "regional_recommendations": {
         "india": {
           "rating_suggestion": "U (Universal)",
+          "human_rating": "U",
           "summary": "This iconic cricket highlight captures Virat Kohli's masterful 82* that led India to victory over Australia in the 2016 T20 World Cup - a moment etched in Indian sporting history. For Indian audiences, this represents more than just a cricket match; it's a celebration of national pride, sporting excellence, and one of the greatest chase performances in T20 history. The content is universally suitable for all age groups, perfect for family viewing, and resonates deeply with India's passion for cricket. This highlight package showcases the skill, determination, and composure that make Kohli a national icon and inspire millions of young cricketers across India.",
           "changes_required": false,
           "recommendations": [
@@ -6111,6 +6120,7 @@
         },
         "france": {
           "rating_suggestion": "Tous Publics",
+          "human_rating": "Tous publics",
           "summary": "This sports highlight showcases a significant cricket match between India and Australia from the 2016 T20 World Cup, featuring player Virat Kohli's exceptional performance. While cricket has limited following in France compared to football or rugby, this content demonstrates the global appeal of competitive sports and athletic excellence. French audiences interested in international sports culture will appreciate the technical skill and high-pressure performance displayed. The content is suitable for all audiences with no cultural or content concerns, though optional French subtitles may help viewers unfamiliar with cricket terminology better understand the commentary and match context.",
           "changes_required": false,
           "recommendations": [
@@ -6120,6 +6130,7 @@
         },
         "japan": {
           "rating_suggestion": "G (General Audience)",
+          "human_rating": "G",
           "summary": "This cricket highlight features India's Virat Kohli in a crucial match against Australia during the 2016 T20 World Cup tournament. While cricket is not mainstream in Japan, Japanese audiences who appreciate competitive sports and athletic achievement will find value in this display of skill under pressure. The content aligns with Japanese appreciation for discipline, precision, and mental fortitude in sports. As a clean sports highlight with no controversial content, it's suitable for all audiences. Clear context about the tournament significance and match stakes will help Japanese viewers unfamiliar with cricket understand why this performance is considered exceptional.",
           "changes_required": false,
           "recommendations": [
@@ -6129,6 +6140,7 @@
         },
         "united_states": {
           "rating_suggestion": "TV-G (General Audience)",
+          "human_rating": "TV-G",
           "summary": "This cricket highlight showcases an outstanding individual performance by India's Virat Kohli in a high-stakes match against Australia. While cricket has a niche following in the United States, American sports fans who appreciate clutch performances and athletic excellence will recognize the skill and pressure management on display. The content parallels American sports values of individual brilliance in team contexts, similar to iconic moments in baseball or basketball. As clean sports content with no objectionable material, it's appropriate for all audiences and provides American viewers a window into one of the world's most popular sports and its biggest stars.",
           "changes_required": false,
           "recommendations": [
@@ -7372,6 +7384,7 @@
       "regional_recommendations": {
         "india": {
           "rating_suggestion": "A (Adults Only - 18+)",
+          "human_rating": "A",
           "summary": "This intense clip from Game of Thrones' acclaimed 'Battle of the Bastards' episode contains graphic violence, psychological torture, and disturbing imagery that significantly exceeds Indian broadcast standards. While the series has a dedicated Indian fanbase who appreciate its complex storytelling, this particular scene includes a severed animal head, explicit threats of violence, and intense psychological abuse that are culturally sensitive for Indian audiences. The content requires an Adults Only rating and substantial editing for television broadcast. Given Indian sensitivities around animal-related violence and graphic content, this clip is best suited for mature streaming audiences with appropriate age verification and watershed hour restrictions.",
           "changes_required": true,
           "recommendations": [
@@ -7383,6 +7396,7 @@
         },
         "france": {
           "rating_suggestion": "-16 (Interdit aux moins de 16 ans)",
+          "human_rating": "-16",
           "summary": "This pivotal scene from Game of Thrones' 'Battle of the Bastards' showcases the series' signature blend of psychological drama and medieval warfare that French audiences have embraced throughout the show's run. The clip contains intense confrontation, graphic imagery, and psychological manipulation that align with French acceptance of mature dramatic content in premium television. While the violence and disturbing elements warrant a -16 rating, French viewers familiar with the series' dark tone will recognize this as consistent with the show's established narrative style. The content requires age-rating visibility but minimal editing, respecting French audiences' appreciation for uncompromised storytelling in adult drama.",
           "changes_required": true,
           "recommendations": [
@@ -7392,6 +7406,7 @@
         },
         "japan": {
           "rating_suggestion": "R15+ (Restricted to 15 and above)",
+          "human_rating": "R18+",
           "summary": "This Game of Thrones battle scene contains intense psychological warfare and graphic imagery that requires careful consideration for Japanese audiences. While fantasy and medieval content is popular in Japan, the explicit display of a severed animal head and verbal descriptions of extreme violence exceed typical Japanese broadcast standards. The R15+ rating reflects the need for parental guidance due to disturbing imagery that may be culturally sensitive in the Japanese context. Japanese viewers familiar with Western premium drama will understand the narrative context, but the graphic elements require mosaic treatment and clear warnings to align with Japanese broadcast regulations and viewer expectations for edited content.",
           "changes_required": true,
           "recommendations": [
@@ -7402,6 +7417,7 @@
         },
         "united_states": {
           "rating_suggestion": "TV-MA (Mature Audiences Only)",
+          "human_rating": "TV-MA",
           "summary": "This legendary scene from Game of Thrones' 'Battle of the Bastards' delivers the intense, uncompromising drama that made the series a cultural phenomenon for American audiences. The clip showcases the psychological warfare and brutal medieval conflict that HBO viewers expect from premium cable programming. While the content includes graphic imagery and intense threats, it represents exactly the kind of mature, sophisticated storytelling that has defined prestige television in the US market. The TV-MA rating appropriately targets adult audiences who appreciate complex narratives with no-holds-barred content, making it perfect for premium streaming platforms and late-night cable broadcast.",
           "changes_required": true,
           "recommendations": [
