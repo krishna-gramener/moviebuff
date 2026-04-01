@@ -68,7 +68,14 @@ function renderVideoGrid() {
         const videoTitle = video.video_details.title || video.video_details.metadata.title;
         const videoDuration = video.video_details.metadata.duration;
         const viewCount = video.video_details.metadata.view_count || 0;
-        const rating = video.video_details.category.rating || 'U/A';
+        
+        // AI Rating (from category.rating)
+        const fullAiRating = video.video_details.category.rating || 'U/A';
+        const aiRatingSymbol = fullAiRating.split('(')[0].trim();
+        
+        // Human Rating (from category.human_rating, fallback to AI rating)
+        const fullHumanRating = video.video_details.category.human_rating || fullAiRating;
+        const humanRatingSymbol = fullHumanRating.split('(')[0].trim();
         
         const videoId = extractVideoId(videoUrl);
         const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
@@ -87,7 +94,13 @@ function renderVideoGrid() {
             </div>
             <div class="video-card-content">
                 <h3 class="video-card-title">${videoTitle}</h3>
-                <div class="video-card-duration">${formatDuration(videoDuration)}</div>
+                <div class="video-card-meta-row">
+                    <div class="video-card-duration">${formatDuration(videoDuration)}</div>
+                    <div class="video-card-ratings">
+                        <span class="rating-badge ai-rating" title="AI Rating">${aiRatingSymbol}</span>
+                        <span class="rating-badge human-rating" title="Human Rating">${humanRatingSymbol}</span>
+                    </div>
+                </div>
             </div>
         `;
         
@@ -535,8 +548,9 @@ function populateLeftSideTabs() {
     const rating = videoDetails.category.rating || 'Not Rated';
     const sentiment = videoDetails.smart_features?.sentiment_analysis || '';
     const duration = videoDetails.metadata?.duration || '';
+    const regionalRecs = videoDetails.regional_recommendations || {};
     
-    // Summary Tab Content - Layout matching the image
+    // Summary Tab Content - Country-specific
     const summaryContentLeft = document.getElementById('summaryContentLeft');
     if (summaryContentLeft) {
         // Get mood tags if available
@@ -545,20 +559,59 @@ function populateLeftSideTabs() {
             `<span style="display: inline-block; background: #1e293b; color: white; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-right: 8px; text-transform: uppercase;">${tag}</span>`
         ).join('') : '';
         
+        // Country flags and data
+        const countries = [
+            { code: 'india', flag: '🇮🇳', name: 'India' },
+            { code: 'united_states', flag: '🇺🇸', name: 'United States' },
+            { code: 'france', flag: '🇫🇷', name: 'France' },
+            { code: 'japan', flag: '🇯🇵', name: 'Japan' }
+        ];
+        
+        // Default to India
+        const defaultCountry = 'india';
+        const currentRegion = regionalRecs[defaultCountry] || {};
+        const currentRating = currentRegion.rating_suggestion || rating;
+        const currentSummary = currentRegion.summary || summary;
+        
         summaryContentLeft.innerHTML = `
-            <div style="background: white; border-radius: 12px; padding: 32px; border: 1px solid #e2e8f0;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-                    <h3 style="font-size: 26px; font-weight: 700; color: #1e293b; margin: 0;">Summary</h3>
-                    <span style="background: #ef4444; color: white; padding: 10px 24px; border-radius: 25px; font-size: 13px; font-weight: 700; white-space: nowrap;">
-                        ${rating}
+            <div style="background: white; border-radius: 12px; padding: 32px; border: 1px solid rgba(174, 183, 132, 0.2);">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+                    <h3 style="font-size: 26px; font-weight: 700; color: #1e3a8a; margin: 0;">Summary</h3>
+                    <span id="summaryRatingBadge" style="background: #1e3a8a; color: white; padding: 10px 24px; border-radius: 25px; font-size: 13px; font-weight: 700; white-space: nowrap; box-shadow: 0 2px 8px rgba(30, 58, 138, 0.3);">
+                        ${currentRating.split('(')[0].trim()}
                     </span>
                 </div>
-                ${sentiment ? `<p style="font-size: 14px; font-weight: 700; color: #1e293b; margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: 0.5px;">${sentiment}</p>` : ''}
+                
+                <!-- Country Selector -->
+                <div style="display: flex; gap: 8px; margin-bottom: 20px; padding: 12px; background: rgba(174, 183, 132, 0.05); border-radius: 8px; border: 1px solid rgba(174, 183, 132, 0.15);">
+                    ${countries.map(country => `
+                        <button 
+                            class="summary-country-btn ${country.code === defaultCountry ? 'active' : ''}" 
+                            data-country="${country.code}"
+                            title="${country.name}"
+                            style="background: ${country.code === defaultCountry ? 'rgba(30, 58, 138, 0.05)' : 'white'}; border: 2px solid ${country.code === defaultCountry ? '#1e3a8a' : 'rgba(174, 183, 132, 0.3)'}; padding: 8px 12px; border-radius: 6px; font-size: 24px; cursor: pointer; transition: all 0.2s; min-width: 50px; display: flex; align-items: center; justify-content: center;">
+                            ${country.flag}
+                        </button>
+                    `).join('')}
+                </div>
+                
+                ${sentiment ? `<p style="font-size: 14px; font-weight: 700; color: #1e3a8a; margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: 0.5px;">${sentiment}</p>` : ''}
                 ${moodTagsHTML ? `<div style="margin-bottom: 20px;">${moodTagsHTML}</div>` : ''}
-                <p style="font-size: 15px; line-height: 1.8; color: #475569; margin-bottom: 20px;">${summary}</p>
+                
+                <!-- Country-specific summary -->
+                <p id="countrySummaryText" style="font-size: 15px; line-height: 1.8; color: #475569; margin-bottom: 20px;">${currentSummary}</p>
+                
                 ${duration ? `<p style="font-size: 14px; color: #64748b; margin: 0;"><strong>Video Length:</strong> ${duration}</p>` : ''}
             </div>
         `;
+        
+        // Add event listeners for country buttons
+        document.querySelectorAll('.summary-country-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const selectedCountry = this.dataset.country;
+                updateSummaryForCountry(selectedCountry);
+            });
+        });
     }
     
     // Genres Tab Content
@@ -584,6 +637,44 @@ function populateLeftSideTabs() {
             ${genresHTML}
         `;
     }
+}
+
+// Update summary for selected country
+function updateSummaryForCountry(countryCode) {
+    if (!currentVideo) return;
+    
+    const videoDetails = currentVideo.video_details;
+    const summary = videoDetails.detailed_summary || videoDetails.summary || 'No summary available.';
+    const rating = videoDetails.category.rating || 'Not Rated';
+    const regionalRecs = videoDetails.regional_recommendations || {};
+    const currentRegion = regionalRecs[countryCode] || {};
+    const currentRating = currentRegion.rating_suggestion || rating;
+    const currentSummary = currentRegion.summary || summary;
+    
+    // Update rating badge
+    const ratingBadge = document.getElementById('summaryRatingBadge');
+    if (ratingBadge) {
+        ratingBadge.textContent = currentRating.split('(')[0].trim();
+    }
+    
+    // Update summary text
+    const summaryText = document.getElementById('countrySummaryText');
+    if (summaryText) {
+        summaryText.textContent = currentSummary;
+    }
+    
+    // Update active button state
+    document.querySelectorAll('.summary-country-btn').forEach(btn => {
+        if (btn.dataset.country === countryCode) {
+            btn.classList.add('active');
+            btn.style.borderColor = '#1e3a8a';
+            btn.style.background = 'rgba(30, 58, 138, 0.05)';
+        } else {
+            btn.classList.remove('active');
+            btn.style.borderColor = 'rgba(174, 183, 132, 0.3)';
+            btn.style.background = 'white';
+        }
+    });
 }
 
 // Populate Regional Tab
@@ -793,10 +884,19 @@ function updateActiveTranscript() {
         
         if (currentTime >= startTime && currentTime < endTime) {
             item.classList.add('active');
-            // Auto-scroll within the transcript container
+            // Auto-scroll within the transcript container only (not the whole page)
             const container = document.getElementById('transcriptContent');
             if (container) {
-                item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Calculate position relative to container
+                const containerRect = container.getBoundingClientRect();
+                const itemRect = item.getBoundingClientRect();
+                const scrollOffset = itemRect.top - containerRect.top - (containerRect.height / 2) + (itemRect.height / 2);
+                
+                // Scroll only the container, not the page
+                container.scrollBy({ 
+                    top: scrollOffset, 
+                    behavior: 'smooth' 
+                });
             }
         } else {
             item.classList.remove('active');

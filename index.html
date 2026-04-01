@@ -9,32 +9,31 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="min-h-screen">
-    <!-- Landing Page -->
-    <div id="landingPage" class="landing-page">
-        <!-- Navigation Bar -->
-        <nav class="nav-bar">
-            <div class="nav-container">
-                <div class="nav-brand">
-                    <div class="brand-icon">🎬</div>
-                    <span class="brand-text">MovieBuff</span>
-                    <span class="brand-subtitle">Powered by AI</span>
-                </div>
-                <div class="nav-links">
-                    <a href="#overview" class="nav-link">Overview</a>
-                    <a href="#guidelines" class="nav-link">Guidelines</a>
-                    <a href="#statistics" class="nav-link">Key Statistics</a>
-                    <a href="#contacts" class="nav-link">Contacts</a>
-                </div>
-                <div class="nav-actions">
-                    <button class="nav-btn secondary">My To-Dos</button>
-                    <button class="nav-btn primary">Profile</button>
-                    <div class="profile-avatar">
-                        <img src="https://ui-avatars.com/api/?name=User&background=AEB784&color=fff" alt="Profile">
-                    </div>
+    <!-- Global Navigation Bar -->
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-icon">🎬</div>
+                <span class="brand-text">MovieBuff</span>
+                <span class="brand-subtitle">Powered by AI</span>
+            </div>
+            <div class="nav-links">
+                <a href="#overview" class="nav-link">Overview</a>
+                <a href="#guidelines" class="nav-link">Guidelines</a>
+                <a href="#statistics" class="nav-link">Key Statistics</a>
+                <a href="#contacts" class="nav-link">Contacts</a>
+            </div>
+            <div class="nav-actions">
+                <button class="nav-btn primary">Profile</button>
+                <div class="profile-avatar">
+                    <img src="https://ui-avatars.com/api/?name=User&background=AEB784&color=fff" alt="Profile">
                 </div>
             </div>
-        </nav>
+        </div>
+    </nav>
 
+    <!-- Landing Page -->
+    <div id="landingPage" class="landing-page">
         <!-- Hero Section -->
         <div class="hero-section">
             <div class="hero-container">
@@ -144,30 +143,6 @@
 
     <!-- Main App (Hidden Initially) -->
     <div id="mainApp" class="hidden">
-        <!-- Navigation Bar -->
-        <nav class="nav-bar">
-            <div class="nav-container">
-                <div class="nav-brand">
-                    <div class="brand-icon">🎬</div>
-                    <span class="brand-text">MovieBuff</span>
-                    <span class="brand-subtitle">Powered by AI</span>
-                </div>
-                <div class="nav-links">
-                    <a href="#overview" class="nav-link">Overview</a>
-                    <a href="#guidelines" class="nav-link">Guidelines</a>
-                    <a href="#statistics" class="nav-link">Key Statistics</a>
-                    <a href="#contacts" class="nav-link">Contacts</a>
-                </div>
-                <div class="nav-actions">
-                    <button class="nav-btn secondary">My To-Dos</button>
-                    <button class="nav-btn primary">Profile</button>
-                    <div class="profile-avatar">
-                        <img src="https://ui-avatars.com/api/?name=User&background=AEB784&color=fff" alt="Profile">
-                    </div>
-                </div>
-            </div>
-        </nav>
-
         <!-- Sidebar Toggle Button -->
         <button class="sidebar-toggle hidden" id="sidebarToggle">
             <span id="sidebarArrow">→</span> Videos
@@ -190,11 +165,23 @@
 
             <!-- Video Library Section -->
             <div id="videoLibrarySection" style="max-width: 1200px; margin: 0 auto;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
                     <h1 style="font-size: 32px; font-weight: 700; color: #1e3a8a; margin: 0;">My Video Library</h1>
                     <div class="library-tabs">
                         <button class="library-tab active">All</button>
                     </div>
+                </div>
+                
+                <!-- Rating Legend -->
+                <div class="rating-legend">
+                    <span class="legend-item">
+                        <span class="legend-dot ai-dot"></span>
+                        <span class="legend-text">AI Rating</span>
+                    </span>
+                    <span class="legend-item">
+                        <span class="legend-dot human-dot"></span>
+                        <span class="legend-text">Human Rating</span>
+                    </span>
                 </div>
                 
                 <!-- Landing State: Video Grid -->
@@ -353,10 +340,10 @@
                                 <div class="tab-content-wrapper">
                                     <!-- Region Selector -->
                                     <div class="region-selector">
-                                        <button class="region-btn active" data-region="india">India</button>
-                                        <button class="region-btn" data-region="united_states">United States</button>
-                                        <button class="region-btn" data-region="france">France</button>
-                                        <button class="region-btn" data-region="japan">Japan</button>
+                                        <button class="region-btn active" data-region="india" title="India">🇮🇳</button>
+                                        <button class="region-btn" data-region="united_states" title="United States">🇺🇸</button>
+                                        <button class="region-btn" data-region="france" title="France">🇫🇷</button>
+                                        <button class="region-btn" data-region="japan" title="Japan">🇯🇵</button>
                                     </div>
                                     <div id="regionalContentNew">
                                         <!-- Regional recommendations will be loaded here -->
