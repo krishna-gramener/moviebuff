@@ -3,6 +3,8 @@
 **Your AI-Assisted Cinema Companion**  
 Analyze, transcribe, and deep-dive into iconic movie moments with comprehensive content analysis and regional recommendations.
 
+> **📌 Note:** This is a demo application for educational and demonstration purposes only. It does not contain any confidential client data or proprietary information.
+
 ## Overview
 
 MovieBuff is a modern web application for AI-powered video content analysis, featuring real-time transcript highlighting, automated processing workflows, audit trails, and geography-specific content recommendations.
@@ -36,13 +38,26 @@ MovieBuff is a modern web application for AI-powered video content analysis, fea
   - Broadcast compliance requirements
   - Cultural sensitivity guidelines
 
+### 🌍 **Country-Specific Content**
+- **Localized Summaries**: Culturally-tailored video summaries for each region
+  - Flag-based country selector (🇮🇳 🇺🇸 🇫🇷 🇯🇵)
+  - Region-specific ratings (U/A 13+, TV-14, -16, R15+, etc.)
+  - Audience-appropriate content framing
+  - Real-time summary and rating updates
+- **Rating Badges**: Visual rating indicators
+  - AI Rating (blue badge) - Automated content assessment
+  - Human Rating (green badge) - Expert reviewer rating
+  - Color-coded legend for easy identification
+
 ### 🎨 **User Interface**
 - **Tab-Based Navigation**: 7 organized tabs in 4+3 grid layout
   - Transcript, Summary, Genres, Category
   - Smart Features, History Logs, Regional Recommendations
-- **50/50 Split Layout**: Video player and content side-by-side
+- **65/35 Split Layout**: Video player (65%) and analysis tabs (35%)
+- **Sticky Video Player**: Video stays visible while scrolling transcripts
+- **List-Style Video Library**: Clean vertical layout for better readability
 - **Responsive Design**: Optimized for desktop and mobile
-- **Clean Aesthetic**: Soft color palette (#AEB784, #E3DBBB, #F8F3E1)
+- **Clean Aesthetic**: Navy blue (#1e3a8a) and olive (#AEB784) color scheme
 
 ## Tech Stack
 
@@ -72,8 +87,10 @@ python3 -m http.server 8000
 1. **Transcript Tab**: View synchronized transcript with real-time highlighting
    - Click any timestamp to jump to that moment
    - Active line highlights as video plays
-2. **Summary Tab**: Read AI-generated detailed summary
-   - View sentiment analysis
+2. **Summary Tab**: Read country-specific summaries
+   - Select country using flag buttons (🇮🇳 🇺🇸 🇫🇷 🇯🇵)
+   - View culturally-tailored summary for selected region
+   - See region-specific rating (updates dynamically)
    - Check video length and metadata
 3. **Genres Tab**: Explore genre classifications
    - See confidence scores with visual bars
@@ -137,6 +154,7 @@ Each video in `data.json` includes:
 ### **regional_recommendations**
 - Region-specific keys: `india`, `france`, `japan`, `united_states`
 - `rating_suggestion`: Localized age rating
+- `summary`: Culturally-tailored video summary for the region
 - `changes_required`: Boolean flag
 - `recommendations`: Array of specific guidance
 
