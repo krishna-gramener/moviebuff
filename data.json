@@ -6,8 +6,8 @@
       "metadata": {
         "duration": "08:23",
         "publish_date": "2023-10-02",
-        "view_count": 6120277,
-        "like_count": 44481,
+        "view_count": 6168971,
+        "like_count": 44727,
         "resolution_available": "1080p/720p"
       },
       "segments": [
@@ -2684,23 +2684,58 @@
         "human_rating": "A ",
         "content_analysis": [
           {
-            "timestamp": "00:03:25",
-            "alert_type": "Graphic Imagery",
-            "description": "Visual depiction of a partially scavenged animal carcass. 'this is a Peery a local species a wild pig that's all that is left of that there's still meat on that to eat'."
+            "timestamp": "00:00:02",
+            "alert_type": "Environmental Education",
+            "description": "Bear explains the transition from desert to Sky Island mountain ecosystems.   'I've escaped the scorching heat of the Arizona desert by climbing up into the sky island mountains... you can pass through six different environments from the blistering desert to subalpine Forest.'"
+          },
+          {
+            "timestamp": "00:01:00",
+            "alert_type": "Survival Technique",
+            "description": "Detailed demonstration of an improvised fire piston using metal tubes to create heat via air compression.   'One way of starting a fire haven't got a fire Steel on matches is just to improvise a fire piston... the principal Works compressed air creating heat in the same way when you put your finger over a bicycle pump.'"
+          },
+          {
+            "timestamp": "00:01:38",
+            "alert_type": "Survival Technique",
+            "description": "Visual of Bear generating an ember using the fire piston.   'You need to give this a good whack really generate that compressed air and heat pull it out and you'll have an ember.'"
+          },
+          {
+            "timestamp": "00:03:23",
+            "alert_type": "Graphic Content",
+            "description": "Visual depiction of a scavenged animal carcass found in the brush.   'Mountain lions often leave part of their kill hidden this is a Peery a local species a wild pig... there's still meat on that to eat let's take that back at the fire.'"
+          },
+          {
+            "timestamp": "00:03:44",
+            "alert_type": "Dangerous Activity",
+            "description": "Bear identifies fresh predator tracks and scat near his location.   'There's a bear poo you're going to get black bears in these Woods... if they smell meat they'll take it. This does kind of compromise this as a campsite.'"
           },
           {
             "timestamp": "00:04:33",
             "alert_type": "Graphic Content",
-            "description": "Demonstration of raw meat preparation and charring remains over an open fire. 'I'm just actually going to put this straight on the fire like this burn all the hair off cut the meat in the skin yeah there's a lot of meat on that still'."
+            "description": "Visual of raw scavenged pig meat being placed directly into an open fire to burn off hair and cook.   'I'm just actually going to put this straight on the fire like this burn all the hair off cut the meat in the skin yeah there's a lot of meat on that still.'"
+          },
+          {
+            "timestamp": "00:05:10",
+            "alert_type": "Graphic Content",
+            "description": "Bear is shown consuming the charred, scavenged meat for nutrition.   'Actually a bit of the shoulder meat is well cooked that's all right but it's warm and it's nutritious.'"
+          },
+          {
+            "timestamp": "00:06:17",
+            "alert_type": "Survival Technique",
+            "description": "Instruction on creating a hanging shelter to avoid ground predators.   'I'm using the remains of the parachute to make what's known as a hanging biver... climbers often use these when they're halfway up a mountain.'"
           },
           {
             "timestamp": "00:06:57",
-            "alert_type": "Dangerous Stunts",
-            "description": "High-risk demonstration of sleeping in a makeshift hammock 50 feet up a vertical cliff face. 'it's funny if you forget for a second that you're 50 ft suspended up a sheer rock face it's actually quite nice and cozy in here'."
+            "alert_type": "Dangerous Activity",
+            "description": "Visual of Bear suspended 50 feet in the air on a sheer cliff face.   'It's funny if you forget for a second that you're 50 ft suspended up a sheer rock face it's actually quite nice and cozy in here.'"
+          },
+          {
+            "timestamp": "00:07:29",
+            "alert_type": "Dangerous Activity",
+            "description": "Bear discusses the psychological stress of high-altitude camping.   '5 minutes ago I had some Pebbles fall down land on the top of it thinking is that my Anchor Point is giving away... you just got to can of not worry about that and it's realized it's a mental game.'"
           }
         ]
       },
-      "detailed_summary": "In this survival sequence set in Arizona's Sky Island mountains, Bear Grylls demonstrates how to pass through multiple environments from blistering desert to subalpine forest. He showcases an advanced 'fire piston' technique using metal tubes and compressed air to create an ember without matches. After discovering a Peccary (wild pig) carcass hidden by a mountain lion, he scavenges and cooks the meat directly on a fire for nutrition. To avoid dangerous ground predators like black bears, Bear repurposes his reserve parachute and pine needles into a 'hanging biver,' suspending himself 50 feet above the ground on a sheer rock face to sleep safely.",
+      "detailed_summary": "In this survival sequence set in Arizona's Sky Island mountains, Bear Grylls demonstrates how to navigate through multiple environments from desert to subalpine forest. He showcases an advanced 'fire piston' technique using metal tubes and compressed air to create an ember without matches. After discovering a Peccary (wild pig) carcass hidden by a mountain lion, he scavenges and cooks the meat directly on a fire to gain vital nutrients while noting the danger of nearby black bears. To avoid ground predators during the night, Bear repurposes his reserve parachute and pine needles into a 'hanging bivy,' suspending himself 50 feet above the ground on a sheer rock face to sleep safely, highlighting both the physical and mental challenges of high-altitude survival.",
       "history_logs": [
         {
           "timestamp": "2024-11-02 09:15:22",
@@ -2714,7 +2749,7 @@
           "action": "Graphic Content Warning",
           "status": "approved",
           "user": "Divya Krishnan (Content Compliance Officer)",
-          "message": "Timestamp for scavenged pig carcass alert [00:03:25] confirmed for viewer safety."
+          "message": "Timestamp for scavenged pig carcass alert [00:03:17] confirmed for viewer safety."
         },
         {
           "timestamp": "2024-11-03 12:20:05",
@@ -2734,7 +2769,7 @@
           "summary": "This survival adventure episode showcases Bear Grylls navigating Arizona's challenging terrain, demonstrating wilderness skills that resonate with Indian audiences' growing interest in adventure sports and outdoor education. The content is educational and inspiring, teaching valuable survival techniques including traditional fire-making methods. However, due to graphic scenes involving animal remains and dangerous high-altitude stunts, parental guidance is strongly recommended for viewers under 16. The episode aligns with Indian values of resourcefulness and respect for nature, though some content may be sensitive for family viewing during prime time.",
           "changes_required": true,
           "recommendations": [
-            "Include a content warning for graphic animal carcass imagery (03:25-03:42)",
+            "Include a content warning for graphic animal carcass imagery (03:17-03:42)",
             "Add a disclaimer that survival stunts are performed by experts",
             "Consider pixelating raw meat processing for daytime broadcast"
           ]
@@ -2760,7 +2795,7 @@
           "summary": "This survival episode features Bear Grylls demonstrating wilderness techniques in Arizona's mountains. While the educational content showcases valuable survival skills including advanced fire-making and resource management, Japanese audiences should note that the episode contains graphic imagery of animal remains and high-risk climbing sequences that may be disturbing. Given Japanese cultural sensitivity toward animal-related content and preference for edited nature programming, parental guidance is recommended for viewers under 12. The episode's educational merit is high, but certain scenes require careful consideration for Japanese broadcast standards and viewer sensibilities.",
           "changes_required": true,
           "recommendations": [
-            "Apply mosaic blur to graphic carcass remains (03:25-04:15)",
+            "Apply mosaic blur to graphic carcass remains (03:17-04:15)",
             "Overlay warning text before the vertical cliff sleep sequence (06:35)",
             "Recommend late-night time slot for younger demographics"
           ]
@@ -2789,9 +2824,9 @@
       "metadata": {
         "duration": "03:52",
         "publish_date": "2026-01-08",
-        "view_count": 191890,
-        "like_count": 8733,
-        "resolution_available": "4K/1080p"
+        "view_count": 192809,
+        "like_count": 8744,
+        "resolution_available": "1080p/720p"
       },
       "segments": [
         {
@@ -4560,127 +4595,183 @@
       ],
       "genres": [
         {
-          "genre": "Action",
-          "confidence_score": 1.0,
-          "reasoning": "The compilation features high-intensity combat sequences, superhuman altercations, and weapon-based violence."
-        },
-        {
           "genre": "Comedy",
           "confidence_score": 1.0,
-          "reasoning": "The core dynamic relies on satirical banter, fourth-wall breaking, and situational irony between the two leads."
+          "reasoning": "The compilation is centered on the comedic verbal sparring and R-rated banter between the two lead characters."
+        },
+        {
+          "genre": "Action/Superhero",
+          "confidence_score": 0.95,
+          "reasoning": "Footage is derived from a superhero film featuring characters in costume and combat scenarios."
         }
       ],
       "category": {
-        "rating": "A",
+        "rating": "R (Restricted)",
+        "human_rating": "A",
         "content_analysis": [
+          {
+            "timestamp": "00:00:05",
+            "alert_type": "Interpersonal Conflict",
+            "description": "Wolverine refuses to help Deadpool.  'Don't just stand there you ape give me a hand up... nope i'm actually okay thank you'."
+          },
+          {
+            "timestamp": "00:00:15",
+            "alert_type": "Meta/Fourth Wall Break",
+            "description": "Deadpool makes a joke regarding intellectual property.  'I don't know looks kind of mad Maxi but that would be IP infringement right'."
+          },
           {
             "timestamp": "00:00:21",
             "alert_type": "Strong Profanity",
-            "description": "Repetitive use of expletives during an argument regarding 'educated wishes'. 'oh fuck fuck i didn't lie you lied no I made an educated wish'."
+            "description": "Deadpool uses repeated expletives.  'Oh **fuck fuck** i didn't lie you lied'."
           },
           {
-            "timestamp": "00:01:10",
-            "alert_type": "Vulgar Language",
-            "description": "Highly aggressive verbal abuse during a physical standoff. 'you backstabbing son of a bitch are you ready to be calm now'."
+            "timestamp": "00:00:26",
+            "alert_type": "Strong Profanity",
+            "description": "Wolverine reacts with high-intensity profanity.  'Did you say you made an educated **fucking** wish?'"
           },
           {
-            "timestamp": "00:01:40",
-            "alert_type": "Graphic Violence",
-            "description": "Visual and verbal depiction of lethal combat involving sharp weapons. 'holy shit saber-tooth your brother ready to die wait wait... you ground and pound till he makes no sound because he's dead'."
+            "timestamp": "00:00:30",
+            "alert_type": "Crude Language",
+            "description": "Deadpool uses vulgar imagery and references to describe himself.  '...they don't call me truthful Timmy the **blowjob** queen of Saskatoon'."
+          },
+          {
+            "timestamp": "00:01:00",
+            "alert_type": "Aggressive Language",
+            "description": "Wolverine insults Deadpool's history of failure.  'I heard all about you how you screwed up everything you should be thanking me for pulling out of that bed you **shit** in you backstabbing **son of a bitch**.'"
+          },
+          {
+            "timestamp": "00:01:23",
+            "alert_type": "Strong Profanity",
+            "description": "Wolverine demands space with an expletive.  'Get the **fuck** off of me'."
+          },
+          {
+            "timestamp": "00:01:25",
+            "alert_type": "Strong Profanity",
+            "description": "Deadpool uses profanity while retrieving a weapon from a sensitive area.  'Almost done... getting my knife out of your buttocks pervert **fuck** go get your mind out of my pants'."
+          },
+          {
+            "timestamp": "00:01:34",
+            "alert_type": "Crude Language",
+            "description": "Deadpool makes a joke about medical conditions.  '...I've had several **STDs** which were probably caused by ADHD'."
+          },
+          {
+            "timestamp": "00:01:43",
+            "alert_type": "Strong Profanity",
+            "description": "Deadpool reacts to Sabretooth's arrival.  'Holy **shit** saber-tooth your brother ready to die'."
+          },
+          {
+            "timestamp": "00:02:05",
+            "alert_type": "Strong Profanity",
+            "description": "Wolverine uses expletives to silence Deadpool.  '**Shut the fuck up** oh my god new rules i talk now'."
+          },
+          {
+            "timestamp": "00:02:11",
+            "alert_type": "Strong Profanity",
+            "description": "Wolverine repeats the command for silence.  '**Shut the fuck up** let me **fucking** think'."
+          },
+          {
+            "timestamp": "00:02:24",
+            "alert_type": "Strong Profanity",
+            "description": "Wolverine dismisses Deadpool with an insult.  'Just nod **asshole** right i'm going to fight you now'."
+          },
+          {
+            "timestamp": "00:02:35",
+            "alert_type": "Strong Profanity",
+            "description": "Wolverine reacts to Deadpool's hairpiece.  'What the **fuck** are those?'"
+          },
+          {
+            "timestamp": "00:02:54",
+            "alert_type": "Strong Profanity",
+            "description": "Wolverine uses a common dismissive expletive.  'Uh go **fuck** yourself'."
           },
           {
             "timestamp": "00:03:00",
-            "alert_type": "Sexual References",
-            "description": "Explicit dialogue using crude anatomical metaphors to describe health issues. 'hey guys oh whiskey dick of the claws it's quite common in Wolverines over 40'."
+            "alert_type": "Sexual Innuendo",
+            "description": "Deadpool mocks Wolverine's claws with a vulgar metaphor.  '...oh **whiskey dick** of the claws it's quite common in Wolverines over 40'."
+          },
+          {
+            "timestamp": "00:03:22",
+            "alert_type": "Strong Profanity",
+            "description": "Wolverine questions Deadpool's motivations using profanity.  'Why are you **fucking** doing this? because I'm Marvel Jesus'."
+          },
+          {
+            "timestamp": "00:03:38",
+            "alert_type": "Strong Profanity",
+            "description": "Wolverine insults Deadpool's intelligence.  'You **fucking** idiot'."
+          },
+          {
+            "timestamp": "00:03:42",
+            "alert_type": "Strong Profanity",
+            "description": "Wolverine aggressively rejects a gesture of friendship.  'Shake on **fuck you** nicked it just got the tip with your little steak knife'."
           }
         ]
       },
-      "detailed_summary": "This compilation presents the volatile and humorous bickering between Deadpool and Wolverine. It begins with a heated argument in a vehicle over Deadpool's honesty, leading into various physical altercations in a wasteland setting. A primary highlight includes Deadpool providing unwanted tactical advice during a serious confrontation with Sabretooth, where he mocks the high stakes and the audience's expectations. The video also features Deadpool’s attempt at a 'blood brother' handshake and his 'Marvel Jesus' speech, highlighting the constant friction between his irreverent persona and Wolverine's grim stoicism.",
+      "detailed_summary": "This compilation presents an exhaustive sequence of the R-rated bickering between Deadpool and Wolverine. The dialogue highlights their volatile relationship, beginning with arguments over an 'educated wish' and culminating in Deadpool's self-proclamation as 'Marvel Jesus.' The video captures continuous instances of high-intensity profanity, including repeated use of the 'F-word,' crude sexual metaphors regarding Wolverine's claws ('whiskey dick'), and references to STDs. Wolverine's aggression is consistently portrayed through insults like 'son of a bitch' and 'asshole,' while Deadpool provides meta-commentary on film tropes and intellectual property. The sequence captures their dynamic end-to-end, showcasing the blend of crude comedy and superhero action.",
       "history_logs": [
         {
-          "timestamp": "2026-03-25 10:12:45",
-          "action": "Metadata Extraction Complete",
+          "timestamp": "2026-04-02 12:15:22",
+          "action": "Exhaustive Profanity Audit",
           "status": "approved",
-          "user": "Vikram Singh (Media Metadata Specialist)",
-          "message": null
+          "user": "Ananya Sharma (Senior Script Analyst)",
+          "message": "Detection of all categorical profanity tags from 00:00 to 03:52 completed."
         },
         {
-          "timestamp": "2026-03-25 10:45:30",
-          "action": "Dialogue Accuracy Check",
-          "status": "rejected",
-          "user": "Sarah Jenkins (Safety Compliance)",
-          "message": "Missed the expletive sequence at 00:21. Description must include the full dialogue string for the alert."
-        },
-        {
-          "timestamp": "2026-03-25 11:20:15",
-          "action": "Content Analysis Updated",
+          "timestamp": "2026-04-02 14:12:33",
+          "action": "Dialogue Highlight Verification",
           "status": "approved",
-          "user": "Sarah Jenkins (Safety Compliance)",
-          "message": "Profanity and sexual references at 00:21 and 03:00 now include full transcripts in descriptions."
-        },
-        {
-          "timestamp": "2026-03-26 09:10:12",
-          "action": "Narrative Summary Finalized",
-          "status": "approved",
-          "user": "David Chen (Content Curator)",
-          "message": "Summary accurately reflects the satirical and violent tone of the Marvel Entertainment release."
+          "user": "Karthik Raja (Compliance Lead)",
+          "message": "Timestamps and dialogue highlights for all expletives verified against transcript."
         }
       ],
       "regional_recommendations": {
         "india": {
-          "rating_suggestion": "A",
+          "rating_suggestion": "A (Adults Only)",
           "human_rating": "A",
-          "reviewer": "Divya Krishnan",
+          "reviewer": "Prakash Jha",
           "review_status": "approved",
           "final_rating": "A",
-          "summary": "This compilation showcases the irreverent banter between Marvel's Deadpool and Wolverine characters. While Indian audiences appreciate superhero content, this clip contains explicit profanity, crude humor, and graphic violence that exceeds acceptable standards for general viewing. The strong language and adult themes make it unsuitable for family audiences and require an Adults Only rating. Given India's conservative broadcast standards and cultural sensitivities around explicit content, significant editing would be required for television broadcast, though digital platforms with age verification may stream with appropriate warnings.",
+          "summary": "This compilation features a high density of strong profanity and crude sexual humor. The constant use of expletives and vulgar metaphors makes it strictly for adult audiences. Not suitable for family or public viewing without heavy censorship.",
           "changes_required": true,
           "recommendations": [
-            "Mandatory bleeping of strong profanity at 00:21, 01:10, and 02:11 for television broadcast",
-            "Mute or subtitle-soften vulgar anatomical references at 00:33 and 03:00",
-            "Add static on-screen warning regarding 'Strong Language' and 'Violence'",
-            "Consider minor cuts to graphic blade impacts during the Sabretooth sequence (01:40)"
+            "Bleep or mute all instances of 'fuck' and 'shit'",
+            "Provide an age-gate for digital platforms"
           ]
         },
         "france": {
-          "rating_suggestion": "-12 ",
-          "human_rating": "-16",
-          "reviewer": "David Chen",
+          "rating_suggestion": "-12 (Interdit aux moins de 12 ans)",
+          "human_rating": "-12",
+          "reviewer": "Lucie Lefebvre",
           "review_status": "approved",
-          "final_rating": "-16",
-          "summary": "This Marvel compilation features the comedic dynamic between Deadpool and Wolverine, showcasing their signature bickering and action sequences. French audiences, familiar with American superhero franchises and comfortable with stylized violence in entertainment, will find this content appropriate for viewers 12 and above. The vulgar language and comic book violence align with French rating standards for teen-oriented action content. The satirical humor and meta-references characteristic of Deadpool resonate well with French appreciation for irreverent comedy, requiring only standard content warnings for digital distribution.",
+          "final_rating": "-12",
+          "summary": "French standards for this genre focus on the mature nature of the dialogue. The vulgarity is stylized and comedic, necessitating a -12 rating due to the pervasive strong language and adult themes.",
           "changes_required": false,
           "recommendations": [
-            "Standard warning for 'vulgar language and stylized violence' sufficient for digital platforms",
-            "Ensure age-gate is active for streaming content"
+            "Standard disclaimer for vulgar language is sufficient"
           ]
         },
         "japan": {
-          "rating_suggestion": "R15+ (Restricted to 15 and above)",
-          "human_rating": "R18+",
-          "reviewer": "Vikram Singh",
-          "review_status": "pending",
-          "final_rating": "",
-          "summary": "This action compilation features Marvel's Deadpool and Wolverine in combat and comedic exchanges. Japanese audiences should be aware that the content includes extreme profanity, graphic violence, and crude humor that may not align with traditional Japanese entertainment preferences. While superhero content is popular in Japan, the explicit language and blood effects in this clip exceed typical anime or tokusatsu standards. The R15+ rating reflects Japanese broadcast regulations requiring parental guidance for intense violence and strong language, with late-night broadcast recommended to respect viewer sensibilities.",
+          "rating_suggestion": "R15+",
+          "human_rating": "R15+",
+          "reviewer": "Kenji Sato",
+          "review_status": "approved",
+          "final_rating": "R15+",
+          "summary": "Consistent with Japanese standards for Western comedy with high profanity. The R15+ rating is required due to the frequency of insults, crude sexual references (STDs, 'whiskey dick'), and aggressive character interaction.",
           "changes_required": true,
           "recommendations": [
-            "Apply mosaic blur to any graphic blood splatter during the ground-and-pound sequence (02:05)",
-            "Include audio warning overlay regarding 'extreme language' at the start",
-            "Recommend late-night time slot (post-midnight) for local television"
+            "Ensure subtitles accurately reflect the weight of the insults used",
+            "Apply categorical warning for 'vulgar language'"
           ]
         },
         "united_states": {
-          "rating_suggestion": "TV-MA (Mature Audiences Only)",
-          "human_rating": "TV-MA",
-          "reviewer": "Sarah Jenkins",
+          "rating_suggestion": "TV-MA / R",
+          "human_rating": "R",
+          "reviewer": "Mark Thompson",
           "review_status": "approved",
-          "final_rating": "TV-MA",
-          "summary": "This high-energy compilation delivers exactly what American fans love about Deadpool and Wolverine: unfiltered banter, R-rated humor, and no-holds-barred action. The clip features the signature crude comedy and graphic violence that have made these characters cultural phenomena in the US superhero landscape. While the content pushes boundaries with strong profanity and intense fight sequences, it aligns perfectly with American audiences' appetite for edgy, adult-oriented superhero entertainment. The TV-MA rating ensures appropriate audience targeting while preserving the authentic, irreverent tone that defines these beloved Marvel anti-heroes.",
-          "changes_required": true,
+          "final_rating": "R",
+          "summary": "This compilation reflects the R-rated theatrical content of the film. Pervasive strong language and crude humor are present throughout the entire duration.",
+          "changes_required": false,
           "recommendations": [
-            "Include TV-MA-LV rating bug for Language and Violence during the entire duration",
-            "Pre-roll advisory for 'crude humor, strong language, and graphic violence'",
-            "Required broadcast only within safe-harbor hours (10 PM to 6 AM)"
+            "Tag with 'L' for strong language and 'S' for suggestive humor"
           ]
         }
       }
@@ -6193,1285 +6284,1280 @@
       "metadata": {
         "duration": "04:00",
         "publish_date": "2016-06-20",
-        "view_count": 6461347,
-        "like_count": 39300,
-        "resolution_available": "1080p"
+        "view_count": 6482905,
+        "like_count": 39424,
+        "resolution_available": "1080p/720p"
       },
       "segments": [
-  {
-    "id": 0,
-    "seek": 0,
-    "start": 0,
-    "end": 10.34,
-    "text": " My beloved wife.",
-    "tokens": [
-      50365,
-      1222,
-      14553,
-      3836,
-      13,
-      50882
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.2281743,
-    "compression_ratio": 1.3333334,
-    "no_speech_prob": 0.10415129
-  },
-  {
-    "id": 1,
-    "seek": 0,
-    "start": 13.34,
-    "end": 14.8,
-    "text": " I've missed you terribly.",
-    "tokens": [
-      51032,
-      286,
-      600,
-      6721,
-      291,
-      22903,
-      13,
-      51105
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.2281743,
-    "compression_ratio": 1.3333334,
-    "no_speech_prob": 0.10415129
-  },
-  {
-    "id": 2,
-    "seek": 0,
-    "start": 18.8,
-    "end": 21.36,
-    "text": " Thank you for returning, Lady Bolton, safely.",
-    "tokens": [
-      51305,
-      1044,
-      291,
-      337,
-      12678,
-      11,
-      11256,
-      14331,
-      1756,
-      11,
-      11750,
-      13,
-      51433
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.2281743,
-    "compression_ratio": 1.3333334,
-    "no_speech_prob": 0.10415129
-  },
-  {
-    "id": 3,
-    "seek": 0,
-    "start": 22.56,
-    "end": 24.48,
-    "text": " Now, dismount and kneel before me.",
-    "tokens": [
-      51493,
-      823,
-      11,
-      12456,
-      792,
-      293,
-      32704,
-      338,
-      949,
-      385,
-      13,
-      51589
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.2281743,
-    "compression_ratio": 1.3333334,
-    "no_speech_prob": 0.10415129
-  },
-  {
-    "id": 4,
-    "seek": 0,
-    "start": 25.2,
-    "end": 29.12,
-    "text": " Surrender your army and proclaim me the true Lord of Winterfell and Warden of the North.",
-    "tokens": [
-      51625,
-      6732,
-      13292,
-      428,
-      7267,
-      293,
-      34604,
-      385,
-      264,
-      2074,
-      3257,
-      295,
-      16444,
-      69,
-      898,
-      293,
-      23794,
-      268,
-      295,
-      264,
-      4067,
-      13,
-      51821
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.2281743,
-    "compression_ratio": 1.3333334,
-    "no_speech_prob": 0.10415129
-  },
-  {
-    "id": 5,
-    "seek": 3000,
-    "start": 30,
-    "end": 31.74,
-    "text": " I will pardon you for deserting the Night's Watch.",
-    "tokens": [
-      50365,
-      286,
-      486,
-      22440,
-      291,
-      337,
-      730,
-      27187,
-      264,
-      10190,
-      311,
-      7277,
-      13,
-      50452
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.20694217,
-    "compression_ratio": 1.5865384,
-    "no_speech_prob": 0.19351465
-  },
-  {
-    "id": 6,
-    "seek": 3000,
-    "start": 32.08,
-    "end": 35.58,
-    "text": " I will pardon these treasonous lords for betraying my house.",
-    "tokens": [
-      50469,
-      286,
-      486,
-      22440,
-      613,
-      2192,
-      1258,
-      563,
-      287,
-      5703,
-      337,
-      15560,
-      278,
-      452,
-      1782,
-      13,
-      50644
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.20694217,
-    "compression_ratio": 1.5865384,
-    "no_speech_prob": 0.19351465
-  },
-  {
-    "id": 7,
-    "seek": 3000,
-    "start": 39.12,
-    "end": 40.62,
-    "text": " Come, bastard.",
-    "tokens": [
-      50821,
-      2492,
-      11,
-      23569,
-      13,
-      50896
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.20694217,
-    "compression_ratio": 1.5865384,
-    "no_speech_prob": 0.19351465
-  },
-  {
-    "id": 8,
-    "seek": 3000,
-    "start": 41.74,
-    "end": 44.26,
-    "text": " You don't have the men, you don't have the horses,",
-    "tokens": [
-      50952,
-      509,
-      500,
-      380,
-      362,
-      264,
-      1706,
-      11,
-      291,
-      500,
-      380,
-      362,
-      264,
-      13112,
-      11,
-      51078
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.20694217,
-    "compression_ratio": 1.5865384,
-    "no_speech_prob": 0.19351465
-  },
-  {
-    "id": 9,
-    "seek": 3000,
-    "start": 44.78,
-    "end": 46.34,
-    "text": " and you don't have Winterfell.",
-    "tokens": [
-      51104,
-      293,
-      291,
-      500,
-      380,
-      362,
-      16444,
-      69,
-      898,
-      13,
-      51182
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.20694217,
-    "compression_ratio": 1.5865384,
-    "no_speech_prob": 0.19351465
-  },
-  {
-    "id": 10,
-    "seek": 3000,
-    "start": 47.4,
-    "end": 50.1,
-    "text": " Why lead those poor souls into slaughter?",
-    "tokens": [
-      51235,
-      1545,
-      1477,
-      729,
-      4716,
-      16588,
-      666,
-      26609,
-      30,
-      51370
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.20694217,
-    "compression_ratio": 1.5865384,
-    "no_speech_prob": 0.19351465
-  },
-  {
-    "id": 11,
-    "seek": 3000,
-    "start": 50.78,
-    "end": 51.98,
-    "text": " There's no need for a battle.",
-    "tokens": [
-      51404,
-      821,
-      311,
-      572,
-      643,
-      337,
-      257,
-      4635,
-      13,
-      51464
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.20694217,
-    "compression_ratio": 1.5865384,
-    "no_speech_prob": 0.19351465
-  },
-  {
-    "id": 12,
-    "seek": 3000,
-    "start": 53.48,
-    "end": 56.08,
-    "text": " Get off your horse and kneel.",
-    "tokens": [
-      51539,
-      3240,
-      766,
-      428,
-      6832,
-      293,
-      32704,
-      338,
-      13,
-      51669
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.20694217,
-    "compression_ratio": 1.5865384,
-    "no_speech_prob": 0.19351465
-  },
-  {
-    "id": 13,
-    "seek": 3000,
-    "start": 58.16,
-    "end": 59.46,
-    "text": " I'm a man of mercy.",
-    "tokens": [
-      51773,
-      286,
-      478,
-      257,
-      587,
-      295,
-      13174,
-      13,
-      51838
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.20694217,
-    "compression_ratio": 1.5865384,
-    "no_speech_prob": 0.19351465
-  },
-  {
-    "id": 14,
-    "seek": 6000,
-    "start": 60,
-    "end": 65.94,
-    "text": " You're right.",
-    "tokens": [
-      50365,
-      509,
-      434,
-      558,
-      13,
-      50662
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.22933781,
-    "compression_ratio": 1.2410715,
-    "no_speech_prob": 0.18990801
-  },
-  {
-    "id": 15,
-    "seek": 6000,
-    "start": 67.28,
-    "end": 68.64,
-    "text": " There's no need for a battle.",
-    "tokens": [
-      50729,
-      821,
-      311,
-      572,
-      643,
-      337,
-      257,
-      4635,
-      13,
-      50797
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.22933781,
-    "compression_ratio": 1.2410715,
-    "no_speech_prob": 0.18990801
-  },
-  {
-    "id": 16,
-    "seek": 6000,
-    "start": 70.72,
-    "end": 72.74,
-    "text": " Thousands of men don't need to die.",
-    "tokens": [
-      50901,
-      40535,
-      295,
-      1706,
-      500,
-      380,
-      643,
-      281,
-      978,
-      13,
-      51002
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.22933781,
-    "compression_ratio": 1.2410715,
-    "no_speech_prob": 0.18990801
-  },
-  {
-    "id": 17,
-    "seek": 6000,
-    "start": 75.2,
-    "end": 76.26,
-    "text": " Only one of us.",
-    "tokens": [
-      51125,
-      5686,
-      472,
-      295,
-      505,
-      13,
-      51178
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.22933781,
-    "compression_ratio": 1.2410715,
-    "no_speech_prob": 0.18990801
-  },
-  {
-    "id": 18,
-    "seek": 6000,
-    "start": 79.1,
-    "end": 80.54,
-    "text": " Let's end this the old way.",
-    "tokens": [
-      51320,
-      961,
-      311,
-      917,
-      341,
-      264,
-      1331,
-      636,
-      13,
-      51392
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.22933781,
-    "compression_ratio": 1.2410715,
-    "no_speech_prob": 0.18990801
-  },
-  {
-    "id": 19,
-    "seek": 6000,
-    "start": 81.36,
-    "end": 82.88,
-    "text": " You against me.",
-    "tokens": [
-      51433,
-      509,
-      1970,
-      385,
-      13,
-      51509
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.22933781,
-    "compression_ratio": 1.2410715,
-    "no_speech_prob": 0.18990801
-  },
-  {
-    "id": 20,
-    "seek": 9000,
-    "start": 90,
-    "end": 98.66,
-    "text": " I keep hearing stories about you, bastard.",
-    "tokens": [
-      50365,
-      286,
-      1066,
-      4763,
-      3676,
-      466,
-      291,
-      11,
-      23569,
-      13,
-      50798
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.22027212,
-    "compression_ratio": 1.4946237,
-    "no_speech_prob": 0.6847138
-  },
-  {
-    "id": 21,
-    "seek": 9000,
-    "start": 99.34,
-    "end": 101.02,
-    "text": " The way people in the North talk about you,",
-    "tokens": [
-      50832,
-      440,
-      636,
-      561,
-      294,
-      264,
-      4067,
-      751,
-      466,
-      291,
-      11,
-      50916
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.22027212,
-    "compression_ratio": 1.4946237,
-    "no_speech_prob": 0.6847138
-  },
-  {
-    "id": 22,
-    "seek": 9000,
-    "start": 101.08,
-    "end": 102.76,
-    "text": " you're the greatest swordsman who ever walked.",
-    "tokens": [
-      50919,
-      291,
-      434,
-      264,
-      6636,
-      26474,
-      1601,
-      567,
-      1562,
-      7628,
-      13,
-      51003
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.22027212,
-    "compression_ratio": 1.4946237,
-    "no_speech_prob": 0.6847138
-  },
-  {
-    "id": 23,
-    "seek": 9000,
-    "start": 104.36,
-    "end": 105.54,
-    "text": " Maybe you are that good.",
-    "tokens": [
-      51083,
-      2704,
-      291,
-      366,
-      300,
-      665,
-      13,
-      51142
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.22027212,
-    "compression_ratio": 1.4946237,
-    "no_speech_prob": 0.6847138
-  },
-  {
-    "id": 24,
-    "seek": 9000,
-    "start": 107.36,
-    "end": 108.14,
-    "text": " Maybe not.",
-    "tokens": [
-      51233,
-      2704,
-      406,
-      13,
-      51272
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.22027212,
-    "compression_ratio": 1.4946237,
-    "no_speech_prob": 0.6847138
-  },
-  {
-    "id": 25,
-    "seek": 9000,
-    "start": 109.44,
-    "end": 111.1,
-    "text": " I don't know if I'd beat you,",
-    "tokens": [
-      51337,
-      286,
-      500,
-      380,
-      458,
-      498,
-      286,
-      1116,
-      4224,
-      291,
-      11,
-      51420
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.22027212,
-    "compression_ratio": 1.4946237,
-    "no_speech_prob": 0.6847138
-  },
-  {
-    "id": 26,
-    "seek": 9000,
-    "start": 111.78,
-    "end": 114.24,
-    "text": " but I know that my army will beat yours.",
-    "tokens": [
-      51454,
-      457,
-      286,
-      458,
-      300,
-      452,
-      7267,
-      486,
-      4224,
-      6342,
-      13,
-      51577
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.22027212,
-    "compression_ratio": 1.4946237,
-    "no_speech_prob": 0.6847138
-  },
-  {
-    "id": 27,
-    "seek": 114,
-    "start": 115.7,
-    "end": 123.316,
-    "text": " I have 6 men And you have what Half that Not even Aye you have the numbers",
-    "tokens": [
-      51650,
-      286,
-      362,
-      1386,
-      11,
-      1360,
-      1706,
-      13,
-      51719,
-      51719,
-      400,
-      291,
-      362,
-      11,
-      437,
-      30,
-      51778,
-      50365,
-      30,
-      50644,
-      50696,
-      1726,
-      754,
-      30,
-      50728,
-      50740,
-      13377,
-      11,
-      291,
-      362,
-      264,
-      3547,
-      13,
-      50803
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.22239259,
-    "compression_ratio": 1.3555555,
-    "no_speech_prob": 0.6757086
-  },
-  {
-    "id": 28,
-    "seek": 114,
-    "start": 125.496,
-    "end": 128.636,
-    "text": " Will your men want to fight for you when they hear you wouldn't fight for them?",
-    "tokens": [
-      50912,
-      3099,
-      428,
-      1706,
-      528,
-      281,
-      2092,
-      337,
-      291,
-      562,
-      436,
-      1568,
-      291,
-      2759,
-      380,
-      2092,
-      337,
-      552,
-      30,
-      51069
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.22239259,
-    "compression_ratio": 1.3555555,
-    "no_speech_prob": 0.6757086
-  },
-  {
-    "id": 29,
-    "seek": 114,
-    "start": 138.276,
-    "end": 140.536,
-    "text": " He's good. Very good.",
-    "tokens": [
-      51551,
-      634,
-      311,
-      665,
-      13,
-      4372,
-      665,
-      13,
-      51664
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.22239259,
-    "compression_ratio": 1.3555555,
-    "no_speech_prob": 0.6757086
-  },
-  {
-    "id": 30,
-    "seek": 2712,
-    "start": 140.536,
-    "end": 146.576,
-    "text": " Tell me, will you let your little brother die because you're too proud to surrender?",
-    "tokens": [
-      50365,
-      5115,
-      385,
-      11,
-      486,
-      291,
-      718,
-      428,
-      707,
-      3708,
-      978,
-      570,
-      291,
-      434,
-      886,
-      4570,
-      281,
-      22185,
-      30,
-      50667
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.15446149,
-    "compression_ratio": 1.1770834,
-    "no_speech_prob": 0.38973472
-  },
-  {
-    "id": 31,
-    "seek": 2712,
-    "start": 147.156,
-    "end": 148.476,
-    "text": " How do we know you have him?",
-    "tokens": [
-      50696,
-      1012,
-      360,
-      321,
-      458,
-      291,
-      362,
-      796,
-      30,
-      50762
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.15446149,
-    "compression_ratio": 1.1770834,
-    "no_speech_prob": 0.38973472
-  },
-  {
-    "id": 32,
-    "seek": 5712,
-    "start": 170.536,
-    "end": 176.376,
-    "text": " Now, if you want to save...",
-    "tokens": [
-      50365,
-      823,
-      11,
-      498,
-      291,
-      528,
-      281,
-      3155,
-      485,
-      50657
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.2100027,
-    "compression_ratio": 1.221374,
-    "no_speech_prob": 0.70987046
-  },
-  {
-    "id": 33,
-    "seek": 5712,
-    "start": 176.376,
-    "end": 178.176,
-    "text": " You're going to die tomorrow, Lord Bolton.",
-    "tokens": [
-      50657,
-      509,
-      434,
-      516,
-      281,
-      978,
-      4153,
-      11,
-      3257,
-      14331,
-      1756,
-      13,
-      50747
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.2100027,
-    "compression_ratio": 1.221374,
-    "no_speech_prob": 0.70987046
-  },
-  {
-    "id": 34,
-    "seek": 5712,
-    "start": 182.616,
-    "end": 183.416,
-    "text": " Sleep well.",
-    "tokens": [
-      50969,
-      19383,
-      731,
-      13,
-      51009
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.2100027,
-    "compression_ratio": 1.221374,
-    "no_speech_prob": 0.70987046
-  },
-  {
-    "id": 35,
-    "seek": 5712,
-    "start": 192.416,
-    "end": 194.156,
-    "text": " She's a fine woman, your sister.",
-    "tokens": [
-      51459,
-      1240,
-      311,
-      257,
-      2489,
-      3059,
-      11,
-      428,
-      4892,
-      13,
-      51546
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.2100027,
-    "compression_ratio": 1.221374,
-    "no_speech_prob": 0.70987046
-  },
-  {
-    "id": 36,
-    "seek": 5712,
-    "start": 195.616,
-    "end": 197.696,
-    "text": " I look forward to having her back in my bed.",
-    "tokens": [
-      51619,
-      286,
-      574,
-      2128,
-      281,
-      1419,
-      720,
-      646,
-      294,
-      452,
-      2901,
-      13,
-      51723
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.2100027,
-    "compression_ratio": 1.221374,
-    "no_speech_prob": 0.70987046
-  },
-  {
-    "id": 37,
-    "seek": 8712,
-    "start": 200.53601,
-    "end": 203.476,
-    "text": " And you're all fine-looking men.",
-    "tokens": [
-      50365,
-      400,
-      291,
-      434,
-      439,
-      2489,
-      12,
-      16129,
-      1706,
-      13,
-      50512
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.24246022,
-    "compression_ratio": 1.4069767,
-    "no_speech_prob": 0.48774618
-  },
-  {
-    "id": 38,
-    "seek": 8712,
-    "start": 204.476,
-    "end": 206.396,
-    "text": " My dogs are desperate to meet you.",
-    "tokens": [
-      50562,
-      1222,
-      7197,
-      366,
-      17601,
-      281,
-      1677,
-      291,
-      13,
-      50658
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.24246022,
-    "compression_ratio": 1.4069767,
-    "no_speech_prob": 0.48774618
-  },
-  {
-    "id": 39,
-    "seek": 8712,
-    "start": 206.896,
-    "end": 208.196,
-    "text": " I haven't fed them for seven days.",
-    "tokens": [
-      50683,
-      286,
-      2378,
-      380,
-      4636,
-      552,
-      337,
-      3407,
-      1708,
-      13,
-      50748
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.24246022,
-    "compression_ratio": 1.4069767,
-    "no_speech_prob": 0.48774618
-  },
-  {
-    "id": 40,
-    "seek": 8712,
-    "start": 208.29599,
-    "end": 209.056,
-    "text": " They're ravenous.",
-    "tokens": [
-      50753,
-      814,
-      434,
-      3342,
-      553,
-      563,
-      13,
-      50791
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.24246022,
-    "compression_ratio": 1.4069767,
-    "no_speech_prob": 0.48774618
-  },
-  {
-    "id": 41,
-    "seek": 8712,
-    "start": 209.916,
-    "end": 212.396,
-    "text": " I wonder which parts they'll try first.",
-    "tokens": [
-      50834,
-      286,
-      2441,
-      597,
-      3166,
-      436,
-      603,
-      853,
-      700,
-      13,
-      50958
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.24246022,
-    "compression_ratio": 1.4069767,
-    "no_speech_prob": 0.48774618
-  },
-  {
-    "id": 42,
-    "seek": 8712,
-    "start": 213.376,
-    "end": 214.03601,
-    "text": " Your eyes?",
-    "tokens": [
-      51007,
-      2260,
-      2575,
-      30,
-      51040
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.24246022,
-    "compression_ratio": 1.4069767,
-    "no_speech_prob": 0.48774618
-  },
-  {
-    "id": 43,
-    "seek": 8712,
-    "start": 215.456,
-    "end": 216.116,
-    "text": " Your balls?",
-    "tokens": [
-      51111,
-      2260,
-      9803,
-      30,
-      51144
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.24246022,
-    "compression_ratio": 1.4069767,
-    "no_speech_prob": 0.48774618
-  },
-  {
-    "id": 44,
-    "seek": 8712,
-    "start": 218.436,
-    "end": 219.876,
-    "text": " We'll find out soon enough.",
-    "tokens": [
-      51260,
-      492,
-      603,
-      915,
-      484,
-      2321,
-      1547,
-      13,
-      51332
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.24246022,
-    "compression_ratio": 1.4069767,
-    "no_speech_prob": 0.48774618
-  },
-  {
-    "id": 45,
-    "seek": 8712,
-    "start": 222.196,
-    "end": 223.356,
-    "text": " In the morning, then.",
-    "tokens": [
-      51448,
-      682,
-      264,
-      2446,
-      11,
-      550,
-      13,
-      51506
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.24246022,
-    "compression_ratio": 1.4069767,
-    "no_speech_prob": 0.48774618
-  },
-  {
-    "id": 46,
-    "seek": 8712,
-    "start": 224.936,
-    "end": 225.51599,
-    "text": " Bastard.",
-    "tokens": [
-      51585,
-      31915,
-      515,
-      13,
-      51614
-    ],
-    "temperature": 0,
-    "avg_logprob": -0.24246022,
-    "compression_ratio": 1.4069767,
-    "no_speech_prob": 0.48774618
-  }
-],
-      "genres": [
         {
-          "genre": "Fantasy",
-          "confidence_score": 1.0,
-          "reasoning": "The clip features established high-fantasy elements, including noble house banners and the remains of a direwolf."
+          "id": 0,
+          "seek": 0,
+          "start": 0,
+          "end": 10.34,
+          "text": " My beloved wife.",
+          "tokens": [
+            50365,
+            1222,
+            14553,
+            3836,
+            13,
+            50882
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.2281743,
+          "compression_ratio": 1.3333334,
+          "no_speech_prob": 0.10415129
         },
         {
+          "id": 1,
+          "seek": 0,
+          "start": 13.34,
+          "end": 14.8,
+          "text": " I've missed you terribly.",
+          "tokens": [
+            51032,
+            286,
+            600,
+            6721,
+            291,
+            22903,
+            13,
+            51105
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.2281743,
+          "compression_ratio": 1.3333334,
+          "no_speech_prob": 0.10415129
+        },
+        {
+          "id": 2,
+          "seek": 0,
+          "start": 18.8,
+          "end": 21.36,
+          "text": " Thank you for returning, Lady Bolton, safely.",
+          "tokens": [
+            51305,
+            1044,
+            291,
+            337,
+            12678,
+            11,
+            11256,
+            14331,
+            1756,
+            11,
+            11750,
+            13,
+            51433
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.2281743,
+          "compression_ratio": 1.3333334,
+          "no_speech_prob": 0.10415129
+        },
+        {
+          "id": 3,
+          "seek": 0,
+          "start": 22.56,
+          "end": 24.48,
+          "text": " Now, dismount and kneel before me.",
+          "tokens": [
+            51493,
+            823,
+            11,
+            12456,
+            792,
+            293,
+            32704,
+            338,
+            949,
+            385,
+            13,
+            51589
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.2281743,
+          "compression_ratio": 1.3333334,
+          "no_speech_prob": 0.10415129
+        },
+        {
+          "id": 4,
+          "seek": 0,
+          "start": 25.2,
+          "end": 29.12,
+          "text": " Surrender your army and proclaim me the true Lord of Winterfell and Warden of the North.",
+          "tokens": [
+            51625,
+            6732,
+            13292,
+            428,
+            7267,
+            293,
+            34604,
+            385,
+            264,
+            2074,
+            3257,
+            295,
+            16444,
+            69,
+            898,
+            293,
+            23794,
+            268,
+            295,
+            264,
+            4067,
+            13,
+            51821
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.2281743,
+          "compression_ratio": 1.3333334,
+          "no_speech_prob": 0.10415129
+        },
+        {
+          "id": 5,
+          "seek": 3000,
+          "start": 30,
+          "end": 31.74,
+          "text": " I will pardon you for deserting the Night's Watch.",
+          "tokens": [
+            50365,
+            286,
+            486,
+            22440,
+            291,
+            337,
+            730,
+            27187,
+            264,
+            10190,
+            311,
+            7277,
+            13,
+            50452
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.20694217,
+          "compression_ratio": 1.5865384,
+          "no_speech_prob": 0.19351465
+        },
+        {
+          "id": 6,
+          "seek": 3000,
+          "start": 32.08,
+          "end": 35.58,
+          "text": " I will pardon these treasonous lords for betraying my house.",
+          "tokens": [
+            50469,
+            286,
+            486,
+            22440,
+            613,
+            2192,
+            1258,
+            563,
+            287,
+            5703,
+            337,
+            15560,
+            278,
+            452,
+            1782,
+            13,
+            50644
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.20694217,
+          "compression_ratio": 1.5865384,
+          "no_speech_prob": 0.19351465
+        },
+        {
+          "id": 7,
+          "seek": 3000,
+          "start": 39.12,
+          "end": 40.62,
+          "text": " Come, bastard.",
+          "tokens": [
+            50821,
+            2492,
+            11,
+            23569,
+            13,
+            50896
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.20694217,
+          "compression_ratio": 1.5865384,
+          "no_speech_prob": 0.19351465
+        },
+        {
+          "id": 8,
+          "seek": 3000,
+          "start": 41.74,
+          "end": 44.26,
+          "text": " You don't have the men, you don't have the horses,",
+          "tokens": [
+            50952,
+            509,
+            500,
+            380,
+            362,
+            264,
+            1706,
+            11,
+            291,
+            500,
+            380,
+            362,
+            264,
+            13112,
+            11,
+            51078
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.20694217,
+          "compression_ratio": 1.5865384,
+          "no_speech_prob": 0.19351465
+        },
+        {
+          "id": 9,
+          "seek": 3000,
+          "start": 44.78,
+          "end": 46.34,
+          "text": " and you don't have Winterfell.",
+          "tokens": [
+            51104,
+            293,
+            291,
+            500,
+            380,
+            362,
+            16444,
+            69,
+            898,
+            13,
+            51182
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.20694217,
+          "compression_ratio": 1.5865384,
+          "no_speech_prob": 0.19351465
+        },
+        {
+          "id": 10,
+          "seek": 3000,
+          "start": 47.4,
+          "end": 50.1,
+          "text": " Why lead those poor souls into slaughter?",
+          "tokens": [
+            51235,
+            1545,
+            1477,
+            729,
+            4716,
+            16588,
+            666,
+            26609,
+            30,
+            51370
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.20694217,
+          "compression_ratio": 1.5865384,
+          "no_speech_prob": 0.19351465
+        },
+        {
+          "id": 11,
+          "seek": 3000,
+          "start": 50.78,
+          "end": 51.98,
+          "text": " There's no need for a battle.",
+          "tokens": [
+            51404,
+            821,
+            311,
+            572,
+            643,
+            337,
+            257,
+            4635,
+            13,
+            51464
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.20694217,
+          "compression_ratio": 1.5865384,
+          "no_speech_prob": 0.19351465
+        },
+        {
+          "id": 12,
+          "seek": 3000,
+          "start": 53.48,
+          "end": 56.08,
+          "text": " Get off your horse and kneel.",
+          "tokens": [
+            51539,
+            3240,
+            766,
+            428,
+            6832,
+            293,
+            32704,
+            338,
+            13,
+            51669
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.20694217,
+          "compression_ratio": 1.5865384,
+          "no_speech_prob": 0.19351465
+        },
+        {
+          "id": 13,
+          "seek": 3000,
+          "start": 58.16,
+          "end": 59.46,
+          "text": " I'm a man of mercy.",
+          "tokens": [
+            51773,
+            286,
+            478,
+            257,
+            587,
+            295,
+            13174,
+            13,
+            51838
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.20694217,
+          "compression_ratio": 1.5865384,
+          "no_speech_prob": 0.19351465
+        },
+        {
+          "id": 14,
+          "seek": 6000,
+          "start": 60,
+          "end": 65.94,
+          "text": " You're right.",
+          "tokens": [
+            50365,
+            509,
+            434,
+            558,
+            13,
+            50662
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.22933781,
+          "compression_ratio": 1.2410715,
+          "no_speech_prob": 0.18990801
+        },
+        {
+          "id": 15,
+          "seek": 6000,
+          "start": 67.28,
+          "end": 68.64,
+          "text": " There's no need for a battle.",
+          "tokens": [
+            50729,
+            821,
+            311,
+            572,
+            643,
+            337,
+            257,
+            4635,
+            13,
+            50797
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.22933781,
+          "compression_ratio": 1.2410715,
+          "no_speech_prob": 0.18990801
+        },
+        {
+          "id": 16,
+          "seek": 6000,
+          "start": 70.72,
+          "end": 72.74,
+          "text": " Thousands of men don't need to die.",
+          "tokens": [
+            50901,
+            40535,
+            295,
+            1706,
+            500,
+            380,
+            643,
+            281,
+            978,
+            13,
+            51002
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.22933781,
+          "compression_ratio": 1.2410715,
+          "no_speech_prob": 0.18990801
+        },
+        {
+          "id": 17,
+          "seek": 6000,
+          "start": 75.2,
+          "end": 76.26,
+          "text": " Only one of us.",
+          "tokens": [
+            51125,
+            5686,
+            472,
+            295,
+            505,
+            13,
+            51178
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.22933781,
+          "compression_ratio": 1.2410715,
+          "no_speech_prob": 0.18990801
+        },
+        {
+          "id": 18,
+          "seek": 6000,
+          "start": 79.1,
+          "end": 80.54,
+          "text": " Let's end this the old way.",
+          "tokens": [
+            51320,
+            961,
+            311,
+            917,
+            341,
+            264,
+            1331,
+            636,
+            13,
+            51392
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.22933781,
+          "compression_ratio": 1.2410715,
+          "no_speech_prob": 0.18990801
+        },
+        {
+          "id": 19,
+          "seek": 6000,
+          "start": 81.36,
+          "end": 82.88,
+          "text": " You against me.",
+          "tokens": [
+            51433,
+            509,
+            1970,
+            385,
+            13,
+            51509
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.22933781,
+          "compression_ratio": 1.2410715,
+          "no_speech_prob": 0.18990801
+        },
+        {
+          "id": 20,
+          "seek": 9000,
+          "start": 90,
+          "end": 98.66,
+          "text": " I keep hearing stories about you, bastard.",
+          "tokens": [
+            50365,
+            286,
+            1066,
+            4763,
+            3676,
+            466,
+            291,
+            11,
+            23569,
+            13,
+            50798
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.22027212,
+          "compression_ratio": 1.4946237,
+          "no_speech_prob": 0.6847138
+        },
+        {
+          "id": 21,
+          "seek": 9000,
+          "start": 99.34,
+          "end": 101.02,
+          "text": " The way people in the North talk about you,",
+          "tokens": [
+            50832,
+            440,
+            636,
+            561,
+            294,
+            264,
+            4067,
+            751,
+            466,
+            291,
+            11,
+            50916
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.22027212,
+          "compression_ratio": 1.4946237,
+          "no_speech_prob": 0.6847138
+        },
+        {
+          "id": 22,
+          "seek": 9000,
+          "start": 101.08,
+          "end": 102.76,
+          "text": " you're the greatest swordsman who ever walked.",
+          "tokens": [
+            50919,
+            291,
+            434,
+            264,
+            6636,
+            26474,
+            1601,
+            567,
+            1562,
+            7628,
+            13,
+            51003
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.22027212,
+          "compression_ratio": 1.4946237,
+          "no_speech_prob": 0.6847138
+        },
+        {
+          "id": 23,
+          "seek": 9000,
+          "start": 104.36,
+          "end": 105.54,
+          "text": " Maybe you are that good.",
+          "tokens": [
+            51083,
+            2704,
+            291,
+            366,
+            300,
+            665,
+            13,
+            51142
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.22027212,
+          "compression_ratio": 1.4946237,
+          "no_speech_prob": 0.6847138
+        },
+        {
+          "id": 24,
+          "seek": 9000,
+          "start": 107.36,
+          "end": 108.14,
+          "text": " Maybe not.",
+          "tokens": [
+            51233,
+            2704,
+            406,
+            13,
+            51272
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.22027212,
+          "compression_ratio": 1.4946237,
+          "no_speech_prob": 0.6847138
+        },
+        {
+          "id": 25,
+          "seek": 9000,
+          "start": 109.44,
+          "end": 111.1,
+          "text": " I don't know if I'd beat you,",
+          "tokens": [
+            51337,
+            286,
+            500,
+            380,
+            458,
+            498,
+            286,
+            1116,
+            4224,
+            291,
+            11,
+            51420
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.22027212,
+          "compression_ratio": 1.4946237,
+          "no_speech_prob": 0.6847138
+        },
+        {
+          "id": 26,
+          "seek": 9000,
+          "start": 111.78,
+          "end": 114.24,
+          "text": " but I know that my army will beat yours.",
+          "tokens": [
+            51454,
+            457,
+            286,
+            458,
+            300,
+            452,
+            7267,
+            486,
+            4224,
+            6342,
+            13,
+            51577
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.22027212,
+          "compression_ratio": 1.4946237,
+          "no_speech_prob": 0.6847138
+        },
+        {
+          "id": 27,
+          "seek": 114,
+          "start": 115.7,
+          "end": 123.316,
+          "text": " I have 6 men And you have what Half that Not even Aye you have the numbers",
+          "tokens": [
+            51650,
+            286,
+            362,
+            1386,
+            11,
+            1360,
+            1706,
+            13,
+            51719,
+            51719,
+            400,
+            291,
+            362,
+            11,
+            437,
+            30,
+            51778,
+            50365,
+            30,
+            50644,
+            50696,
+            1726,
+            754,
+            30,
+            50728,
+            50740,
+            13377,
+            11,
+            291,
+            362,
+            264,
+            3547,
+            13,
+            50803
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.22239259,
+          "compression_ratio": 1.3555555,
+          "no_speech_prob": 0.6757086
+        },
+        {
+          "id": 28,
+          "seek": 114,
+          "start": 125.496,
+          "end": 128.636,
+          "text": " Will your men want to fight for you when they hear you wouldn't fight for them?",
+          "tokens": [
+            50912,
+            3099,
+            428,
+            1706,
+            528,
+            281,
+            2092,
+            337,
+            291,
+            562,
+            436,
+            1568,
+            291,
+            2759,
+            380,
+            2092,
+            337,
+            552,
+            30,
+            51069
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.22239259,
+          "compression_ratio": 1.3555555,
+          "no_speech_prob": 0.6757086
+        },
+        {
+          "id": 29,
+          "seek": 114,
+          "start": 138.276,
+          "end": 140.536,
+          "text": " He's good. Very good.",
+          "tokens": [
+            51551,
+            634,
+            311,
+            665,
+            13,
+            4372,
+            665,
+            13,
+            51664
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.22239259,
+          "compression_ratio": 1.3555555,
+          "no_speech_prob": 0.6757086
+        },
+        {
+          "id": 30,
+          "seek": 2712,
+          "start": 140.536,
+          "end": 146.576,
+          "text": " Tell me, will you let your little brother die because you're too proud to surrender?",
+          "tokens": [
+            50365,
+            5115,
+            385,
+            11,
+            486,
+            291,
+            718,
+            428,
+            707,
+            3708,
+            978,
+            570,
+            291,
+            434,
+            886,
+            4570,
+            281,
+            22185,
+            30,
+            50667
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.15446149,
+          "compression_ratio": 1.1770834,
+          "no_speech_prob": 0.38973472
+        },
+        {
+          "id": 31,
+          "seek": 2712,
+          "start": 147.156,
+          "end": 148.476,
+          "text": " How do we know you have him?",
+          "tokens": [
+            50696,
+            1012,
+            360,
+            321,
+            458,
+            291,
+            362,
+            796,
+            30,
+            50762
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.15446149,
+          "compression_ratio": 1.1770834,
+          "no_speech_prob": 0.38973472
+        },
+        {
+          "id": 32,
+          "seek": 5712,
+          "start": 170.536,
+          "end": 176.376,
+          "text": " Now, if you want to save...",
+          "tokens": [
+            50365,
+            823,
+            11,
+            498,
+            291,
+            528,
+            281,
+            3155,
+            485,
+            50657
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.2100027,
+          "compression_ratio": 1.221374,
+          "no_speech_prob": 0.70987046
+        },
+        {
+          "id": 33,
+          "seek": 5712,
+          "start": 176.376,
+          "end": 178.176,
+          "text": " You're going to die tomorrow, Lord Bolton.",
+          "tokens": [
+            50657,
+            509,
+            434,
+            516,
+            281,
+            978,
+            4153,
+            11,
+            3257,
+            14331,
+            1756,
+            13,
+            50747
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.2100027,
+          "compression_ratio": 1.221374,
+          "no_speech_prob": 0.70987046
+        },
+        {
+          "id": 34,
+          "seek": 5712,
+          "start": 182.616,
+          "end": 183.416,
+          "text": " Sleep well.",
+          "tokens": [
+            50969,
+            19383,
+            731,
+            13,
+            51009
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.2100027,
+          "compression_ratio": 1.221374,
+          "no_speech_prob": 0.70987046
+        },
+        {
+          "id": 35,
+          "seek": 5712,
+          "start": 192.416,
+          "end": 194.156,
+          "text": " She's a fine woman, your sister.",
+          "tokens": [
+            51459,
+            1240,
+            311,
+            257,
+            2489,
+            3059,
+            11,
+            428,
+            4892,
+            13,
+            51546
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.2100027,
+          "compression_ratio": 1.221374,
+          "no_speech_prob": 0.70987046
+        },
+        {
+          "id": 36,
+          "seek": 5712,
+          "start": 195.616,
+          "end": 197.696,
+          "text": " I look forward to having her back in my bed.",
+          "tokens": [
+            51619,
+            286,
+            574,
+            2128,
+            281,
+            1419,
+            720,
+            646,
+            294,
+            452,
+            2901,
+            13,
+            51723
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.2100027,
+          "compression_ratio": 1.221374,
+          "no_speech_prob": 0.70987046
+        },
+        {
+          "id": 37,
+          "seek": 8712,
+          "start": 200.53601,
+          "end": 203.476,
+          "text": " And you're all fine-looking men.",
+          "tokens": [
+            50365,
+            400,
+            291,
+            434,
+            439,
+            2489,
+            12,
+            16129,
+            1706,
+            13,
+            50512
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.24246022,
+          "compression_ratio": 1.4069767,
+          "no_speech_prob": 0.48774618
+        },
+        {
+          "id": 38,
+          "seek": 8712,
+          "start": 204.476,
+          "end": 206.396,
+          "text": " My dogs are desperate to meet you.",
+          "tokens": [
+            50562,
+            1222,
+            7197,
+            366,
+            17601,
+            281,
+            1677,
+            291,
+            13,
+            50658
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.24246022,
+          "compression_ratio": 1.4069767,
+          "no_speech_prob": 0.48774618
+        },
+        {
+          "id": 39,
+          "seek": 8712,
+          "start": 206.896,
+          "end": 208.196,
+          "text": " I haven't fed them for seven days.",
+          "tokens": [
+            50683,
+            286,
+            2378,
+            380,
+            4636,
+            552,
+            337,
+            3407,
+            1708,
+            13,
+            50748
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.24246022,
+          "compression_ratio": 1.4069767,
+          "no_speech_prob": 0.48774618
+        },
+        {
+          "id": 40,
+          "seek": 8712,
+          "start": 208.29599,
+          "end": 209.056,
+          "text": " They're ravenous.",
+          "tokens": [
+            50753,
+            814,
+            434,
+            3342,
+            553,
+            563,
+            13,
+            50791
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.24246022,
+          "compression_ratio": 1.4069767,
+          "no_speech_prob": 0.48774618
+        },
+        {
+          "id": 41,
+          "seek": 8712,
+          "start": 209.916,
+          "end": 212.396,
+          "text": " I wonder which parts they'll try first.",
+          "tokens": [
+            50834,
+            286,
+            2441,
+            597,
+            3166,
+            436,
+            603,
+            853,
+            700,
+            13,
+            50958
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.24246022,
+          "compression_ratio": 1.4069767,
+          "no_speech_prob": 0.48774618
+        },
+        {
+          "id": 42,
+          "seek": 8712,
+          "start": 213.376,
+          "end": 214.03601,
+          "text": " Your eyes?",
+          "tokens": [
+            51007,
+            2260,
+            2575,
+            30,
+            51040
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.24246022,
+          "compression_ratio": 1.4069767,
+          "no_speech_prob": 0.48774618
+        },
+        {
+          "id": 43,
+          "seek": 8712,
+          "start": 215.456,
+          "end": 216.116,
+          "text": " Your balls?",
+          "tokens": [
+            51111,
+            2260,
+            9803,
+            30,
+            51144
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.24246022,
+          "compression_ratio": 1.4069767,
+          "no_speech_prob": 0.48774618
+        },
+        {
+          "id": 44,
+          "seek": 8712,
+          "start": 218.436,
+          "end": 219.876,
+          "text": " We'll find out soon enough.",
+          "tokens": [
+            51260,
+            492,
+            603,
+            915,
+            484,
+            2321,
+            1547,
+            13,
+            51332
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.24246022,
+          "compression_ratio": 1.4069767,
+          "no_speech_prob": 0.48774618
+        },
+        {
+          "id": 45,
+          "seek": 8712,
+          "start": 222.196,
+          "end": 223.356,
+          "text": " In the morning, then.",
+          "tokens": [
+            51448,
+            682,
+            264,
+            2446,
+            11,
+            550,
+            13,
+            51506
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.24246022,
+          "compression_ratio": 1.4069767,
+          "no_speech_prob": 0.48774618
+        },
+        {
+          "id": 46,
+          "seek": 8712,
+          "start": 224.936,
+          "end": 225.51599,
+          "text": " Bastard.",
+          "tokens": [
+            51585,
+            31915,
+            515,
+            13,
+            51614
+          ],
+          "temperature": 0,
+          "avg_logprob": -0.24246022,
+          "compression_ratio": 1.4069767,
+          "no_speech_prob": 0.48774618
+        }
+      ],
+      "genres": [
+        {
           "genre": "Drama",
-          "confidence_score": 0.98,
-          "reasoning": "The scene is a high-stakes dialogue-driven confrontation centered on political negotiation and psychological intimidation."
+          "confidence_score": 1.0,
+          "reasoning": "The content focuses on intense interpersonal dialogue, political maneuvering, and high-stakes conflict characteristic of prestige television drama."
+        },
+        {
+          "genre": "Action/Fantasy",
+          "confidence_score": 0.9,
+          "reasoning": "The scene is set within a fantasy world and depicts the parley immediately preceding a massive medieval-style military engagement."
         }
       ],
       "category": {
-        "rating": "A",
+        "rating": "TV-MA",
+        "human_rating": "A",
         "content_analysis": [
           {
-            "timestamp": "00:00:18",
-            "alert_type": "Psychological/Verbal Abuse",
-            "description": "'thank you for returning lady Bolton safely now Dismount and kneel before me Surrender Your Army and Proclaim me the true Lord of Winterfell'. Ramsay Bolton uses possessive and dehumanizing language toward Sansa Stark while demanding total subservience from his opponents."
+            "timestamp": "00:00:09",
+            "alert_type": "Psychological Manipulation",
+            "description": "Ramsay Bolton addresses Sansa Stark with mocking affection to assert dominance.  'My beloved wife, I've missed you terribly. Thank you for returning Lady Bolton safely.'"
+          },
+          {
+            "timestamp": "00:00:38",
+            "alert_type": "Derogatory Language",
+            "description": "Ramsay uses a slur to demean Jon Snow's status.  'Come bastard, you don't have the men, you don't have the horses, and you don't have Winterfell.'"
+          },
+          {
+            "timestamp": "00:01:11",
+            "alert_type": "Conflict Tension",
+            "description": "Jon Snow attempts to settle the war through single combat.  'Thousands of men don't need to die, only one of us. Let's end this the old way: you against me.'"
+          },
+          {
+            "timestamp": "00:01:35",
+            "alert_type": "Derogatory Language",
+            "description": "Ramsay repeats the slur while questioning Jon's reputation.  'I keep hearing stories about you, bastard. The way people in the North talk about you, you're the greatest swordsman who ever walked.'"
+          },
+          {
+            "timestamp": "00:02:40",
+            "alert_type": "Graphic Imagery",
+            "description": "Smalljon Umber throws the severed head of the direwolf Shaggydog onto the ground as proof of Rickon Stark's capture."
           },
           {
             "timestamp": "00:02:55",
-            "alert_type": "Graphic Imagery",
-            "description": "Close-up visual of a severed, bloodied animal head (the direwolf Shaggydog) being thrown as a trophy of war."
+            "alert_type": "Verbal Threat",
+            "description": "Sansa Stark delivers a cold promise of execution.  'You're going to die tomorrow, Lord Bolton. Sleep well.'"
+          },
+          {
+            "timestamp": "00:03:11",
+            "alert_type": "Sexual Reference",
+            "description": "Ramsay makes a crude and possessive comment regarding Sansa.  'She's a fine woman, your sister. I look forward to having her back in my bed.'"
           },
           {
             "timestamp": "00:03:22",
-            "alert_type": "Graphic Verbal Content",
-            "description": "my dogs are desperate to meet you I haven't found them for seven days they're ravenous I wonder which parts they'll try first your eyes your bosss'. Detailed verbal threats of anatomical mutilation and predatory animal violence used as psychological warfare."
+            "alert_type": "Violent Threats",
+            "description": "Ramsay describes his starving hounds and how they will kill the Stark leaders.  'My dogs are desperate to meet you. I haven't fed them for seven days. They're ravenous.'"
+          },
+          {
+            "timestamp": "00:03:35",
+            "alert_type": "Violent Threats",
+            "description": "Detailed graphic description of animal mutilation.  'I wonder which parts they'll try first: your eyes, your balls. We'll find out soon enough.'"
+          },
+          {
+            "timestamp": "00:03:44",
+            "alert_type": "Derogatory Language",
+            "description": "Ramsay delivers a final parting insult as he rides away.  'Bastard.'"
           }
         ]
       },
-      "detailed_summary": "This clip depicts the final parley between Jon Snow and Ramsay Bolton before the Battle of Winterfell. Ramsay, confident in his 6,000-man army, demands that Jon surrender and return Sansa Stark, whom he still refers to as his wife. Jon counters with a proposal for a one-on-one duel to spare the lives of their soldiers, but Ramsay dismisses the offer, citing his numerical advantage. The tension peaks when Ramsay produces the head of the direwolf Shaggydog as proof that he holds Rickon Stark captive. The meeting concludes with Sansa's icy promise of Ramsay's death and Ramsay's own graphic threat involving his starved hounds, setting the stage for the violent conflict to follow.",
-      "smart_features": {
-        "key_moments": [
-          {
-            "time": "00:01:19",
-            "label": "Jon Snow's Duel Proposal"
-          },
-          {
-            "time": "00:02:55",
-            "label": "The Reveal of Shaggydog"
-          },
-          {
-            "time": "00:03:25",
-            "label": "Ramsay's Hounds Threat"
-          }
-        ],
-        "mood_tags": [
-          "Grim",
-          "Sinister",
-          "Tense",
-          "Defiant"
-        ],
-        "engagement_score": "High",
-        "sentiment_analysis": "Antagonistic/Dramatic",
-        "accessibility": {
-          "captions_available": true,
-          "dialogue_density": "Medium",
-          "visual_motion_intensity": "Low"
-        }
-      },
+      "detailed_summary": "This scene depicts the final parley between Jon Snow and Ramsay Bolton before the 'Battle of the Bastards.' Ramsay, holding Winterfell and the captured Rickon Stark, demands total surrender and mocks Sansa's return. Jon proposes a duel to save their armies, but Ramsay refuses, confident in his superior numbers and 6,000-man army. After confirming Rickon's capture by displaying the severed head of his direwolf, Sansa chimes in with a chilling promise of Ramsay's death. Ramsay concludes the meeting with graphic threats of his starving hounds consuming Jon and his lords, specifically mentioning their 'eyes and balls' as the first targets.",
       "history_logs": [
         {
-          "timestamp": "2026-03-31 08:20:15",
-          "action": "Parley Dialogue Verified",
+          "timestamp": "2024-11-20 09:45:00",
+          "action": "Dialogue Accuracy Check",
           "status": "approved",
-          "user": "Anil Deshmukh (Metadata Analyst)",
-          "message": null
+          "user": "Vikram Seth (Script Continuity)",
+          "message": "Verified Ramsay Bolton's 'ravenous dogs' speech [00:03:22] for textual accuracy."
         },
         {
-          "timestamp": "2026-03-31 08:45:22",
-          "action": "Content Warning Review",
-          "status": "rejected",
-          "user": "Lakshmi Iyer (Safety & Compliance Auditor)",
-          "message": "The description for the direwolf head alert at 02:55 needs to explicitly mention the lack of dialogue for clarity."
+          "timestamp": "2024-11-20 11:30:15",
+          "action": "Visual Content Tagging",
+          "status": "approved",
+          "user": "Meera Iyer (Media Compliance)",
+          "message": "Timestamp for the direwolf head visual [00:02:40] verified and tagged as 'Graphic Visuals'."
         },
         {
-          "timestamp": "2026-03-31 09:12:08",
-          "action": "Content Warning Approved",
+          "timestamp": "2024-11-20 14:15:55",
+          "action": "Regional Rating Alignment",
           "status": "approved",
-          "user": "Lakshmi Iyer (Safety & Compliance Auditor)",
-          "message": "Corrected description to reflect visual-only nature of the 02:55 mark."
-        },
-        {
-          "timestamp": "2026-03-31 10:05:40",
-          "action": "Summary Approved",
-          "status": "approved",
-          "user": "Rahul Deshmukh (Content Team Lead)",
-          "message": "The detailed summary accurately reflects the narrative weight of the scene."
+          "user": "David Miller (Content Standards)",
+          "message": "Summary and content alerts aligned with TV-MA standards for psychological and verbal violence."
         }
       ],
       "regional_recommendations": {
         "india": {
-          "rating_suggestion": "A",
+          "rating_suggestion": "U/A 16+",
           "human_rating": "A",
-          "reviewer": "Lakshmi Iyer",
-          "review_status": "pending",
-          "final_rating": "",
-          "summary": "This intense clip from Game of Thrones' acclaimed 'Battle of the Bastards' episode contains graphic violence, psychological torture, and disturbing imagery that significantly exceeds Indian broadcast standards. While the series has a dedicated Indian fanbase who appreciate its complex storytelling, this particular scene includes a severed animal head, explicit threats of violence, and intense psychological abuse that are culturally sensitive for Indian audiences. The content requires an Adults Only rating and substantial editing for television broadcast. Given Indian sensitivities around animal-related violence and graphic content, this clip is best suited for mature streaming audiences with appropriate age verification and watershed hour restrictions.",
+          "reviewer": "Sanjay Kapoor",
+          "review_status": "approved",
+          "final_rating": "A",
+          "summary": "This clip contains intense psychological abuse, graphic threats of violence (including mutilation by animals), and disturbing dialogue concerning sexual possession. Due to the dark themes and the severed animal head visual, it is strictly recommended for mature audiences under 16 only with parental guidance, though a digital 'A' rating is more appropriate for Indian broadcast standards.",
           "changes_required": true,
           "recommendations": [
-            "Mandatory blur of the severed animal head at 02:55",
-            "Audio mute or 'beep' for the graphic anatomical threat at 03:32",
-            "Add content warning card for graphic violence and psychological abuse at start",
-            "Restrict broadcast to post-11 PM watershed hours"
+            "Display a prominent content warning for graphic verbal threats",
+            "Ensure local age-gating matches mature audience standards",
+            "Consider blurred treatment for the severed animal head during prime-time hours"
           ]
         },
         "france": {
-          "rating_suggestion": "-16",
-          "human_rating": "-16",
-          "reviewer": "Rahul Deshmukh",
+          "rating_suggestion": "-12 (Interdit aux moins de 12 ans)",
+          "human_rating": "-12",
+          "reviewer": "Isabelle Laurent",
           "review_status": "approved",
-          "final_rating": "-16",
-          "summary": "This pivotal scene from Game of Thrones' 'Battle of the Bastards' showcases the series' signature blend of psychological drama and medieval warfare that French audiences have embraced throughout the show's run. The clip contains intense confrontation, graphic imagery, and psychological manipulation that align with French acceptance of mature dramatic content in premium television. While the violence and disturbing elements warrant a -16 rating, French viewers familiar with the series' dark tone will recognize this as consistent with the show's established narrative style. The content requires age-rating visibility but minimal editing, respecting French audiences' appreciation for uncompromised storytelling in adult drama.",
-          "changes_required": true,
+          "final_rating": "-12",
+          "summary": "The episode clip focuses on high-tension psychological warfare. While visually less violent than the battle itself, the verbal threats and the display of the dead wolf head fall under French 'disturbing content' guidelines for minors. Suitable for audiences aged 12 and above.",
+          "changes_required": false,
           "recommendations": [
-            "Include visible age-rating logo throughout the clip",
-            "Provide warning for psychological distress and graphic images"
+            "Standard disclaimer for 'scenes potentially disturbing to younger audiences' is sufficient"
           ]
         },
         "japan": {
-          "rating_suggestion": "R15+ (Restricted to 15 and above)",
-          "human_rating": "R18+",
-          "reviewer": "Anil Deshmukh",
+          "rating_suggestion": "PG12",
+          "human_rating": "PG12",
+          "reviewer": "Takashi Sato",
           "review_status": "approved",
-          "final_rating": "R18+",
-          "summary": "This Game of Thrones battle scene contains intense psychological warfare and graphic imagery that requires careful consideration for Japanese audiences. While fantasy and medieval content is popular in Japan, the explicit display of a severed animal head and verbal descriptions of extreme violence exceed typical Japanese broadcast standards. The R15+ rating reflects the need for parental guidance due to disturbing imagery that may be culturally sensitive in the Japanese context. Japanese viewers familiar with Western premium drama will understand the narrative context, but the graphic elements require mosaic treatment and clear warnings to align with Japanese broadcast regulations and viewer expectations for edited content.",
+          "final_rating": "PG12",
+          "summary": "This scene highlights the cruelty of Ramsay Bolton. The description of starving hounds eating human remains and the visual of the direwolf head are considered intense for younger Japanese viewers. Parental guidance is required for those under 12.",
           "changes_required": true,
           "recommendations": [
-            "Apply mosaic blur to the severed direwolf head at 02:55-02:58",
-            "Display warning text for verbal descriptions of extreme violence",
-            "Age-gate required for online distribution"
+            "Provide Japanese subtitles that capture the specific gravity of Ramsay's threats",
+            "Add a warning for 'cruelty' (zankoku) before the visual reveal of the wolf head"
           ]
         },
         "united_states": {
-          "rating_suggestion": "TV-MA (Mature Audiences Only)",
+          "rating_suggestion": "TV-MA",
           "human_rating": "TV-MA",
-          "reviewer": "David Chen",
+          "reviewer": "Jessica Vance",
           "review_status": "approved",
           "final_rating": "TV-MA",
-          "summary": "This legendary scene from Game of Thrones' 'Battle of the Bastards' delivers the intense, uncompromising drama that made the series a cultural phenomenon for American audiences. The clip showcases the psychological warfare and brutal medieval conflict that HBO viewers expect from premium cable programming. While the content includes graphic imagery and intense threats, it represents exactly the kind of mature, sophisticated storytelling that has defined prestige television in the US market. The TV-MA rating appropriately targets adult audiences who appreciate complex narratives with no-holds-barred content, making it perfect for premium streaming platforms and late-night cable broadcast.",
-          "changes_required": true,
+          "summary": "True to Game of Thrones' overall tone, this clip contains mature language, threats of extreme violence, and psychological cruelty. The TV-MA rating is appropriate due to the disturbing nature of the dialogue regarding mutilation and the display of animal remains.",
+          "changes_required": false,
           "recommendations": [
-            "Display TV-MA LV rating bug (Language, Violence) at the beginning",
-            "Include viewer discretion warning for graphic imagery and threats",
-            "Recommended for premium cable or age-restricted streaming platforms"
+            "Tag with descriptors for 'Adult Content' and 'Graphic Language'"
           ]
         }
       }
