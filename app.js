@@ -60,22 +60,13 @@ function renderVideoGrid() {
     
     videosData.forEach((video, index) => {
         const card = document.createElement('div');
-        card.className = 'video-card';
-        card.onclick = () => selectVideo(video);
+        card.className = 'video-card-wrapper';
         
         // Extract video ID from YouTube URL
         const videoUrl = video.video_details.url || video.video_details.metadata.video_url;
         const videoTitle = video.video_details.title || video.video_details.metadata.title;
         const videoDuration = video.video_details.metadata.duration;
         const viewCount = video.video_details.metadata.view_count || 0;
-        
-        // AI Rating (from category.rating)
-        const fullAiRating = video.video_details.category.rating || 'U/A';
-        const aiRatingSymbol = fullAiRating.split('(')[0].trim();
-        
-        // Human Rating (from category.human_rating, fallback to AI rating)
-        const fullHumanRating = video.video_details.category.human_rating || fullAiRating;
-        const humanRatingSymbol = fullHumanRating.split('(')[0].trim();
         
         const videoId = extractVideoId(videoUrl);
         const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
@@ -87,7 +78,7 @@ function renderVideoGrid() {
             ? (viewCount / 1000).toFixed(1) + 'K'
             : viewCount.toString();
         
-        // Build regional ratings data
+        // Build regional details
         const regionalRecs = video.video_details.regional_recommendations || {};
         const countries = [
             { code: 'india', flag: '🇮🇳', name: 'India' },
@@ -96,50 +87,81 @@ function renderVideoGrid() {
             { code: 'japan', flag: '🇯🇵', name: 'Japan' }
         ];
         
-        const regionalRatingsHTML = countries.map(country => {
-            const region = regionalRecs[country.code] || {};
-            const aiRating = region.rating_suggestion.slice(0, 4) || 'N/A';
-            const humanRating = region.human_rating.slice(0, 4) || aiRating;
-            return `
-                <div class="regional-rating-row">
-                    <span class="region-flag">${country.flag}</span>
-                    <span class="region-name">${country.name}</span>
-                    <div class="region-ratings">
-                        <span class="mini-badge ai">${aiRating.split('(')[0].trim()}</span>
-                        <span class="mini-badge human">${humanRating.split('(')[0].trim()}</span>
-                    </div>
-                </div>
-            `;
-        }).join('');
+        // Build horizontal table with region-wise review stages
+        const expandedTableHTML = `
+            <table class="review-stages-table">
+                <thead>
+                    <tr>
+                        <th class="stage-header">Region</th>
+                        <th class="stage-header">AI Rating</th>
+                        <th class="stage-header">Human Rating</th>
+                        <th class="stage-header">Reviewer</th>
+                        <th class="stage-header">Final Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${countries.map(country => {
+                        const region = regionalRecs[country.code] || {};
+                        const aiRating = (region.rating_suggestion || 'N/A').slice(0, 5);
+                        const humanRating = (region.human_rating || '').slice(0, 5);
+                        const reviewer = region.reviewer || '-';
+                        const finalRating = region.final_rating ? region.final_rating.slice(0, 5) : '-';
+                        
+                        return `
+                            <tr class="review-stage-row">
+                                <td class="region-cell">
+                                    <span class="region-flag-table">${country.flag}</span>
+                                    <span class="region-name-table">${country.name}</span>
+                                </td>
+                                <td class="rating-cell">
+                                    <span class="rating-badge-table ai-badge">${aiRating}</span>
+                                </td>
+                                <td class="rating-cell">
+                                    <span class="rating-badge-table human-badge">${humanRating}</span>
+                                </td>
+                                <td class="reviewer-cell">
+                                    <span class="reviewer-text">${reviewer}</span>
+                                </td>
+                                <td class="rating-cell">
+                                    <span class="rating-badge-table final-badge">${finalRating}</span>
+                                </td>
+                            </tr>
+                        `;
+                    }).join('')}
+                </tbody>
+            </table>
+        `;
         
         card.innerHTML = `
-            <div class="video-card-thumbnail">
-                <img src="${thumbnailUrl}" alt="${videoTitle}" 
-                     onerror="this.src='https://img.youtube.com/vi/${videoId}/0.jpg'">
-            </div>
-            <div class="video-card-content">
-                <h3 class="video-card-title">${videoTitle}</h3>
-                <div class="video-card-meta-row">
-                    <div class="video-card-duration">${formatDuration(videoDuration)}</div>
-                    <div class="video-card-ratings-container">
-                        <div class="video-card-ratings" onclick="toggleRatingDropdown(event, ${index})">
-                            <span class="rating-badge ai-rating" title="AI Rating">${aiRatingSymbol}</span>
-                            <span class="rating-badge human-rating" title="Human Rating">${humanRatingSymbol}</span>
-                            <span class="dropdown-arrow">▼</span>
-                        </div>
-                        <div class="rating-dropdown" id="rating-dropdown-${index}">
-                            <div class="rating-dropdown-header">
-                                <span></span>
-                                <span>Country</span>
-                                <span>AI</span>
-                                <span>Human</span>
-                            </div>
-                            ${regionalRatingsHTML}
-                        </div>
+            <div class="video-card-main" data-video-index="${index}">
+                <button class="expand-arrow-btn" onclick="toggleExpandDetails(event, ${index})" title="Show Details">
+                    <span class="arrow-icon">▶</span>
+                </button>
+                <div class="video-card-thumbnail">
+                    <img src="${thumbnailUrl}" alt="${videoTitle}" 
+                         onerror="this.src='https://img.youtube.com/vi/${videoId}/0.jpg'">
+                </div>
+                <div class="video-card-content">
+                    <h3 class="video-card-title">${videoTitle}</h3>
+                    <div class="video-card-meta-row">
+                        <div class="video-card-duration">${formatDuration(videoDuration)}</div>
+                        <div class="video-card-views">${formattedViews} views</div>
                     </div>
                 </div>
             </div>
+            <div class="video-card-expanded" id="expanded-details-${index}">
+                ${expandedTableHTML}
+            </div>
         `;
+        
+        // Add click handler to the main card area
+        const cardMain = card.querySelector('.video-card-main');
+        cardMain.addEventListener('click', (e) => {
+            // Don't trigger if clicking the arrow button
+            if (!e.target.closest('.expand-arrow-btn')) {
+                selectVideo(video);
+            }
+        });
         
         grid.appendChild(card);
     });
@@ -1368,17 +1390,17 @@ function openReviewModal(alertIndex, action) {
     const title = isSummaryReview 
         ? (action === 'approved' ? 'Approve Summary' : 'Reject Summary')
         : (action === 'approved' ? 'Approve Content Alert' : 'Reject Content Alert');
-    const message = isSummaryReview
-        ? (action === 'approved' 
-            ? 'Are you sure you want to approve this video summary?' 
-            : 'Are you sure you want to reject this video summary?')
-        : (action === 'approved' 
-            ? 'Are you sure you want to approve this content alert?' 
-            : 'Are you sure you want to reject this content alert?');
+    const message = action === 'approved'
+        ? 'State the reason for approval'
+        : 'State the reason for rejection';
+    const placeholder = action === 'approved'
+        ? 'Add your reason for approval (optional)...'
+        : 'Add your reason for rejection (required)...';
     
     document.getElementById('reviewModalTitle').textContent = title;
     document.getElementById('reviewModalMessage').textContent = message;
     document.getElementById('reviewComment').value = '';
+    document.getElementById('reviewComment').placeholder = placeholder;
     
     // Show modal
     modal.style.display = 'flex';
@@ -1402,6 +1424,13 @@ function submitReview() {
     }
     
     const comment = document.getElementById('reviewComment').value.trim();
+    
+    // Validate: comment is mandatory for rejection
+    if (currentReviewAction === 'rejected' && !comment) {
+        showNotification('Please provide a reason for rejection', 'error');
+        return;
+    }
+    
     const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19);
     let historyEntry;
     let notificationMessage;
@@ -1697,7 +1726,7 @@ function approveCurrentRating() {
         action: `Rating Approval: ${currentRating}`,
         status: 'approved',
         user: `${CURRENT_REVIEWER.name} (${CURRENT_REVIEWER.designation})`,
-        message: `Current rating ${currentRating} approved without changes`
+        message: `Rating Approved`
     };
     
     // Add to history logs
@@ -1714,32 +1743,34 @@ function approveCurrentRating() {
     showNotification('Rating approved!', 'approved');
 }
 
-// Toggle rating dropdown in video library
-function toggleRatingDropdown(event, videoIndex) {
+// Toggle expand details in video library
+function toggleExpandDetails(event, videoIndex) {
     event.stopPropagation(); // Prevent card click
     
-    const dropdown = document.getElementById(`rating-dropdown-${videoIndex}`);
-    const allDropdowns = document.querySelectorAll('.rating-dropdown');
+    const expandedSection = document.getElementById(`expanded-details-${videoIndex}`);
+    const arrowBtn = event.currentTarget;
+    const arrowIcon = arrowBtn.querySelector('.arrow-icon');
     
-    // Close all other dropdowns
-    allDropdowns.forEach(dd => {
-        if (dd !== dropdown) {
-            dd.classList.remove('show');
+    // Close all other expanded sections
+    document.querySelectorAll('.video-card-expanded').forEach((section, idx) => {
+        if (idx !== videoIndex) {
+            section.classList.remove('show');
         }
     });
     
-    // Toggle current dropdown
-    dropdown.classList.toggle('show');
+    // Reset all other arrows
+    document.querySelectorAll('.expand-arrow-btn .arrow-icon').forEach((icon, idx) => {
+        if (idx !== videoIndex) {
+            icon.style.transform = 'rotate(0deg)';
+        }
+    });
+    
+    // Toggle current section
+    const isExpanded = expandedSection.classList.toggle('show');
+    
+    // Rotate arrow
+    arrowIcon.style.transform = isExpanded ? 'rotate(90deg)' : 'rotate(0deg)';
 }
-
-// Close dropdowns when clicking outside
-document.addEventListener('click', (event) => {
-    if (!event.target.closest('.video-card-ratings-container')) {
-        document.querySelectorAll('.rating-dropdown').forEach(dd => {
-            dd.classList.remove('show');
-        });
-    }
-});
 
 // Page navigation functions
 function showLandingPage() {

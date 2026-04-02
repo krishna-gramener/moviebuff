@@ -42,30 +42,64 @@ body::before {
 }
 
 /* Clean Professional Video Cards */
-.video-card {
+/* Video Card Wrapper */
+.video-card-wrapper {
     background: white;
     border-radius: 16px;
-    overflow: visible;
-    cursor: pointer;
+    overflow: hidden;
     transition: all 0.3s ease;
     position: relative;
-    display: flex;
-    align-items: center;
-    padding: 24px;
-    gap: 20px;
     border: 1px solid rgba(174, 183, 132, 0.2);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     margin-bottom: 0;
 }
 
-.video-card:has(.rating-dropdown.show) {
-    margin-bottom: 180px;
-}
-
-.video-card:hover {
-    transform: translateY(-4px);
+.video-card-wrapper:hover {
     box-shadow: 0 8px 24px rgba(30, 58, 138, 0.15);
     border-color: rgba(174, 183, 132, 0.4);
+}
+
+/* Video Card Main (clickable area) */
+.video-card-main {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    gap: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+}
+
+.video-card-main:hover {
+    background: rgba(174, 183, 132, 0.03);
+}
+
+/* Expand Arrow Button */
+.expand-arrow-btn {
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    z-index: 10;
+    padding: 0;
+}
+
+.expand-arrow-btn:hover {
+    opacity: 0.7;
+}
+
+.arrow-icon {
+    font-size: 12px;
+    color: #64748b;
+    transition: transform 0.3s ease;
+    display: inline-block;
+    font-weight: 400;
 }
 
 .video-card-thumbnail {
@@ -147,6 +181,244 @@ body::before {
     background: rgba(110, 231, 183, 0.15);
     color: #059669;
     border-color: #10b981;
+}
+
+/* Video Card Expanded Section */
+.video-card-expanded {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    background: #f8fafc;
+    border-top: 1px solid transparent;
+}
+
+.video-card-expanded.show {
+    max-height: 400px;
+    border-top: 1px solid #e2e8f0;
+}
+
+/* Review Stages Table */
+.review-stages-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.review-stages-table thead {
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+}
+
+.stage-header {
+    padding: 14px 16px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    vertical-align: middle;
+}
+
+.stage-header:first-child {
+    text-align: left;
+}
+
+.stage-header:last-child {
+    border-right: none;
+}
+
+.review-stage-row {
+    border-bottom: 1px solid #e2e8f0;
+    transition: background 0.2s;
+}
+
+.review-stage-row:hover {
+    background: rgba(174, 183, 132, 0.05);
+}
+
+.review-stage-row:last-child {
+    border-bottom: none;
+}
+
+.review-stage-row td {
+    vertical-align: middle;
+}
+
+.region-cell {
+    padding: 14px 16px;
+    text-align: left;
+}
+
+.region-flag-table {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.region-name-table {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.rating-cell {
+    padding: 14px 16px;
+    text-align: center;
+}
+
+.rating-badge-table {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.ai-badge {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.human-badge {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.final-badge {
+    background: rgba(139, 92, 246, 0.1);
+    color: #8b5cf6;
+    border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.reviewer-cell {
+    padding: 14px 16px;
+    text-align: center;
+}
+
+.reviewer-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+}
+
+.expanded-header {
+    padding: 16px 20px;
+    background: rgba(30, 58, 138, 0.03);
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.expanded-reviewer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.reviewer-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.reviewer-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e3a8a;
+}
+
+.expanded-regions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 20px;
+}
+
+.expanded-region-row {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.2s;
+}
+
+.expanded-region-row:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-color: #cbd5e1;
+}
+
+.expanded-region-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.region-flag-large {
+    font-size: 28px;
+}
+
+.region-name-large {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.expanded-region-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.rating-detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: #f8fafc;
+    border-radius: 6px;
+}
+
+.rating-detail-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+}
+
+.rating-detail-value {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+.ai-color {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.human-color {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.final-color {
+    background: rgba(139, 92, 246, 0.1);
+    color: #8b5cf6;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.video-card-views {
+    font-size: 13px;
+    color: #64748b;
+    font-weight: 500;
 }
 
 /* Library Tabs */
