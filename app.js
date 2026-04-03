@@ -1814,6 +1814,21 @@ function toggleExpandDetails(event, videoIndex) {
     arrowIcon.style.transform = isExpanded ? 'rotate(90deg)' : 'rotate(0deg)';
 }
 
+// Make functions globally accessible for onclick handlers
+window.toggleExpandDetails = toggleExpandDetails;
+window.seekTo = seekTo;
+window.openReviewModal = openReviewModal;
+window.closeReviewModal = closeReviewModal;
+window.submitReview = submitReview;
+window.openSummaryReviewModal = openSummaryReviewModal;
+window.openRatingOverrideModal = openRatingOverrideModal;
+window.closeRatingOverrideModal = closeRatingOverrideModal;
+window.submitRatingOverride = submitRatingOverride;
+window.approveCurrentRating = approveCurrentRating;
+window.showLandingPage = showLandingPage;
+window.showGuidelinesPage = showGuidelinesPage;
+window.showContactPage = showContactPage;
+
 // Page navigation functions
 function showLandingPage() {
     document.getElementById('landingPage').classList.remove('hidden');
