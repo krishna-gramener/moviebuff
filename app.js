@@ -1,3 +1,6 @@
+// Import subtitle functions
+import { downloadSubtitles } from './subtitle.js';
+
 // Landing Page Handler
 document.addEventListener('DOMContentLoaded', () => {
     const startReviewBtn = document.getElementById('startReviewBtn');
@@ -22,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 let videosData = [];
 let currentVideo = null;
 let player = null;
-let currentTab = 'transcript';
+let currentTab = 'content';
 let processingSteps = [
     { id: 'step1', name: 'Extracting Audio', duration: 1000 },
     { id: 'step2', name: 'Generating Transcripts', duration: 2000 },
@@ -105,7 +108,8 @@ function renderVideoGrid() {
                         const aiRating = (region.rating_suggestion || 'N/A').slice(0, 5);
                         const humanRating = (region.human_rating || '').slice(0, 5);
                         const reviewer = region.reviewer || '-';
-                        const finalRating = region.final_rating ? region.final_rating.slice(0, 5) : '-';
+                        const finalRating = region.final_rating ? region.final_rating.slice(0, 5) : '';
+                        const isPending = !region.final_rating || region.final_rating === '';
                         
                         return `
                             <tr class="review-stage-row">
@@ -123,7 +127,7 @@ function renderVideoGrid() {
                                     <span class="reviewer-text">${reviewer}</span>
                                 </td>
                                 <td class="rating-cell">
-                                    <span class="rating-badge-table final-badge">${finalRating}</span>
+                                    <span class="rating-badge-table ${isPending ? 'pending-badge' : 'final-badge'}">${isPending ? 'Pending' : finalRating}</span>
                                 </td>
                             </tr>
                         `;
@@ -275,7 +279,7 @@ function convertTimeToSeconds(timeString) {
 // Select a video
 function selectVideo(video) {
     currentVideo = video;
-    currentTab = 'transcript';
+    currentTab = 'content';
     currentStepIndex = 0;
     
     // Hide main app header
@@ -563,12 +567,12 @@ function populateAnalysisResults() {
                             ${alert.review_comment ? `<span class="review-comment-preview" title="${alert.review_comment}"></span>` : ''}
                         </div>
                     ` : `
-                        <button class="action-btn approve-btn" onclick="openReviewModal(${index}, 'approved'); return false;" title="Approve">
+                        <button class="action-btn action-btn-icon approve-btn" onclick="openReviewModal(${index}, 'approved'); return false;" title="Approve">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                                 <path d="M13.5 4L6 11.5L2.5 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
-                        <button class="action-btn reject-btn" onclick="openReviewModal(${index}, 'rejected'); return false;" title="Reject">
+                        <button class="action-btn action-btn-icon reject-btn" onclick="openReviewModal(${index}, 'rejected'); return false;" title="Reject">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                                 <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                             </svg>
@@ -603,6 +607,18 @@ function populateTranscriptTab() {
         return;
     }
     
+    // Download button HTML
+    const downloadButtonHTML = `
+        <div class="transcript-download-container">
+            <button class="download-subtitle-btn" onclick="handleDownloadSubtitles(); return false;">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M8 1v10M8 11l-3-3M8 11l3-3M2 14h12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Download Subtitles (.srt)
+            </button>
+        </div>
+    `;
+    
     const transcriptHTML = segments.map(segment => {
         const timestamp = formatDuration(segment.start);
         const seconds = Math.floor(segment.start);
@@ -617,7 +633,7 @@ function populateTranscriptTab() {
         `;
     }).join('');
     
-    transcriptContent.innerHTML = transcriptHTML;
+    transcriptContent.innerHTML = downloadButtonHTML + transcriptHTML;
 }
 
 // Populate Left Side Tabs (Summary and Genres)
@@ -734,14 +750,14 @@ function populateLeftSideTabs() {
                         </div>
                     ` : `
                         <div style="display: flex; gap: 12px; padding-top: 12px; border-top: 1px solid rgba(174, 183, 132, 0.2);">
-                            <button class="action-btn approve-btn" onclick="openSummaryReviewModal('approved'); return false;" title="Approve Summary">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <button class="action-btn summary-btn approve-btn" onclick="openSummaryReviewModal('approved'); return false;" title="Approve Summary">
+                                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                                     <path d="M13.5 4L6 11.5L2.5 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                                 Approve Summary
                             </button>
-                            <button class="action-btn reject-btn" onclick="openSummaryReviewModal('rejected'); return false;" title="Reject Summary">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <button class="action-btn summary-btn reject-btn" onclick="openSummaryReviewModal('rejected'); return false;" title="Reject Summary">
+                                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                                     <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                                 </svg>
                                 Reject Summary
@@ -1152,7 +1168,7 @@ if (breadcrumbLibrary) {
 function switchTab(tabName) {
     // Define left side tabs and right side tabs
     const leftTabs = ['summary', 'genres'];
-    const rightTabs = ['transcript', 'contentalert', 'features', 'regional', 'history'];
+    const rightTabs = ['contentalert', 'transcript', 'history'];
     
     const tabContentMap = {
         'transcript': 'transcriptTab',
@@ -1331,6 +1347,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// Download subtitles handler
+function handleDownloadSubtitles() {
+    if (!currentVideo) {
+        alert('No video selected');
+        return;
+    }
+    
+    // Prepare transcript data in the format expected by subtitle.js
+    const segments = currentVideo.video_details.segments || [];
+    const transcriptData = segments.map(segment => ({
+        timestamp: formatDuration(segment.start),
+        text: segment.text
+    }));
+    
+    // Create video object for download function
+    const videoForDownload = {
+        title: currentVideo.video_details.title,
+        transcript: transcriptData
+    };
+    
+    downloadSubtitles(videoForDownload);
+}
+
+// Make function globally accessible
+window.handleDownloadSubtitles = handleDownloadSubtitles;
 
 // Review modal and functions
 let currentReviewAlertIndex = null;

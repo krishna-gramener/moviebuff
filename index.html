@@ -20,7 +20,7 @@
             <div class="nav-links">
                 <a href="#" onclick="showLandingPage(); return false;" class="nav-link">Overview</a>
                 <a href="#" onclick="showGuidelinesPage(); return false;" class="nav-link">Guidelines</a>
-                <a href="#" onclick="showContactPage(); return false;" class="nav-link">Contact Us</a>
+                <!-- <a href="#" onclick="showContactPage(); return false;" class="nav-link">Contact Us</a> -->
             </div>
             <div class="nav-actions">
                 <button class="nav-btn primary">Profile</button>
@@ -414,12 +414,9 @@
             <div id="videoLibrarySection" style="max-width: 1200px; margin: 0 auto;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
                     <h1 style="font-size: 32px; font-weight: 700; color: #1e3a8a; margin: 0;">My Video Library</h1>
-                    <div class="library-tabs">
-                        <button class="library-tab active">All</button>
-                    </div>
                 </div>
                 
-                <!-- Rating Legend -->
+                <!-- Rating Legend
                 <div class="rating-legend">
                     <span class="legend-item">
                         <span class="legend-dot ai-dot"></span>
@@ -429,7 +426,7 @@
                         <span class="legend-dot human-dot"></span>
                         <span class="legend-text">Human Rating</span>
                     </span>
-                </div>
+                </div> -->
                 
                 <!-- Landing State: Video Grid -->
                 <div id="videoGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -554,23 +551,22 @@
                         <div class="analysis-section">
                             <!-- Tab Navigation -->
                             <div class="analysis-tabs">
-                                <button class="analysis-tab active" data-tab="transcript">Transcript</button>
-                                <button class="analysis-tab" data-tab="content-alerts">
+                                <button class="analysis-tab active" data-tab="content-alerts">
                                     Content Alerts <span class="tab-count" id="alertCount">0</span>
                                 </button>
-                                <button class="analysis-tab" data-tab="regional">Regional Advisory</button>
+                                <button class="analysis-tab" data-tab="transcript">Transcript</button>
                                 <button class="analysis-tab" data-tab="history">History Logs</button>
                             </div>
 
                             <!-- Transcript Tab -->
-                            <div class="analysis-tab-content active" id="transcriptTabContent">
+                            <div class="analysis-tab-content" id="transcriptTabContent">
                                 <div class="tab-content-wrapper" id="transcriptContent">
                                     <!-- Transcript will be loaded here -->
                                 </div>
                             </div>
 
                             <!-- Content Alerts Tab -->
-                            <div class="analysis-tab-content" id="contentAlertsTab">
+                            <div class="analysis-tab-content active" id="contentAlertsTab">
                                 <!-- Category Filters (dynamically populated) -->
                                 <div class="category-filters" id="categoryFilters">
                                     <!-- Category filter buttons will be dynamically inserted here -->
@@ -582,10 +578,9 @@
                                 </div>
                             </div>
 
-                            <!-- Regional Advisory Tab -->
-                            <div class="analysis-tab-content" id="regionalTabContent">
+                            <!-- Regional Advisory Tab (COMMENTED OUT) -->
+                            <!-- <div class="analysis-tab-content" id="regionalTabContent">
                                 <div class="tab-content-wrapper">
-                                    <!-- Region Selector -->
                                     <div class="region-selector">
                                         <button class="region-btn active" data-region="india" title="India">🇮🇳</button>
                                         <button class="region-btn" data-region="united_states" title="United States">🇺🇸</button>
@@ -593,10 +588,9 @@
                                         <button class="region-btn" data-region="japan" title="Japan">🇯🇵</button>
                                     </div>
                                     <div id="regionalContentNew">
-                                        <!-- Regional recommendations will be loaded here -->
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <!-- History Logs Tab -->
                             <div class="analysis-tab-content" id="historyTabContent">
@@ -614,6 +608,6 @@
 
     <!-- Load YouTube IFrame API -->
     <script src="https://www.youtube.com/iframe_api"></script>
-    <script src="app.js"></script>
+    <script type="module" src="app.js"></script>
 </body>
 </html>

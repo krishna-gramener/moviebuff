@@ -2680,57 +2680,57 @@
         }
       ],
       "category": {
-        "rating": "PG-13 (Parental Guidance Suggested)",
+        "rating": "PG-13",
         "human_rating": "A ",
         "content_analysis": [
           {
             "timestamp": "00:00:02",
-            "alert_type": "Environmental Education",
+            "alert_type": "Others",
             "description": "Bear explains the transition from desert to Sky Island mountain ecosystems.   'I've escaped the scorching heat of the Arizona desert by climbing up into the sky island mountains... you can pass through six different environments from the blistering desert to subalpine Forest.'"
           },
           {
             "timestamp": "00:01:00",
-            "alert_type": "Survival Technique",
+            "alert_type": "Others",
             "description": "Detailed demonstration of an improvised fire piston using metal tubes to create heat via air compression.   'One way of starting a fire haven't got a fire Steel on matches is just to improvise a fire piston... the principal Works compressed air creating heat in the same way when you put your finger over a bicycle pump.'"
           },
           {
             "timestamp": "00:01:38",
-            "alert_type": "Survival Technique",
+            "alert_type": "Others",
             "description": "Visual of Bear generating an ember using the fire piston.   'You need to give this a good whack really generate that compressed air and heat pull it out and you'll have an ember.'"
           },
           {
             "timestamp": "00:03:23",
-            "alert_type": "Graphic Content",
+            "alert_type": "Violence",
             "description": "Visual depiction of a scavenged animal carcass found in the brush.   'Mountain lions often leave part of their kill hidden this is a Peery a local species a wild pig... there's still meat on that to eat let's take that back at the fire.'"
           },
           {
             "timestamp": "00:03:44",
-            "alert_type": "Dangerous Activity",
+            "alert_type": "Others",
             "description": "Bear identifies fresh predator tracks and scat near his location.   'There's a bear poo you're going to get black bears in these Woods... if they smell meat they'll take it. This does kind of compromise this as a campsite.'"
           },
           {
             "timestamp": "00:04:33",
-            "alert_type": "Graphic Content",
+            "alert_type": "Violence",
             "description": "Visual of raw scavenged pig meat being placed directly into an open fire to burn off hair and cook.   'I'm just actually going to put this straight on the fire like this burn all the hair off cut the meat in the skin yeah there's a lot of meat on that still.'"
           },
           {
             "timestamp": "00:05:10",
-            "alert_type": "Graphic Content",
+            "alert_type": "Violence",
             "description": "Bear is shown consuming the charred, scavenged meat for nutrition.   'Actually a bit of the shoulder meat is well cooked that's all right but it's warm and it's nutritious.'"
           },
           {
             "timestamp": "00:06:17",
-            "alert_type": "Survival Technique",
+            "alert_type": "Others",
             "description": "Instruction on creating a hanging shelter to avoid ground predators.   'I'm using the remains of the parachute to make what's known as a hanging biver... climbers often use these when they're halfway up a mountain.'"
           },
           {
             "timestamp": "00:06:57",
-            "alert_type": "Dangerous Activity",
+            "alert_type": "Others",
             "description": "Visual of Bear suspended 50 feet in the air on a sheer cliff face.   'It's funny if you forget for a second that you're 50 ft suspended up a sheer rock face it's actually quite nice and cozy in here.'"
           },
           {
             "timestamp": "00:07:29",
-            "alert_type": "Dangerous Activity",
+            "alert_type": "Others",
             "description": "Bear discusses the psychological stress of high-altitude camping.   '5 minutes ago I had some Pebbles fall down land on the top of it thinking is that my Anchor Point is giving away... you just got to can of not worry about that and it's realized it's a mental game.'"
           }
         ]
@@ -2766,7 +2766,7 @@
           "reviewer": "Abhishek Shrivastava",
           "review_status": "approved",
           "final_rating": "U/A 16+",
-          "summary": "This survival adventure episode showcases Bear Grylls navigating Arizona's challenging terrain, demonstrating wilderness skills that resonate with Indian audiences' growing interest in adventure sports and outdoor education. The content is educational and inspiring, teaching valuable survival techniques including traditional fire-making methods. However, due to graphic scenes involving animal remains and dangerous high-altitude stunts, parental guidance is strongly recommended for viewers under 16. The episode aligns with Indian values of resourcefulness and respect for nature, though some content may be sensitive for family viewing during prime time.",
+          "summary": "This survival documentary contains 3 instances of violence including graphic depictions of a scavenged animal carcass (wild pig remains), raw meat being burned directly on fire to remove hair, and consumption of charred scavenged meat. Additionally, there are 7 instances of survival techniques and dangerous activities including fire piston demonstration, bear scat identification near campsite, and sleeping suspended 50 feet up a sheer cliff face. While the educational content on wilderness survival is valuable, Indian broadcast standards and cultural sensitivities around animal-related content require a U/A 16+ rating. The graphic imagery of animal remains and high-risk stunts necessitate parental guidance, with recommendations for pixelating raw meat processing during daytime broadcast and including expert disclaimers.",
           "changes_required": true,
           "recommendations": [
             "Include a content warning for graphic animal carcass imagery (03:17-03:42)",
@@ -2780,7 +2780,7 @@
           "reviewer": "Marie Dubois",
           "review_status": "pending",
           "final_rating": "",
-          "summary": "This wilderness survival documentary presents Bear Grylls' journey through Arizona's Sky Island mountains, offering French audiences an authentic look at human adaptation in extreme natural environments. The episode demonstrates traditional survival techniques including fire-starting through air compression and resourceful food procurement. Consistent with French documentary standards that value unfiltered nature content, the episode presents survival realities without excessive dramatization. The content respects environmental consciousness while showcasing the raw challenges of wilderness survival, making it suitable for general audiences with appropriate context warnings.",
+          "summary": "This wilderness survival documentary contains 3 instances of violence including visual depiction of a scavenged wild pig carcass, raw meat being placed directly into fire, and consumption of charred animal remains. It also features 7 instances of survival education and dangerous activities such as improvised fire piston construction, predator tracking near camp, and cliff-face camping 50 feet above ground. French documentary standards generally accept unfiltered nature content, and the educational merit of demonstrating real survival techniques aligns with France's appreciation for authentic wilderness programming. However, the graphic animal imagery warrants a -12 rating to ensure younger viewers have parental context. The content is suitable for educational broadcast with standard nature documentary warnings.",
           "changes_required": false,
           "recommendations": [
             "Standard warning for 'nature in its raw state' sufficient for French educational standards"
@@ -2792,7 +2792,7 @@
           "reviewer": "Yuki Tanaka",
           "review_status": "approved",
           "final_rating": "R15+",
-          "summary": "This survival episode features Bear Grylls demonstrating wilderness techniques in Arizona's mountains. While the educational content showcases valuable survival skills including advanced fire-making and resource management, Japanese audiences should note that the episode contains graphic imagery of animal remains and high-risk climbing sequences that may be disturbing. Given Japanese cultural sensitivity toward animal-related content and preference for edited nature programming, parental guidance is recommended for viewers under 12. The episode's educational merit is high, but certain scenes require careful consideration for Japanese broadcast standards and viewer sensibilities.",
+          "summary": "This survival documentary contains 3 instances of violence including graphic display of a scavenged wild pig carcass with visible meat, burning raw animal flesh directly on open fire, and eating charred scavenged remains. It also includes 7 instances of survival techniques and risky activities such as fire piston construction, bear scat discovery near sleeping area, and overnight camping suspended on a cliff 50 feet high. Japanese cultural sensitivity toward animal-related content and preference for carefully edited nature programming make the graphic carcass imagery particularly concerning. The R15+ rating reflects Japanese broadcast regulations requiring parental guidance for disturbing animal imagery and extreme risk-taking behavior. Educational value is acknowledged, but mosaic treatment of graphic scenes is recommended for Japanese broadcast standards.",
           "changes_required": true,
           "recommendations": [
             "Apply mosaic blur to graphic carcass remains (03:17-04:15)",
@@ -2804,9 +2804,9 @@
           "rating_suggestion": "TV-14",
           "human_rating": "TV-MA",
           "reviewer": "Sarah Jenkins",
-          "review_status": "approved",
-          "final_rating": "TV-MA",
-          "summary": "Bear Grylls takes on Arizona's unforgiving wilderness in this action-packed survival episode that showcases the grit and ingenuity American audiences expect from adventure programming. The episode features advanced survival techniques including fire-starting with a compression piston and resourceful scavenging in extreme conditions. While the content delivers high entertainment and educational value, it includes graphic depictions of animal remains and extreme high-risk stunts that warrant a TV-14 rating. The episode embodies core American values of self-reliance, innovation, and conquering nature's challenges, though viewer discretion is advised for intense survival scenarios.",
+          "review_status": "pending",
+          "final_rating": "",
+          "summary": "This survival documentary contains 3 instances of violence including graphic footage of a scavenged wild pig carcass with exposed meat, raw animal flesh being burned on open flames, and consumption of charred scavenged remains. It also features 7 instances of survival education and dangerous activities including fire piston construction using metal tubes, identifying fresh bear scat and tracks near camp, and sleeping in a hanging bivouac 50 feet up a sheer rock face. American audiences appreciate authentic survival content, but the graphic animal scavenging scenes and extreme risk-taking warrant a TV-MA rating under FCC guidelines. The content embodies self-reliance values but requires viewer discretion advisories for graphic nature content and dangerous stunts performed by professionals. Suitable for late-night broadcast or streaming with appropriate warnings.",
           "changes_required": true,
           "recommendations": [
             "Include TV-14-V rating for graphic animal violence and dangerous stunts",
@@ -4606,102 +4606,92 @@
         }
       ],
       "category": {
-        "rating": "R (Restricted)",
+        "rating": "R",
         "human_rating": "A",
         "content_analysis": [
           {
-            "timestamp": "00:00:05",
-            "alert_type": "Interpersonal Conflict",
-            "description": "Wolverine refuses to help Deadpool.  'Don't just stand there you ape give me a hand up... nope i'm actually okay thank you'."
-          },
-          {
-            "timestamp": "00:00:15",
-            "alert_type": "Meta/Fourth Wall Break",
-            "description": "Deadpool makes a joke regarding intellectual property.  'I don't know looks kind of mad Maxi but that would be IP infringement right'."
-          },
-          {
             "timestamp": "00:00:21",
-            "alert_type": "Strong Profanity",
+            "alert_type": "Coarse Language",
             "description": "Deadpool uses repeated expletives.  'Oh **fuck fuck** i didn't lie you lied'."
           },
           {
             "timestamp": "00:00:26",
-            "alert_type": "Strong Profanity",
+            "alert_type": "Coarse Language",
             "description": "Wolverine reacts with high-intensity profanity.  'Did you say you made an educated **fucking** wish?'"
           },
           {
             "timestamp": "00:00:30",
-            "alert_type": "Crude Language",
+            "alert_type": "Coarse Language",
             "description": "Deadpool uses vulgar imagery and references to describe himself.  '...they don't call me truthful Timmy the **blowjob** queen of Saskatoon'."
           },
           {
             "timestamp": "00:01:00",
-            "alert_type": "Aggressive Language",
+            "alert_type": "Coarse Language",
             "description": "Wolverine insults Deadpool's history of failure.  'I heard all about you how you screwed up everything you should be thanking me for pulling out of that bed you **shit** in you backstabbing **son of a bitch**.'"
           },
           {
             "timestamp": "00:01:23",
-            "alert_type": "Strong Profanity",
+            "alert_type": "Coarse Language",
             "description": "Wolverine demands space with an expletive.  'Get the **fuck** off of me'."
           },
           {
             "timestamp": "00:01:25",
-            "alert_type": "Strong Profanity",
+            "alert_type": "Coarse Language",
             "description": "Deadpool uses profanity while retrieving a weapon from a sensitive area.  'Almost done... getting my knife out of your buttocks pervert **fuck** go get your mind out of my pants'."
           },
           {
             "timestamp": "00:01:34",
-            "alert_type": "Crude Language",
+            "alert_type": "Coarse Language",
             "description": "Deadpool makes a joke about medical conditions.  '...I've had several **STDs** which were probably caused by ADHD'."
           },
           {
             "timestamp": "00:01:43",
-            "alert_type": "Strong Profanity",
+            "alert_type": "Coarse Language",
             "description": "Deadpool reacts to Sabretooth's arrival.  'Holy **shit** saber-tooth your brother ready to die'."
           },
           {
             "timestamp": "00:02:05",
-            "alert_type": "Strong Profanity",
+            "alert_type": "Coarse Language",
             "description": "Wolverine uses expletives to silence Deadpool.  '**Shut the fuck up** oh my god new rules i talk now'."
           },
           {
             "timestamp": "00:02:11",
-            "alert_type": "Strong Profanity",
+            "alert_type": "Coarse Language",
             "description": "Wolverine repeats the command for silence.  '**Shut the fuck up** let me **fucking** think'."
           },
           {
             "timestamp": "00:02:24",
-            "alert_type": "Strong Profanity",
+            "alert_type": "Coarse Language",
             "description": "Wolverine dismisses Deadpool with an insult.  'Just nod **asshole** right i'm going to fight you now'."
           },
           {
             "timestamp": "00:02:35",
-            "alert_type": "Strong Profanity",
+            "alert_type": "Coarse Language",
             "description": "Wolverine reacts to Deadpool's hairpiece.  'What the **fuck** are those?'"
           },
           {
             "timestamp": "00:02:54",
-            "alert_type": "Strong Profanity",
+            "alert_type": "Coarse Language",
             "description": "Wolverine uses a common dismissive expletive.  'Uh go **fuck** yourself'."
           },
           {
             "timestamp": "00:03:00",
-            "alert_type": "Sexual Innuendo",
+            "alert_type": "Suggestive Dialogue",
             "description": "Deadpool mocks Wolverine's claws with a vulgar metaphor.  '...oh **whiskey dick** of the claws it's quite common in Wolverines over 40'."
           },
           {
             "timestamp": "00:03:22",
-            "alert_type": "Strong Profanity",
+            "alert_type": "Coarse Language",
             "description": "Wolverine questions Deadpool's motivations using profanity.  'Why are you **fucking** doing this? because I'm Marvel Jesus'."
           },
           {
             "timestamp": "00:03:38",
-            "alert_type": "Strong Profanity",
+            "alert_type": "Coarse Language",
             "description": "Wolverine insults Deadpool's intelligence.  'You **fucking** idiot'."
           },
           {
             "timestamp": "00:03:42",
-            "alert_type": "Strong Profanity",
+            "alert_type": "Coarse Language",
             "description": "Wolverine aggressively rejects a gesture of friendship.  'Shake on **fuck you** nicked it just got the tip with your little steak knife'."
           }
         ]
@@ -4725,12 +4715,12 @@
       ],
       "regional_recommendations": {
         "india": {
-          "rating_suggestion": "A (Adults Only)",
+          "rating_suggestion": "A",
           "human_rating": "A",
           "reviewer": "Prakash Jha",
           "review_status": "approved",
           "final_rating": "A",
-          "summary": "This compilation features a high density of strong profanity and crude sexual humor. The constant use of expletives and vulgar metaphors makes it strictly for adult audiences. Not suitable for family or public viewing without heavy censorship.",
+          "summary": "This Marvel compilation contains 16 instances of coarse language including repeated use of the F-word, aggressive insults like 'son of a bitch' and 'backstabbing son of a bitch', crude sexual references including 'blowjob queen of Saskatoon' and 'STDs caused by ADHD', and suggestive dialogue with vulgar metaphors like 'whiskey dick of the claws'. Given Indian broadcast standards and the Central Board of Film Certification's strict guidelines on profanity, this content requires an 'A' (Adults Only 18+) rating. The pervasive explicit language throughout makes it unsuitable for family viewing, television broadcast, or public exhibition without extensive audio censorship.",
           "changes_required": true,
           "recommendations": [
             "Bleep or mute all instances of 'fuck' and 'shit'",
@@ -4738,12 +4728,12 @@
           ]
         },
         "france": {
-          "rating_suggestion": "-12 (Interdit aux moins de 12 ans)",
+          "rating_suggestion": "-12 ",
           "human_rating": "-12",
           "reviewer": "Lucie Lefebvre",
           "review_status": "approved",
           "final_rating": "-12",
-          "summary": "French standards for this genre focus on the mature nature of the dialogue. The vulgarity is stylized and comedic, necessitating a -12 rating due to the pervasive strong language and adult themes.",
+          "summary": "This Marvel compilation contains 16 instances of coarse language including repeated F-words, aggressive insults, and crude sexual humor like 'blowjob queen' and 'whiskey dick of the claws'. While French audiences are generally more tolerant of adult language in entertainment, the concentration and explicit nature of the profanity warrants a -16 rating under France's classification system. The content exceeds the -12 threshold due to the pervasive strong language combined with sexual references. Suitable for older teens and adults who appreciate Deadpool's signature irreverent, meta-humor style.",
           "changes_required": false,
           "recommendations": [
             "Standard disclaimer for vulgar language is sufficient"
@@ -4755,7 +4745,7 @@
           "reviewer": "Kenji Sato",
           "review_status": "approved",
           "final_rating": "R15+",
-          "summary": "Consistent with Japanese standards for Western comedy with high profanity. The R15+ rating is required due to the frequency of insults, crude sexual references (STDs, 'whiskey dick'), and aggressive character interaction.",
+          "summary": "This Marvel compilation contains 16 instances of coarse language including multiple F-words, aggressive insults like 'son of a bitch' and 'asshole', crude sexual references such as 'blowjob queen of Saskatoon' and 'STDs caused by ADHD', plus suggestive dialogue with vulgar metaphors like 'whiskey dick of the claws'. Japanese broadcast standards are generally conservative regarding explicit language, and while Western superhero content is popular, the concentration of profanity and sexual humor exceeds acceptable levels for general audiences. The R18+ rating is justified due to the pervasive strong language throughout the runtime, making it suitable only for adult viewers in Japan's classification system.",
           "changes_required": true,
           "recommendations": [
             "Ensure subtitles accurately reflect the weight of the insults used",
@@ -4763,12 +4753,12 @@
           ]
         },
         "united_states": {
-          "rating_suggestion": "TV-MA / R",
+          "rating_suggestion": "R",
           "human_rating": "R",
           "reviewer": "Mark Thompson",
           "review_status": "approved",
           "final_rating": "R",
-          "summary": "This compilation reflects the R-rated theatrical content of the film. Pervasive strong language and crude humor are present throughout the entire duration.",
+          "summary": "This Marvel compilation contains 16 instances of coarse language including repeated F-words ('fuck', 'fucking'), aggressive insults ('son of a bitch', 'asshole', 'idiot'), crude sexual references ('blowjob queen of Saskatoon', 'STDs caused by ADHD'), and suggestive dialogue with vulgar metaphors ('whiskey dick of the claws'). American audiences familiar with Deadpool's R-rated brand expect this level of adult language and humor. The R rating is appropriate under MPAA guidelines due to the pervasive strong profanity, sexual content, and crude humor throughout. This content is designed for mature audiences who appreciate the characters' signature irreverent, boundary-pushing comedy style and is suitable for theatrical release or streaming platforms with age verification.",
           "changes_required": false,
           "recommendations": [
             "Tag with 'L' for strong language and 'S' for suggestive humor"
@@ -6190,17 +6180,17 @@
         "content_analysis": [
           {
             "timestamp": "00:01:28",
-            "alert_type": "Sporting Milestone/High Intensity",
+            "alert_type": "Others",
             "description": "'he swats that to the man in the deep and 50 for Kohli' This marks a critical turning point in the match where Virat Kohli reaches a half-century, intensifying the momentum of the chase."
           },
           {
             "timestamp": "00:04:30",
-            "alert_type": "Emotional Peak",
+            "alert_type": "Others",
             "description": "'India have made the semifinals of the ICC World 2020 they have brought their best to chandigarh have a look at virat kohli so emotional he knew it was tough'. Captures the raw emotional release of the lead player sinking to his knees after securing a high-stakes victory."
           },
           {
             "timestamp": "00:04:50",
-            "alert_type": "Visual Milestone",
+            "alert_type": "Others",
             "description": "Visual showing Virat Kohli celebrating the final winning runs, highlighting the successful conclusion of a high-pressure run chase."
           }
         ]
@@ -6227,8 +6217,8 @@
           "rating_suggestion": "U ",
           "human_rating": "U",
           "reviewer": "Vikram Sethi",
-          "review_status": "approved",
-          "final_rating": "U",
+          "review_status": "pending",
+          "final_rating": "",
           "summary": "This iconic cricket highlight captures Virat Kohli's masterful 82* that led India to victory over Australia in the 2016 T20 World Cup - a moment etched in Indian sporting history. For Indian audiences, this represents more than just a cricket match; it's a celebration of national pride, sporting excellence, and one of the greatest chase performances in T20 history. The content is universally suitable for all age groups, perfect for family viewing, and resonates deeply with India's passion for cricket. This highlight package showcases the skill, determination, and composure that make Kohli a national icon and inspire millions of young cricketers across India.",
           "changes_required": false,
           "recommendations": [
@@ -6263,12 +6253,12 @@
           ]
         },
         "united_states": {
-          "rating_suggestion": "TV-G (General Audience)",
+          "rating_suggestion": "TV-G",
           "human_rating": "TV-G",
           "reviewer": "Rohan Mehta",
           "review_status": "approved",
           "final_rating": "TV-G",
-          "summary": "This cricket highlight showcases an outstanding individual performance by India's Virat Kohli in a high-stakes match against Australia. While cricket has a niche following in the United States, American sports fans who appreciate clutch performances and athletic excellence will recognize the skill and pressure management on display. The content parallels American sports values of individual brilliance in team contexts, similar to iconic moments in baseball or basketball. As clean sports content with no objectionable material, it's appropriate for all audiences and provides American viewers a window into one of the world's most popular sports and its biggest stars.",
+          "summary": "This cricket highlight showcases Virat Kohli's match-winning 82* against Australia in the 2016 T20 World Cup semifinal. The content contains no violence, profanity, or objectionable material - only clean sports action and emotional celebration. American audiences unfamiliar with cricket will appreciate the athletic excellence, pressure performance, and dramatic finish comparable to clutch moments in baseball or basketball playoffs. The TV-G rating reflects the universal family-friendly nature of this sports content, making it appropriate for all ages and suitable for broadcast at any time without restrictions.",
           "changes_required": false,
           "recommendations": [
             "Appropriate for all audiences; standard sports programming guidelines apply."
@@ -7434,52 +7424,52 @@
         "content_analysis": [
           {
             "timestamp": "00:00:09",
-            "alert_type": "Psychological Manipulation",
+            "alert_type": "Others",
             "description": "Ramsay Bolton addresses Sansa Stark with mocking affection to assert dominance.  'My beloved wife, I've missed you terribly. Thank you for returning Lady Bolton safely.'"
           },
           {
             "timestamp": "00:00:38",
-            "alert_type": "Derogatory Language",
+            "alert_type": "Coarse Language",
             "description": "Ramsay uses a slur to demean Jon Snow's status.  'Come bastard, you don't have the men, you don't have the horses, and you don't have Winterfell.'"
           },
           {
             "timestamp": "00:01:11",
-            "alert_type": "Conflict Tension",
+            "alert_type": "Others",
             "description": "Jon Snow attempts to settle the war through single combat.  'Thousands of men don't need to die, only one of us. Let's end this the old way: you against me.'"
           },
           {
             "timestamp": "00:01:35",
-            "alert_type": "Derogatory Language",
+            "alert_type": "Coarse Language",
             "description": "Ramsay repeats the slur while questioning Jon's reputation.  'I keep hearing stories about you, bastard. The way people in the North talk about you, you're the greatest swordsman who ever walked.'"
           },
           {
             "timestamp": "00:02:40",
-            "alert_type": "Graphic Imagery",
+            "alert_type": "Violence",
             "description": "Smalljon Umber throws the severed head of the direwolf Shaggydog onto the ground as proof of Rickon Stark's capture."
           },
           {
             "timestamp": "00:02:55",
-            "alert_type": "Verbal Threat",
+            "alert_type": "Violence",
             "description": "Sansa Stark delivers a cold promise of execution.  'You're going to die tomorrow, Lord Bolton. Sleep well.'"
           },
           {
             "timestamp": "00:03:11",
-            "alert_type": "Sexual Reference",
+            "alert_type": "Suggestive Dialogue",
             "description": "Ramsay makes a crude and possessive comment regarding Sansa.  'She's a fine woman, your sister. I look forward to having her back in my bed.'"
           },
           {
             "timestamp": "00:03:22",
-            "alert_type": "Violent Threats",
+            "alert_type": "Violence",
             "description": "Ramsay describes his starving hounds and how they will kill the Stark leaders.  'My dogs are desperate to meet you. I haven't fed them for seven days. They're ravenous.'"
           },
           {
             "timestamp": "00:03:35",
-            "alert_type": "Violent Threats",
+            "alert_type": "Violence",
             "description": "Detailed graphic description of animal mutilation.  'I wonder which parts they'll try first: your eyes, your balls. We'll find out soon enough.'"
           },
           {
             "timestamp": "00:03:44",
-            "alert_type": "Derogatory Language",
+            "alert_type": "Coarse Language",
             "description": "Ramsay delivers a final parting insult as he rides away.  'Bastard.'"
           }
         ]
@@ -7515,7 +7505,7 @@
           "reviewer": "Sanjay Kapoor",
           "review_status": "approved",
           "final_rating": "A",
-          "summary": "This clip contains intense psychological abuse, graphic threats of violence (including mutilation by animals), and disturbing dialogue concerning sexual possession. Due to the dark themes and the severed animal head visual, it is strictly recommended for mature audiences under 16 only with parental guidance, though a digital 'A' rating is more appropriate for Indian broadcast standards.",
+          "summary": "This Game of Thrones scene contains 5 instances of violence including psychological manipulation ('my beloved wife'), verbal threats of death ('you're going to die tomorrow'), graphic imagery of a severed direwolf head thrown on the ground, detailed threats of mutilation by starving dogs ('which parts they'll try first: your eyes, your balls'), and descriptions of dogs being starved for seven days. It also includes 4 instances of coarse language with repeated use of 'bastard' as a derogatory slur, plus 1 instance of suggestive dialogue with crude sexual possession reference ('I look forward to having her back in my bed'), and 2 instances of conflict tension. Given Indian cultural sensitivities around graphic violence, animal cruelty imagery, and sexual references, this content requires an 'A' (Adults Only 18+) rating. The combination of psychological abuse, disturbing visuals, and explicit threats makes it unsuitable for viewers under 18 and requires substantial editing for television broadcast.",
           "changes_required": true,
           "recommendations": [
             "Display a prominent content warning for graphic verbal threats",
@@ -7524,12 +7514,12 @@
           ]
         },
         "france": {
-          "rating_suggestion": "-12 (Interdit aux moins de 12 ans)",
+          "rating_suggestion": "-12",
           "human_rating": "-12",
           "reviewer": "Isabelle Laurent",
           "review_status": "approved",
           "final_rating": "-12",
-          "summary": "The episode clip focuses on high-tension psychological warfare. While visually less violent than the battle itself, the verbal threats and the display of the dead wolf head fall under French 'disturbing content' guidelines for minors. Suitable for audiences aged 12 and above.",
+          "summary": "This Game of Thrones scene contains 5 instances of violence including psychological manipulation, death threats ('you're going to die tomorrow'), a severed direwolf head displayed on the ground, graphic verbal descriptions of mutilation by dogs ('your eyes, your balls'), and threats involving starved animals. It includes 4 instances of coarse language using 'bastard' repeatedly as an insult, 1 instance of suggestive dialogue with sexual possession reference ('having her back in my bed'), and 2 instances of psychological conflict. French audiences familiar with Game of Thrones' mature content will recognize this as consistent with the series' dark medieval tone. The -16 rating reflects France's classification for content with disturbing psychological elements and graphic verbal threats. While less visually violent than battle scenes, the combination of animal cruelty imagery and explicit verbal violence warrants the higher age restriction.",
           "changes_required": false,
           "recommendations": [
             "Standard disclaimer for 'scenes potentially disturbing to younger audiences' is sufficient"
@@ -7541,7 +7531,7 @@
           "reviewer": "Takashi Sato",
           "review_status": "approved",
           "final_rating": "PG12",
-          "summary": "This scene highlights the cruelty of Ramsay Bolton. The description of starving hounds eating human remains and the visual of the direwolf head are considered intense for younger Japanese viewers. Parental guidance is required for those under 12.",
+          "summary": "This Game of Thrones scene contains 5 instances of violence including psychological manipulation, death threats ('you're going to die tomorrow'), a severed direwolf head thrown to the ground, graphic descriptions of mutilation ('which parts they'll try first: your eyes, your balls'), and detailed threats about starved dogs consuming human remains. It includes 4 instances of coarse language with 'bastard' used as a derogatory insult, 1 instance of suggestive dialogue referencing sexual possession ('having her back in my bed'), and 2 instances of psychological warfare. Japanese cultural sensitivity toward animal cruelty and graphic verbal violence makes this content particularly concerning. The R18+ rating reflects the disturbing nature of the animal head imagery combined with explicit threats of bodily mutilation, which exceed Japanese broadcast standards for younger audiences. Mosaic treatment and clear cruelty warnings are essential for Japanese distribution.",
           "changes_required": true,
           "recommendations": [
             "Provide Japanese subtitles that capture the specific gravity of Ramsay's threats",
@@ -7554,7 +7544,7 @@
           "reviewer": "Jessica Vance",
           "review_status": "approved",
           "final_rating": "TV-MA",
-          "summary": "True to Game of Thrones' overall tone, this clip contains mature language, threats of extreme violence, and psychological cruelty. The TV-MA rating is appropriate due to the disturbing nature of the dialogue regarding mutilation and the display of animal remains.",
+          "summary": "This Game of Thrones scene contains 5 instances of violence including psychological manipulation ('my beloved wife'), death threats ('you're going to die tomorrow'), a severed direwolf head thrown on the ground, explicit descriptions of mutilation by dogs ('which parts they'll try first: your eyes, your balls'), and threats involving seven-day starved animals. It includes 4 instances of coarse language with repeated use of 'bastard' as a slur, 1 instance of suggestive dialogue with sexual possession reference ('I look forward to having her back in my bed'), and 2 instances of intense psychological warfare. American audiences familiar with Game of Thrones expect this level of mature content from HBO's prestige drama. The TV-MA rating is appropriate under FCC guidelines due to the combination of graphic verbal violence, disturbing animal imagery, and psychological cruelty. This content represents the series' signature dark medieval tone and is suitable for adult viewers on premium cable or streaming platforms.",
           "changes_required": false,
           "recommendations": [
             "Tag with descriptors for 'Adult Content' and 'Graphic Language'"
