@@ -510,16 +510,30 @@ function populateAnalysisResults() {
         return;
     }
     
-    // Get unique alert types from content analysis
-    const alertTypes = [...new Set(contentAnalysis.map(alert => alert.alert_type))];
+    // Define all standard categories
+    const standardCategories = [
+        'Suggestive Dialogue',
+        'Coarse Language',
+        'Sexual Content',
+        'Violence',
+        'Others'
+    ];
     
-    // Create category filter buttons dynamically
+    // Create category filter buttons - always show all 5 categories
     if (categoryFilters) {
         const categoryCounts = {};
         categoryCounts['all'] = contentAnalysis.length;
         
-        alertTypes.forEach(type => {
+        // Count occurrences for each standard category
+        standardCategories.forEach(type => {
             categoryCounts[type.toLowerCase().replace(/\s+/g, '-')] = contentAnalysis.filter(a => a.alert_type === type).length;
+        });
+        
+        // Sort categories by count (descending)
+        const sortedCategories = [...standardCategories].sort((a, b) => {
+            const countA = categoryCounts[a.toLowerCase().replace(/\s+/g, '-')] || 0;
+            const countB = categoryCounts[b.toLowerCase().replace(/\s+/g, '-')] || 0;
+            return countB - countA; // Descending order
         });
         
         let filtersHTML = `
@@ -528,11 +542,13 @@ function populateAnalysisResults() {
             </button>
         `;
         
-        alertTypes.forEach(type => {
+        // Always show all 5 standard categories, ordered by count
+        sortedCategories.forEach(type => {
             const categoryKey = type.toLowerCase().replace(/\s+/g, '-');
+            const count = categoryCounts[categoryKey] || 0;
             filtersHTML += `
                 <button class="category-btn" data-category="${categoryKey}" data-alert-type="${type}">
-                    ${type} <span class="category-count">${categoryCounts[categoryKey]}</span>
+                    ${type} <span class="category-count">${count}</span>
                 </button>
             `;
         });
@@ -659,14 +675,14 @@ function populateLeftSideTabs() {
         
         // Country flags and data
         const countries = [
-            { code: 'india', flag: '🇮🇳', name: 'India' },
             { code: 'united_states', flag: '🇺🇸', name: 'United States' },
+            { code: 'india', flag: '🇮🇳', name: 'India' },
             { code: 'france', flag: '🇫🇷', name: 'France' },
             { code: 'japan', flag: '🇯🇵', name: 'Japan' }
         ];
         
         // Default to India
-        const defaultCountry = 'india';
+        const defaultCountry = 'united_states';
         const currentRegion = regionalRecs[defaultCountry] || {};
         const currentRating = currentRegion.rating_suggestion || rating;
         const currentSummary = currentRegion.summary || summary;
@@ -720,15 +736,15 @@ function populateLeftSideTabs() {
                 <!-- Rating Actions -->
                 <div id="ratingActionsSection" style="display: flex; gap: 12px; padding: 16px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 24px;">
                     ${ratingApproved ? `
-                        <div class="review-status approved" style="display: inline-flex; flex: 1; justify-content: center;">
+                        <div class="review-status approved" style="display: inline-flex;">
                             ✓ Rating Approved
                         </div>
                     ` : `
-                        <button class="action-btn" onclick="openRatingOverrideModal(); return false;" style="flex: 1; background: #f59e0b; color: white; padding: 12px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s;">
-                            Override Rating
+                        <button class="action-btn-compact override-btn" onclick="openRatingOverrideModal(); return false;">
+                            Override
                         </button>
-                        <button class="action-btn approve-btn" onclick="approveCurrentRating(); return false;" style="flex: 1; padding: 12px;">
-                            Approve Rating
+                        <button class="action-btn-compact approve-btn" onclick="approveCurrentRating(); return false;">
+                            Approve
                         </button>
                     `}
                 </div>
@@ -750,17 +766,11 @@ function populateLeftSideTabs() {
                         </div>
                     ` : `
                         <div style="display: flex; gap: 12px; padding-top: 12px; border-top: 1px solid rgba(174, 183, 132, 0.2);">
-                            <button class="action-btn summary-btn approve-btn" onclick="openSummaryReviewModal('approved'); return false;" title="Approve Summary">
-                                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                                    <path d="M13.5 4L6 11.5L2.5 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                                Approve Summary
+                            <button class="action-btn-compact approve-btn" onclick="openSummaryReviewModal('approved'); return false;">
+                                Approve
                             </button>
-                            <button class="action-btn summary-btn reject-btn" onclick="openSummaryReviewModal('rejected'); return false;" title="Reject Summary">
-                                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                                    <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                </svg>
-                                Reject Summary
+                            <button class="action-btn-compact reject-btn" onclick="openSummaryReviewModal('rejected'); return false;">
+                                Reject
                             </button>
                         </div>
                     `}
