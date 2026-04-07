@@ -1879,6 +1879,9 @@ function switchGuidelinesTab(country) {
     document.getElementById(`guidelines-${country}`).classList.add('active');
 }
 
+// Expose to global scope for inline onclick handlers
+window.switchGuidelinesTab = switchGuidelinesTab;
+
 // Sidebar toggle button listener - wrapped in DOMContentLoaded to ensure element exists
 document.addEventListener('DOMContentLoaded', () => {
     const sidebarToggle = document.getElementById('sidebarToggle');
