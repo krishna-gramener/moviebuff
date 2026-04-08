@@ -6,6 +6,7 @@
     <title>RatingsAI - Your AI-Assisted Cinema Companion</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="min-h-screen">
@@ -20,6 +21,7 @@
             <div class="nav-links">
                 <a href="#" onclick="showLandingPage(); return false;" class="nav-link">Overview</a>
                 <a href="#" onclick="showGuidelinesPage(); return false;" class="nav-link">Guidelines</a>
+                <a href="#" onclick="showArchitecturePage(); return false;" class="nav-link">Architecture</a>
                 <!-- <a href="#" onclick="showContactPage(); return false;" class="nav-link">Contact Us</a> -->
             </div>
             <div class="nav-actions">
@@ -388,6 +390,485 @@
         </div>
     </div>
 
+    <!-- Architecture Page (Hidden Initially) -->
+    <div id="architecturePage" class="hidden" style="min-height: 100vh; background: #f8fafc; padding: 40px 0;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 24px;">
+            <div style="margin-bottom: 40px;">
+                <h1 style="font-size: 36px; font-weight: 700; color: #1e293b; margin-bottom: 12px;">AI Application Architecture & Lifecycle</h1>
+                <p style="font-size: 16px; color: #64748b;">Cloud architecture diagrams and implementation details for different cloud providers.</p>
+            </div>
+
+            <!-- Cloud Provider Tabs -->
+            <div style="display: flex; gap: 8px; margin-bottom: 32px; border-bottom: 2px solid #e2e8f0;">
+                <button class="guidelines-tab active" data-cloud="aws" onclick="switchArchitectureTab('aws')" style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-brands fa-aws" style="color: #FF9900; font-size: 20px;"></i>
+                    AWS
+                </button>
+                <button class="guidelines-tab" data-cloud="gcp" onclick="switchArchitectureTab('gcp')" style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-brands fa-google" style="color: #4285F4; font-size: 20px;"></i>
+                    GCP
+                </button>
+                <button class="guidelines-tab" data-cloud="azure" onclick="switchArchitectureTab('azure')" style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-brands fa-microsoft" style="color: #0078D4; font-size: 20px;"></i>
+                    Azure
+                </button>
+            </div>
+
+            <!-- AWS Tab Content -->
+            <div id="architecture-aws" class="guidelines-content active">
+                <!-- Architecture Diagram Placeholder -->
+                <div style="background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 32px;">
+                    <div onclick="toggleArchDiagram('aws')" style="padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0;">
+                        <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0;">Architecture Diagram</h3>
+                        <i id="aws-diagram-icon" class="fa-solid fa-chevron-up" style="color: #64748b; transition: transform 0.3s;"></i>
+                    </div>
+                    <div id="aws-diagram-content" style="padding: 32px; text-align: center;">
+                        <img src="/architecture/aws.jpg" alt="AWS Architecture" style="max-width: 100%; height: auto; border-radius: 8px;">
+                    </div>
+                </div>
+
+                <!-- Lifecycle Flow -->
+                <div style="background: white; border-radius: 12px; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 32px;">
+                    <h2 style="font-size: 24px; font-weight: 700; color: #1e293b; margin-bottom: 24px;">Lifecycle Flow Diagram</h2>
+                    <div style="background: #f8fafc; padding: 24px; border-radius: 8px; border-left: 4px solid #3b82f6;">
+                        <pre style="margin: 0; font-family: 'Courier New', monospace; font-size: 14px; color: #1e293b; line-height: 2;">Frontend Request
+      ↓
+Content Ingestion (Upload Video)
+      ↓
+Event Trigger (Auto Pipeline Start)
+      ↓
+AI Microservices Processing
+      ↓
+Intermediate Data Storage
+      ↓
+Aggregation Service
+      ↓
+Final Storage (Database)
+      ↓
+Backend API
+      ↓
+Frontend Display (UI + Streaming)</pre>
+                    </div>
+                </div>
+
+                <!-- Stage-by-Stage Architecture -->
+                <div style="background: white; border-radius: 12px; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 32px;">
+                    <h2 style="font-size: 24px; font-weight: 700; color: #1e293b; margin-bottom: 24px;">Stage-by-Stage Architecture + Technologies</h2>
+                    
+                    <!-- Stage Cards -->
+                    <div style="display: grid; gap: 20px;">
+                        <!-- Content Ingestion -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #3b82f6;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.1 Content Ingestion Layer</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Frontend sends request, Video uploaded to storage (entry point)</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> Amazon S3, API Gateway, AWS Lambda</p>
+                        </div>
+
+                        <!-- Event Trigger -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #10b981;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.2 Event Trigger Layer</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Upload triggers pipeline automatically</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> S3 Event Notifications, (Optional) SQS, EventBridge</p>
+                        </div>
+
+                        <!-- AI Processing -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #8b5cf6;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.3 AI Processing Pipeline</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Metadata extraction, Audio transcription, AI analysis, Rating generation</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong><br>
+                            • Compute: Lambda / ECS / EKS<br>
+                            • AI Services: Amazon Transcribe, Amazon Rekognition, Amazon Comprehend</p>
+                        </div>
+
+                        <!-- Intermediate Storage -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.4 Intermediate Data Storage</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Stores transcripts, labels, analysis outputs</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> Amazon S3</p>
+                        </div>
+
+                        <!-- Aggregation -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #ef4444;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.5 Aggregation Layer</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Combines intermediate outputs into final result</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> AWS Lambda / ECS</p>
+                        </div>
+
+                        <!-- Final Storage -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #06b6d4;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.6 Final Data Storage</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Stores final structured AI results</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> Amazon DynamoDB</p>
+                        </div>
+
+                        <!-- Backend API -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #ec4899;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.7 Backend API Layer</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Fetches results for frontend</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> API Gateway, AWS Lambda</p>
+                        </div>
+
+                        <!-- Frontend -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #14b8a6;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.8 Frontend Layer</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Displays results and video</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> React (or similar), HLS Streaming</p>
+                        </div>
+
+                        <!-- Video Streaming -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #6366f1;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.9 Video Streaming Layer</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Converts video to streaming format</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> HLS, Amazon S3, (Optional) CloudFront</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Lifecycle Summary Table -->
+                <div style="background: white; border-radius: 12px; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 32px;">
+                    <h2 style="font-size: 24px; font-weight: 700; color: #1e293b; margin-bottom: 24px;">Data Lifecycle Summary</h2>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: #f8fafc;">
+                                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e2e8f0; font-weight: 600; color: #1e293b;">Stage</th>
+                                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e2e8f0; font-weight: 600; color: #1e293b;">Description</th>
+                                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e2e8f0; font-weight: 600; color: #1e293b;">Technology</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Ingestion</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Upload video</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">S3</td></tr>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Trigger</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Start pipeline</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">S3 Events</td></tr>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Processing</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">AI services</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Lambda / ECS</td></tr>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">AI Tasks</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Analyze content</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Transcribe, Rekognition, Comprehend</td></tr>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Intermediate</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Store outputs</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">S3</td></tr>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Aggregation</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Combine results</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Lambda</td></tr>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Persistence</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Store final data</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">DynamoDB</td></tr>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">API</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Serve data</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">API Gateway</td></tr>
+                                <tr><td style="padding: 12px;">Frontend</td><td style="padding: 12px;">Display results</td><td style="padding: 12px;">React</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Key Architectural Principles -->
+                <div style="background: white; border-radius: 12px; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <h2 style="font-size: 24px; font-weight: 700; color: #1e293b; margin-bottom: 24px;">Key Architectural Principles</h2>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="padding: 12px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #3b82f6;">✓ Event-driven architecture</li>
+                        <li style="padding: 12px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #10b981;">✓ Microservices-based design</li>
+                        <li style="padding: 12px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #8b5cf6;">✓ Serverless compute</li>
+                        <li style="padding: 12px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #f59e0b;">✓ Storage-driven pipeline</li>
+                        <li style="padding: 12px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #ef4444;">✓ Decoupled services</li>
+                        <li style="padding: 12px; background: #f8fafc; border-radius: 6px; border-left: 3px solid #06b6d4;">✓ Scalable and fault-tolerant system</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- GCP Tab Content -->
+            <div id="architecture-gcp" class="guidelines-content">
+                <!-- Architecture Diagram Placeholder -->
+                <div style="background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 32px;">
+                    <div onclick="toggleArchDiagram('gcp')" style="padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0;">
+                        <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0;">Architecture Diagram</h3>
+                        <i id="gcp-diagram-icon" class="fa-solid fa-chevron-up" style="color: #64748b; transition: transform 0.3s;"></i>
+                    </div>
+                    <div id="gcp-diagram-content" style="padding: 32px; text-align: center;">
+                        <img src="/architecture/gcp.jpg" alt="GCP Architecture" style="max-width: 100%; height: auto; border-radius: 8px;">
+                    </div>
+                </div>
+
+                <!-- Lifecycle Flow -->
+                <div style="background: white; border-radius: 12px; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 32px;">
+                    <h2 style="font-size: 24px; font-weight: 700; color: #1e293b; margin-bottom: 24px;">Lifecycle Flow Diagram</h2>
+                    <div style="background: #f8fafc; padding: 24px; border-radius: 8px; border-left: 4px solid #4285f4;">
+                        <pre style="margin: 0; font-family: 'Courier New', monospace; font-size: 14px; color: #1e293b; line-height: 2;">Frontend Request
+      ↓
+Content Ingestion (Upload Video)
+      ↓
+Event Trigger (Auto Pipeline Start)
+      ↓
+AI Microservices Processing
+      ↓
+Intermediate Data Storage
+      ↓
+Aggregation Service
+      ↓
+Final Storage (Database)
+      ↓
+Backend API
+      ↓
+Frontend Display (UI + Streaming)</pre>
+                    </div>
+                </div>
+
+                <!-- Stage-by-Stage Architecture -->
+                <div style="background: white; border-radius: 12px; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 32px;">
+                    <h2 style="font-size: 24px; font-weight: 700; color: #1e293b; margin-bottom: 24px;">Stage-by-Stage Architecture + Technologies (GCP)</h2>
+                    
+                    <!-- Stage Cards -->
+                    <div style="display: grid; gap: 20px;">
+                        <!-- Content Ingestion -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #4285f4;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.1 Content Ingestion Layer</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Frontend sends request, Video uploaded to storage (entry point)</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> Google Cloud Storage, Google Cloud Functions, Google Cloud Endpoints</p>
+                        </div>
+
+                        <!-- Event Trigger -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #34a853;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.2 Event Trigger Layer</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Upload triggers pipeline automatically</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> Cloud Storage Triggers, (Optional) Pub/Sub</p>
+                        </div>
+
+                        <!-- AI Processing -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #ea4335;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.3 AI Processing Pipeline</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Metadata extraction, Audio transcription, AI analysis, Rating generation</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong><br>
+                            • Compute: Cloud Functions / Cloud Run / GKE<br>
+                            • AI Services: Speech-to-Text, Video Intelligence API, Natural Language API</p>
+                        </div>
+
+                        <!-- Intermediate Storage -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #fbbc04;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.4 Intermediate Data Storage</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Stores transcripts, labels, analysis outputs</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> Cloud Storage</p>
+                        </div>
+
+                        <!-- Aggregation -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #ea4335;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.5 Aggregation Layer</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Combines intermediate outputs into final result</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> Cloud Functions / Cloud Run</p>
+                        </div>
+
+                        <!-- Final Storage -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #4285f4;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.6 Final Data Storage</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Stores final structured AI results</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> Firestore / Bigtable</p>
+                        </div>
+
+                        <!-- Backend API -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #34a853;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.7 Backend API Layer</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Fetches results for frontend</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> Cloud Endpoints, Cloud Functions / Cloud Run</p>
+                        </div>
+
+                        <!-- Frontend -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #fbbc04;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.8 Frontend Layer</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Displays results and video</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> React (or similar), HLS Streaming</p>
+                        </div>
+
+                        <!-- Video Streaming -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #ea4335;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.9 Video Streaming Layer</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Converts video to streaming format</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> HLS, Cloud Storage, (Optional) Cloud CDN</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Lifecycle Summary Table -->
+                <div style="background: white; border-radius: 12px; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 32px;">
+                    <h2 style="font-size: 24px; font-weight: 700; color: #1e293b; margin-bottom: 24px;">Data Lifecycle Summary</h2>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: #f8fafc;">
+                                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e2e8f0; font-weight: 600; color: #1e293b;">Stage</th>
+                                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e2e8f0; font-weight: 600; color: #1e293b;">Description</th>
+                                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e2e8f0; font-weight: 600; color: #1e293b;">Technology</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Ingestion</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Upload video</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Cloud Storage</td></tr>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Trigger</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Start pipeline</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Storage Triggers</td></tr>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Processing</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">AI services</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Cloud Functions / Run</td></tr>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">AI Tasks</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Analyze content</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Speech-to-Text, Video Intelligence, NLP</td></tr>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Intermediate</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Store outputs</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Cloud Storage</td></tr>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Aggregation</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Combine results</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Cloud Functions</td></tr>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Persistence</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Store final data</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Firestore / Bigtable</td></tr>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">API</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Serve data</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Cloud Endpoints</td></tr>
+                                <tr><td style="padding: 12px;">Frontend</td><td style="padding: 12px;">Display results</td><td style="padding: 12px;">React</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Key Architectural Principles -->
+                <div style="background: white; border-radius: 12px; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <h2 style="font-size: 24px; font-weight: 700; color: #1e293b; margin-bottom: 24px;">Key Architectural Principles</h2>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="padding: 12px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #4285f4;">✓ Event-driven architecture</li>
+                        <li style="padding: 12px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #34a853;">✓ Microservices-based design</li>
+                        <li style="padding: 12px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #ea4335;">✓ Serverless compute</li>
+                        <li style="padding: 12px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #fbbc04;">✓ Storage-driven pipeline</li>
+                        <li style="padding: 12px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #4285f4;">✓ Decoupled services</li>
+                        <li style="padding: 12px; background: #f8fafc; border-radius: 6px; border-left: 3px solid #34a853;">✓ Scalable and fault-tolerant system</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Azure Tab Content -->
+            <div id="architecture-azure" class="guidelines-content">
+                <!-- Architecture Diagram Placeholder -->
+                <div style="background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 32px;">
+                    <div onclick="toggleArchDiagram('azure')" style="padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0;">
+                        <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0;">Architecture Diagram</h3>
+                        <i id="azure-diagram-icon" class="fa-solid fa-chevron-up" style="color: #64748b; transition: transform 0.3s;"></i>
+                    </div>
+                    <div id="azure-diagram-content" style="padding: 32px; text-align: center;">
+                        <img src="/architecture/azure.jpg" alt="Azure Architecture" style="max-width: 100%; height: auto; border-radius: 8px;">
+                    </div>
+                </div>
+
+                <!-- Lifecycle Flow -->
+                <div style="background: white; border-radius: 12px; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 32px;">
+                    <h2 style="font-size: 24px; font-weight: 700; color: #1e293b; margin-bottom: 24px;">Lifecycle Flow Diagram</h2>
+                    <div style="background: #f8fafc; padding: 24px; border-radius: 8px; border-left: 4px solid #0078d4;">
+                        <pre style="margin: 0; font-family: 'Courier New', monospace; font-size: 14px; color: #1e293b; line-height: 2;">Frontend Request
+      ↓
+Content Ingestion (Upload Video)
+      ↓
+Event Trigger (Auto Pipeline Start)
+      ↓
+AI Microservices Processing
+      ↓
+Intermediate Data Storage
+      ↓
+Aggregation Service
+      ↓
+Final Storage (Database)
+      ↓
+Backend API
+      ↓
+Frontend Display (UI + Streaming)</pre>
+                    </div>
+                </div>
+
+                <!-- Stage-by-Stage Architecture -->
+                <div style="background: white; border-radius: 12px; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 32px;">
+                    <h2 style="font-size: 24px; font-weight: 700; color: #1e293b; margin-bottom: 24px;">Stage-by-Stage Architecture + Technologies (Azure)</h2>
+                    
+                    <!-- Stage Cards -->
+                    <div style="display: grid; gap: 20px;">
+                        <!-- Content Ingestion -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #0078d4;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.1 Content Ingestion Layer</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Frontend sends request, Video uploaded to storage (entry point)</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> Azure Blob Storage, Azure Functions, Azure API Management</p>
+                        </div>
+
+                        <!-- Event Trigger -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #50e6ff;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.2 Event Trigger Layer</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Upload triggers pipeline automatically</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> Blob Storage Events, (Optional) Azure Event Grid / Service Bus</p>
+                        </div>
+
+                        <!-- AI Processing -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #7fba00;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.3 AI Processing Pipeline</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Metadata extraction, Audio transcription, AI analysis, Rating generation</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong><br>
+                            • Compute: Azure Functions / Azure Container Apps / AKS<br>
+                            • AI Services: Azure Speech to Text, Azure Video Indexer, Azure AI Language</p>
+                        </div>
+
+                        <!-- Intermediate Storage -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #ffb900;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.4 Intermediate Data Storage</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Stores transcripts, labels, analysis outputs</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> Azure Blob Storage</p>
+                        </div>
+
+                        <!-- Aggregation -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #f25022;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.5 Aggregation Layer</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Combines intermediate outputs into final result</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> Azure Functions / Container Apps</p>
+                        </div>
+
+                        <!-- Final Storage -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #0078d4;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.6 Final Data Storage</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Stores final structured AI results</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> Azure Cosmos DB</p>
+                        </div>
+
+                        <!-- Backend API -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #50e6ff;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.7 Backend API Layer</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Fetches results for frontend</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> Azure API Management, Azure Functions / Container Apps</p>
+                        </div>
+
+                        <!-- Frontend -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #7fba00;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.8 Frontend Layer</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Displays results and video</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> React (or similar), HLS Streaming</p>
+                        </div>
+
+                        <!-- Video Streaming -->
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #ffb900;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 12px;">2.9 Video Streaming Layer</h3>
+                            <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;"><strong>What Happens:</strong> Converts video to streaming format</p>
+                            <p style="font-size: 14px; color: #1e293b;"><strong>Technologies:</strong> HLS, Azure Blob Storage, (Optional) Azure CDN</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Lifecycle Summary Table -->
+                <div style="background: white; border-radius: 12px; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 32px;">
+                    <h2 style="font-size: 24px; font-weight: 700; color: #1e293b; margin-bottom: 24px;">Data Lifecycle Summary</h2>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: #f8fafc;">
+                                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e2e8f0; font-weight: 600; color: #1e293b;">Stage</th>
+                                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e2e8f0; font-weight: 600; color: #1e293b;">Description</th>
+                                    <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e2e8f0; font-weight: 600; color: #1e293b;">Technology</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Ingestion</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Upload video</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Blob Storage</td></tr>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Trigger</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Start pipeline</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Storage Events</td></tr>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Processing</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">AI services</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Functions / Container Apps</td></tr>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">AI Tasks</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Analyze content</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Speech, Video Indexer, Language</td></tr>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Intermediate</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Store outputs</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Blob Storage</td></tr>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Aggregation</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Combine results</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Functions</td></tr>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Persistence</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Store final data</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Cosmos DB</td></tr>
+                                <tr><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">API</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Serve data</td><td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">API Management</td></tr>
+                                <tr><td style="padding: 12px;">Frontend</td><td style="padding: 12px;">Display results</td><td style="padding: 12px;">React</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Key Architectural Principles -->
+                <div style="background: white; border-radius: 12px; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <h2 style="font-size: 24px; font-weight: 700; color: #1e293b; margin-bottom: 24px;">Key Architectural Principles</h2>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="padding: 12px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #0078d4;">✓ Event-driven architecture</li>
+                        <li style="padding: 12px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #50e6ff;">✓ Microservices-based design</li>
+                        <li style="padding: 12px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #7fba00;">✓ Serverless compute</li>
+                        <li style="padding: 12px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #ffb900;">✓ Storage-driven pipeline</li>
+                        <li style="padding: 12px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px; border-left: 3px solid #f25022;">✓ Decoupled services</li>
+                        <li style="padding: 12px; background: #f8fafc; border-radius: 6px; border-left: 3px solid #0078d4;">✓ Scalable and fault-tolerant system</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Main App (Hidden Initially) -->
     <div id="mainApp" class="hidden">
         <!-- Sidebar Toggle Button -->
@@ -550,12 +1031,40 @@
                         <!-- Right Side: Content Analysis & Tabs -->
                         <div class="analysis-section">
                             <!-- Tab Navigation -->
-                            <div class="analysis-tabs">
-                                <button class="analysis-tab active" data-tab="content-alerts">
-                                    Content Alerts <span class="tab-count" id="alertCount">0</span>
+                            <div class="analysis-tabs" style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="display: flex; gap: 0;">
+                                    <button class="analysis-tab active" data-tab="content-alerts">
+                                        Content Alerts <span class="tab-count" id="alertCount">0</span>
+                                    </button>
+                                    <button class="analysis-tab" data-tab="transcript">Transcript</button>
+                                    <button class="analysis-tab" data-tab="history">History Logs</button>
+                                </div>
+                                <button 
+                                    id="manualDetectionBtn"
+                                    onclick="openManualDetectionModal()" 
+                                    title="Add Manual Detection"
+                                    style="
+                                        width: 36px;
+                                        height: 36px;
+                                        border-radius: 50%;
+                                        background: #3b82f6;
+                                        color: white;
+                                        border: none;
+                                        cursor: pointer;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        font-size: 20px;
+                                        font-weight: 300;
+                                        box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+                                        transition: all 0.2s ease;
+                                        margin-right: 8px;
+                                    "
+                                    onmouseover="this.style.background='#2563eb'; this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 12px rgba(59, 130, 246, 0.4)';"
+                                    onmouseout="this.style.background='#3b82f6'; this.style.transform='scale(1)'; this.style.boxShadow='0 2px 8px rgba(59, 130, 246, 0.3)';"
+                                >
+                                    +
                                 </button>
-                                <button class="analysis-tab" data-tab="transcript">Transcript</button>
-                                <button class="analysis-tab" data-tab="history">History Logs</button>
                             </div>
 
                             <!-- Transcript Tab -->

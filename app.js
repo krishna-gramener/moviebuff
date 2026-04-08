@@ -243,16 +243,26 @@ function formatDuration(duration) {
 
 // Format timestamp for display (MM:SS)
 function formatTimestamp(timestamp) {
-    // If already a string in format "00:00:00", return as is
+    // If it's a string, parse it
     if (typeof timestamp === 'string') {
+        // Check if it's in HH:MM:SS format
+        const parts = timestamp.split(':');
+        if (parts.length === 3) {
+            const hours = parseInt(parts[0]);
+            const minutes = parseInt(parts[1]);
+            const seconds = parseInt(parts[2]);
+            const totalMinutes = hours * 60 + minutes;
+            return `${totalMinutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+        // If it's already in M:SS or MM:SS format, return as is
         return timestamp;
     }
     
-    // Convert numeric seconds to MM:SS format
+    // Convert numeric seconds to M:SS format (no leading zero on minutes)
     const seconds = parseFloat(timestamp);
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
 
 // Convert time string to seconds
@@ -568,9 +578,12 @@ function populateAnalysisResults() {
         return `
             <div class="analysis-item" data-category="${categoryClass}" data-alert-index="${index}">
                 <div class="analysis-item-header">
-                    <a href="#" class="analysis-timestamp" onclick="seekTo(${seconds}); return false;">
-                        ${formatTimestamp(alert.timestamp)}
-                    </a>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <a href="#" class="analysis-timestamp" onclick="seekTo(${seconds}); return false;">
+                            ${formatTimestamp(alert.timestamp)}
+                        </a>
+                        ${alert.manual_entry ? '<span class="manual-entry-badge" style="background: #8b5cf6; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">MANUAL ENTRY</span>' : ''}
+                    </div>
                     <span class="analysis-category">${alert.alert_type}</span>
                 </div>
                 <div class="analysis-item-content">
@@ -943,17 +956,49 @@ function populateHistoryTab() {
         const statusBadgeColor = log.status === 'approved' ? '#10b981' : log.status === 'rejected' ? '#ef4444' : '#6b7280';
         const statusBadgeText = log.status ? log.status.charAt(0).toUpperCase() + log.status.slice(1) : '';
         
+        // Format action name for display
+        const actionDisplay = log.action === 'manual_detection' ? 'Manual Detection' : log.action;
+        
+        // Format timestamp for display
+        const displayTimestamp = new Date(log.timestamp).toLocaleString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        
+        // Build details section for manual detection
+        let detailsHTML = '';
+        if (log.action === 'manual_detection' && log.details) {
+            detailsHTML = `
+                <div style="margin-top: 12px; padding: 12px; background: #f8fafc; border-radius: 8px; border-left: 3px solid #8b5cf6;">
+                    <div style="font-size: 13px; color: #475569; margin-bottom: 6px;">
+                        <strong>Timestamp:</strong> ${log.details.alert_timestamp}
+                    </div>
+                    <div style="font-size: 13px; color: #475569; margin-bottom: 6px;">
+                        <strong>Category:</strong> ${log.details.category}
+                    </div>
+                    <div style="font-size: 13px; color: #475569;">
+                        <strong>Justification:</strong> ${log.details.justification}
+                    </div>
+                </div>
+            `;
+        }
+        
         return `
             <div style="background: white; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid #e2e8f0;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                     <div>
-                        <span style="font-weight: 700; font-size: 15px; color: #1e293b;">${log.action}</span>
+                        <span style="font-weight: 700; font-size: 15px; color: #1e293b;">${actionDisplay}</span>
                         ${statusBadgeText ? `<span style="display: inline-block; margin-left: 12px; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 600; background: ${statusBadgeColor}; color: white;">${statusBadgeText}</span>` : ''}
                     </div>
-                    <span style="font-size: 13px; color: #64748b;">${log.timestamp}</span>
+                    <span style="font-size: 13px; color: #64748b;">${displayTimestamp}</span>
                 </div>
                 ${log.message ? `<p style="font-size: 14px; color: #475569; margin: 0; margin-bottom: 8px;">${log.message}</p>` : ''}
+                ${log.reviewer ? `<p style="font-size: 13px; color: #94a3b8; margin: 0;">By: ${log.reviewer}${log.designation ? ` (${log.designation})` : ''}</p>` : ''}
                 ${log.user ? `<p style="font-size: 13px; color: #94a3b8; margin: 0;">By: ${log.user}</p>` : ''}
+                ${detailsHTML}
             </div>
         `;
     }).join('');
@@ -1325,6 +1370,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const contentId = contentMap[tabName];
             if (contentId) {
                 document.getElementById(contentId).classList.add('active');
+            }
+            
+            // Show/hide manual detection button based on active tab
+            const manualDetectionBtn = document.getElementById('manualDetectionBtn');
+            if (manualDetectionBtn) {
+                if (tabName === 'content-alerts') {
+                    manualDetectionBtn.style.display = 'flex';
+                } else {
+                    manualDetectionBtn.style.display = 'none';
+                }
             }
         });
     });
@@ -1824,6 +1879,180 @@ function toggleExpandDetails(event, videoIndex) {
     arrowIcon.style.transform = isExpanded ? 'rotate(90deg)' : 'rotate(0deg)';
 }
 
+// Manual Detection Modal Functions
+function openManualDetectionModal() {
+    if (!currentVideo) {
+        showNotification('Please select a video first', 'rejected');
+        return;
+    }
+
+    // Create modal if it doesn't exist
+    let modal = document.getElementById('manualDetectionModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'manualDetectionModal';
+        modal.className = 'review-modal';
+        modal.innerHTML = `
+            <div class="review-modal-content" style="max-width: 500px;">
+                <div class="review-modal-header">
+                    <div>
+                        <h3>Manual Detection</h3>
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">${CURRENT_REVIEWER.name}</div>
+                            <div class="reviewer-designation">${CURRENT_REVIEWER.designation}</div>
+                        </div>
+                    </div>
+                    <button class="review-modal-close" onclick="closeManualDetectionModal()">&times;</button>
+                </div>
+                <div class="review-modal-body">
+                    <div style="margin-bottom: 16px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #1e293b;">
+                            Timestamp (MM:SS)
+                        </label>
+                        <input 
+                            type="text" 
+                            id="manualTimestamp" 
+                            placeholder="e.g., 1:23 or 12:45"
+                            style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px;"
+                        />
+                    </div>
+                    
+                    <div style="margin-bottom: 16px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #1e293b;">
+                            Category
+                        </label>
+                        <select 
+                            id="manualCategory"
+                            style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; background: white;"
+                        >
+                            <option value="">Select a category</option>
+                            <option value="Suggestive Dialogue">Suggestive Dialogue</option>
+                            <option value="Coarse Language">Coarse Language</option>
+                            <option value="Sexual Content">Sexual Content</option>
+                            <option value="Violence">Violence</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+                    
+                    <div style="margin-bottom: 16px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #1e293b;">
+                            Justification
+                        </label>
+                        <textarea 
+                            id="manualJustification" 
+                            placeholder="Provide justification for this manual detection..."
+                            rows="4"
+                            style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; resize: vertical;"
+                        ></textarea>
+                    </div>
+                </div>
+                <div class="review-modal-footer">
+                    <button class="modal-btn cancel-btn" onclick="closeManualDetectionModal()">Cancel</button>
+                    <button class="modal-btn submit-btn" onclick="submitManualDetection()">Submit</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
+    
+    // Reset form
+    document.getElementById('manualTimestamp').value = '';
+    document.getElementById('manualCategory').value = '';
+    document.getElementById('manualJustification').value = '';
+    
+    // Show modal
+    modal.style.display = 'flex';
+}
+
+function closeManualDetectionModal() {
+    const modal = document.getElementById('manualDetectionModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+function submitManualDetection() {
+    const timestamp = document.getElementById('manualTimestamp').value.trim();
+    const category = document.getElementById('manualCategory').value;
+    const justification = document.getElementById('manualJustification').value.trim();
+    
+    // Validation
+    if (!timestamp) {
+        showNotification('Please enter a timestamp', 'rejected');
+        return;
+    }
+    
+    if (!category) {
+        showNotification('Please select a category', 'rejected');
+        return;
+    }
+    
+    if (!justification) {
+        showNotification('Please provide justification', 'rejected');
+        return;
+    }
+    
+    // Convert timestamp to seconds
+    const seconds = convertTimeToSeconds(timestamp);
+    if (seconds === null || isNaN(seconds)) {
+        showNotification('Invalid timestamp format. Use MM:SS or HH:MM:SS', 'rejected');
+        return;
+    }
+    
+    // Convert to HH:MM:SS format
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = Math.floor(seconds % 60);
+    const formattedTimestamp = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    
+    // Create new alert object
+    const newAlert = {
+        timestamp: formattedTimestamp,
+        alert_type: category,
+        description: justification,
+        manual_entry: true,
+        reviewed: true,
+        review_status: 'approved',
+        review_comment: 'Manual detection entry',
+        reviewer: CURRENT_REVIEWER.name,
+        review_date: new Date().toISOString()
+    };
+    
+    // Add to content analysis
+    if (!currentVideo.video_details.category.content_analysis) {
+        currentVideo.video_details.category.content_analysis = [];
+    }
+    currentVideo.video_details.category.content_analysis.push(newAlert);
+    
+    // Add to history logs
+    const historyEntry = {
+        action: 'manual_detection',
+        timestamp: new Date().toISOString(),
+        reviewer: CURRENT_REVIEWER.name,
+        designation: CURRENT_REVIEWER.designation,
+        details: {
+            alert_timestamp: formattedTimestamp,
+            category: category,
+            justification: justification
+        }
+    };
+    
+    if (!currentVideo.video_details.history_logs) {
+        currentVideo.video_details.history_logs = [];
+    }
+    currentVideo.video_details.history_logs.unshift(historyEntry);
+    
+    // Close modal
+    closeManualDetectionModal();
+    
+    // Refresh displays
+    populateAnalysisResults();
+    populateHistoryTab();
+    
+    // Show success message
+    showNotification('Manual detection added successfully!', 'approved');
+}
+
 // Make functions globally accessible for onclick handlers
 window.toggleExpandDetails = toggleExpandDetails;
 window.seekTo = seekTo;
@@ -1838,12 +2067,17 @@ window.approveCurrentRating = approveCurrentRating;
 window.showLandingPage = showLandingPage;
 window.showGuidelinesPage = showGuidelinesPage;
 window.showContactPage = showContactPage;
+window.showArchitecturePage = showArchitecturePage;
+window.openManualDetectionModal = openManualDetectionModal;
+window.closeManualDetectionModal = closeManualDetectionModal;
+window.submitManualDetection = submitManualDetection;
 
 // Page navigation functions
 function showLandingPage() {
     document.getElementById('landingPage').classList.remove('hidden');
     document.getElementById('guidelinesPage').classList.add('hidden');
     document.getElementById('contactPage').classList.add('hidden');
+    document.getElementById('architecturePage').classList.add('hidden');
     document.getElementById('mainApp').classList.add('hidden');
 }
 
@@ -1851,6 +2085,7 @@ function showGuidelinesPage() {
     document.getElementById('landingPage').classList.add('hidden');
     document.getElementById('guidelinesPage').classList.remove('hidden');
     document.getElementById('contactPage').classList.add('hidden');
+    document.getElementById('architecturePage').classList.add('hidden');
     document.getElementById('mainApp').classList.add('hidden');
 }
 
@@ -1858,6 +2093,15 @@ function showContactPage() {
     document.getElementById('landingPage').classList.add('hidden');
     document.getElementById('guidelinesPage').classList.add('hidden');
     document.getElementById('contactPage').classList.remove('hidden');
+    document.getElementById('architecturePage').classList.add('hidden');
+    document.getElementById('mainApp').classList.add('hidden');
+}
+
+function showArchitecturePage() {
+    document.getElementById('landingPage').classList.add('hidden');
+    document.getElementById('guidelinesPage').classList.add('hidden');
+    document.getElementById('contactPage').classList.add('hidden');
+    document.getElementById('architecturePage').classList.remove('hidden');
     document.getElementById('mainApp').classList.add('hidden');
 }
 
@@ -1881,6 +2125,44 @@ function switchGuidelinesTab(country) {
 
 // Expose to global scope for inline onclick handlers
 window.switchGuidelinesTab = switchGuidelinesTab;
+
+// Switch architecture tabs
+function switchArchitectureTab(cloud) {
+    // Update tab buttons
+    document.querySelectorAll('.guidelines-tab[data-cloud]').forEach(tab => {
+        if (tab.dataset.cloud === cloud) {
+            tab.classList.add('active');
+        } else {
+            tab.classList.remove('active');
+        }
+    });
+    
+    // Update content
+    document.querySelectorAll('[id^="architecture-"]').forEach(content => {
+        content.classList.remove('active');
+    });
+    document.getElementById(`architecture-${cloud}`).classList.add('active');
+}
+
+window.switchArchitectureTab = switchArchitectureTab;
+
+// Toggle architecture diagram visibility
+function toggleArchDiagram(cloud) {
+    const content = document.getElementById(`${cloud}-diagram-content`);
+    const icon = document.getElementById(`${cloud}-diagram-icon`);
+    
+    if (content.style.display === 'none') {
+        content.style.display = 'block';
+        icon.classList.remove('fa-chevron-down');
+        icon.classList.add('fa-chevron-up');
+    } else {
+        content.style.display = 'none';
+        icon.classList.remove('fa-chevron-up');
+        icon.classList.add('fa-chevron-down');
+    }
+}
+
+window.toggleArchDiagram = toggleArchDiagram;
 
 // Sidebar toggle button listener - wrapped in DOMContentLoaded to ensure element exists
 document.addEventListener('DOMContentLoaded', () => {
