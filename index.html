@@ -15,8 +15,10 @@
         <div class="nav-container">
             <div class="nav-brand">
                 <div class="brand-icon">🎬</div>
-                <span class="brand-text">RatingsAI</span>
-                <span class="brand-subtitle">Powered by Straive</span>
+                <div class="brand-text-container">
+                    <span class="brand-text">RatingsAI</span>
+                    <span class="brand-subtitle">Powered by Straive</span>
+                </div>
             </div>
             <div class="nav-links">
                 <a href="#" onclick="showLandingPage(); return false;" class="nav-link">Overview</a>
@@ -1001,6 +1003,38 @@ Frontend Display (UI + Streaming)</pre>
                     <div class="analysis-container">
                         <!-- Left Side: Video Player & Tabs -->
                         <div class="video-section">
+                            <!-- Episode Header -->
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding: 0 4px;">
+                                <h2 id="episodeName" style="font-size: 18px; font-weight: 600; color: #1e293b; margin: 0;">
+                                    <!-- Episode name will be loaded here -->
+                                </h2>
+                                <button 
+                                    id="manualDetectionBtnTop"
+                                    onclick="openManualDetectionModal()" 
+                                    title="Add Manual Detection"
+                                    style="
+                                        padding: 8px 16px;
+                                        border-radius: 8px;
+                                        background: #3b82f6;
+                                        color: white;
+                                        border: none;
+                                        cursor: pointer;
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 6px;
+                                        font-size: 14px;
+                                        font-weight: 500;
+                                        box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+                                        transition: all 0.2s ease;
+                                    "
+                                    onmouseover="this.style.background='#2563eb'; this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 12px rgba(59, 130, 246, 0.4)';"
+                                    onmouseout="this.style.background='#3b82f6'; this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(59, 130, 246, 0.3)';"
+                                >
+                                    <span style="font-size: 18px; font-weight: 300;">+</span>
+                                    Add Manual Detection
+                                </button>
+                            </div>
+                            
                             <!-- Video Player -->
                             <div class="video-player-wrapper">
                                 <div id="playerWrapper">
@@ -1031,40 +1065,12 @@ Frontend Display (UI + Streaming)</pre>
                         <!-- Right Side: Content Analysis & Tabs -->
                         <div class="analysis-section">
                             <!-- Tab Navigation -->
-                            <div class="analysis-tabs" style="display: flex; justify-content: space-between; align-items: center;">
-                                <div style="display: flex; gap: 0;">
-                                    <button class="analysis-tab active" data-tab="content-alerts">
-                                        Content Alerts <span class="tab-count" id="alertCount">0</span>
-                                    </button>
-                                    <button class="analysis-tab" data-tab="transcript">Transcript</button>
-                                    <button class="analysis-tab" data-tab="history">History Logs</button>
-                                </div>
-                                <button 
-                                    id="manualDetectionBtn"
-                                    onclick="openManualDetectionModal()" 
-                                    title="Add Manual Detection"
-                                    style="
-                                        width: 36px;
-                                        height: 36px;
-                                        border-radius: 50%;
-                                        background: #3b82f6;
-                                        color: white;
-                                        border: none;
-                                        cursor: pointer;
-                                        display: flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        font-size: 20px;
-                                        font-weight: 300;
-                                        box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
-                                        transition: all 0.2s ease;
-                                        margin-right: 8px;
-                                    "
-                                    onmouseover="this.style.background='#2563eb'; this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 12px rgba(59, 130, 246, 0.4)';"
-                                    onmouseout="this.style.background='#3b82f6'; this.style.transform='scale(1)'; this.style.boxShadow='0 2px 8px rgba(59, 130, 246, 0.3)';"
-                                >
-                                    +
+                            <div class="analysis-tabs">
+                                <button class="analysis-tab active" data-tab="content-alerts">
+                                    Content Alerts <span class="tab-count" id="alertCount">0</span>
                                 </button>
+                                <button class="analysis-tab" data-tab="transcript">Transcript</button>
+                                <button class="analysis-tab" data-tab="history">History Logs</button>
                             </div>
 
                             <!-- Transcript Tab -->

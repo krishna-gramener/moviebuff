@@ -329,6 +329,13 @@ function selectVideo(video) {
     if (breadcrumbTitle) breadcrumbTitle.textContent = videoTitle;
     if (videoTitleText) videoTitleText.textContent = videoTitle;
     
+    // Update episode name
+    const episodeName = document.getElementById('episodeName');
+    if (episodeName) {
+        const episode = metadata.episode || '';
+        episodeName.textContent = episode;
+    }
+    
     // Update metadata section
     const videoMetadata = document.getElementById('videoMetadata');
     if (videoMetadata) {
